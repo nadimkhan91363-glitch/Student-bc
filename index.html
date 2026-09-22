@@ -8,10 +8,91 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Deploy 2 Extra Styles */
+    .input-field {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-elevated);
+      color: var(--text-main);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      margin-bottom: 12px;
+      box-sizing: border-box;
+    }
+    .input-field:focus {
+      border-color: var(--accent);
+    }
+    .action-btn {
+      background: var(--text-main);
+      color: var(--bg-surface);
+      border: none;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      width: 100%;
+      transition: opacity 0.2s;
+    }
+    .action-btn:active {
+      transform: scale(0.98);
+    }
+    .segmented-control {
+      display: flex;
+      background: var(--bg-elevated);
+      padding: 4px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 12px;
+      gap: 4px;
+    }
+    .seg-btn {
+      flex: 1;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      padding: 8px 4px;
+      border-radius: var(--radius-sm);
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .seg-btn.active {
+      background: var(--bg-surface);
+      color: var(--text-main);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .output-box {
+      margin-top: 14px;
+      background: var(--bg-elevated);
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      border-left: 3px solid var(--accent);
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+    }
+    .terminal-box {
+      background: #090D16;
+      color: #10B981;
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      font-family: monospace;
+      font-size: 0.8rem;
+      margin-top: 12px;
+      min-height: 80px;
+      text-align: left;
+      line-height: 1.6;
+    }
+  </style>
 </head>
 <body data-theme="clean-light">
 
-  <!-- Cinematic Entry Gate -->
+  <!-- Cinematic Gate Overlay -->
   <div id="gate-overlay" class="gate-overlay">
     <div class="gate-card">
       <div class="badge">SECURE HANDSHAKE</div>
@@ -47,13 +128,42 @@
       </div>
     </section>
 
-    <!-- Placeholder for Next Modules -->
-    <div class="modules-grid" id="modules-container">
-      <div class="card empty-card">
-        <span class="module-number">STATUS</span>
-        <h3>Portal Online</h3>
-        <p class="card-desc">Core architecture active. Modules loading in next deployment...</p>
-      </div>
+    <!-- Modules Grid -->
+    <div class="modules-grid">
+
+      <!-- Module 01: Biometric & Bakchodi Scanner -->
+      <section class="card">
+        <span class="module-number">MODULE 01</span>
+        <h3>Biometric & IQ Scanner</h3>
+        <p class="card-desc">Simulated sensory verification via optical cursor tracking.</p>
+        
+        <div class="scanner-box">
+          <input type="text" id="scanner-name" placeholder="Target's legal name..." class="input-field" />
+          <button id="start-scan-btn" class="action-btn">Initialize Deep Scan</button>
+          <div id="scan-terminal" class="terminal-box hidden">
+            <p id="scan-log">> System ready...</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Module 02: Roast Engine -->
+      <section class="card">
+        <span class="module-number">MODULE 02</span>
+        <h3>Roast Engine v3.4</h3>
+        <p class="card-desc">Algorithmic behavioral critique based on custom parameters.</p>
+        
+        <div class="roast-form">
+          <input type="text" id="roast-name" placeholder="Friend's Name / Nickname" class="input-field" />
+          <div class="segmented-control">
+            <button class="seg-btn active" data-level="mild">Mild</button>
+            <button class="seg-btn" data-level="dangerous">Dangerous</button>
+            <button class="seg-btn" data-level="nuclear">Nuclear ☢️</button>
+          </div>
+          <button id="generate-roast-btn" class="action-btn">Generate Critique</button>
+          <div id="roast-output" class="output-box">Waiting for subject...</div>
+        </div>
+      </section>
+
     </div>
   </main>
 
@@ -65,8 +175,10 @@
     </div>
   </footer>
 
-    <script>
+  <!-- Single Embedded Script -->
+  <script>
     document.addEventListener("DOMContentLoaded", () => {
+      // 1. Gate Logic
       const loaderBar = document.getElementById("loader-bar");
       const loaderText = document.getElementById("loader-text");
       const enterBtn = document.getElementById("enter-btn");
@@ -89,14 +201,72 @@
           clearInterval(interval);
           enterBtn.classList.remove("hidden");
         }
-      }, 400);
+      }, 350);
 
       enterBtn.addEventListener("click", () => {
         gateOverlay.style.opacity = "0";
-        setTimeout(() => {
-          gateOverlay.classList.add("hidden");
-        }, 500);
+        setTimeout(() => gateOverlay.classList.add("hidden"), 400);
+      });
+
+      // 2. Roast Machine Logic
+      let roastLevel = "mild";
+      document.querySelectorAll(".seg-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".seg-btn").forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          roastLevel = btn.dataset.level;
+        });
+      });
+
+      const roasts = {
+        mild: [
+          "has the battery life of an iPhone 6.",
+          "walks into a room and the Wi-Fi speed drops automatically.",
+          "replies after 6 business days with just 'ha'."
+        ],
+        dangerous: [
+          "studies for 12 hours straight just to forget their own roll number.",
+          "confidence Ambani jaisa, bank balance ₹14.50.",
+          "typing speed 120 WPM, common sense 0 WPM."
+        ],
+        nuclear: [
+          "is living proof that oxygen can be wasted in 4K resolution.",
+          "their future is blurrier than a 144p video clip from 2007.",
+          "born to be iconic, forced to beg for hotspot daily."
+        ]
+      };
+
+      document.getElementById("generate-roast-btn").addEventListener("click", () => {
+        const name = document.getElementById("roast-name").value.trim() || "Subject";
+        const bank = roasts[roastLevel];
+        const picked = bank[Math.floor(Math.random() * bank.length)];
+        document.getElementById("roast-output").innerText = `${name} ${picked}`;
+      });
+
+      // 3. Biometric Scanner Logic
+      const scanBtn = document.getElementById("start-scan-btn");
+      const scanTerminal = document.getElementById("scan-terminal");
+      const scanLog = document.getElementById("scan-log");
+
+      scanBtn.addEventListener("click", () => {
+        const name = document.getElementById("scanner-name").value.trim() || "Target Human";
+        scanTerminal.classList.remove("hidden");
+        scanLog.innerHTML = `> Initializing neural link for ${name}...`;
+
+        const logs = [
+          "Bypassing cranial firewall...",
+          "Searching for common sense... [ERROR: 0 FOUND]",
+          "Measuring gossip bandwidth... [MAX LEVEL]",
+          `Verdict: ${name} is 99.8% Certified Bakchod.`
+        ];
+
+        logs.forEach((txt, idx) => {
+          setTimeout(() => {
+            scanLog.innerHTML += `<br>> ${txt}`;
+          }, (idx + 1) * 600);
+        });
       });
     });
   </script>
-
+</body>
+</html>
