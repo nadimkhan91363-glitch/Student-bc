@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>THE FRIENDZONE — Ultimate Portal</title>
+  <title>THE FRIENDZONE — Secret OS Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
@@ -26,6 +26,95 @@
       --text-muted: #008F11;
       --border-subtle: #003B00;
       --accent: #00FF66;
+    }
+
+    /* Floating Real-time Push Notification Banner */
+    .push-notif-container {
+      position: fixed;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 420px;
+      z-index: 10000;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .system-push {
+      background: rgba(24, 24, 27, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 14px;
+      padding: 12px 16px;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #FFF;
+      animation: slideInDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      pointer-events: auto;
+    }
+    @keyframes slideInDown {
+      0% { transform: translateY(-40px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    .push-app-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: #2563EB;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .push-details {
+      flex: 1;
+    }
+    .push-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #94A3B8;
+      display: flex;
+      justify-content: space-between;
+    }
+    .push-body {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #F8FAFC;
+      margin-top: 2px;
+      line-height: 1.3;
+    }
+
+    /* Live Telemetry Ping Widget */
+    .ping-widget {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-family: monospace;
+      padding: 4px 10px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #10B981;
+      border-radius: 999px;
+    }
+    .pulse-dot {
+      width: 6px;
+      height: 6px;
+      background: #10B981;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #10B981;
+      animation: pulseAnim 1.5s infinite;
+    }
+    @keyframes pulseAnim {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.4); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.8; }
     }
 
     .input-field, .dropdown-select {
@@ -173,7 +262,6 @@
       letter-spacing: 0.05em;
     }
 
-    /* Meltdown Animation */
     @keyframes screenShake {
       0% { transform: translate(1px, 1px) rotate(0deg); }
       20% { transform: translate(-3px, 0px) rotate(1deg); }
@@ -342,7 +430,6 @@
       line-height: 1.6;
     }
 
-    /* UPI Bhikhari QR Card */
     .bhikhari-card {
       background: #FFFFFF;
       color: #0F172A;
@@ -357,7 +444,6 @@
       width: 140px;
       height: 140px;
       margin: 10px auto;
-      background: repeating-conic-gradient(#000 0% 25%, #FFF 0% 50%) 50% / 20px 20px;
       border: 4px solid #000;
       display: flex;
       align-items: center;
@@ -366,9 +452,9 @@
       font-size: 0.75rem;
       color: #EF4444;
       background-color: #FFF;
+      background-image: repeating-linear-gradient(45deg, #000 0, #000 10px, #FFF 0, #FFF 20px);
     }
 
-    /* Medical Rx Slip */
     .rx-paper {
       background: #F0FDF4;
       color: #14532D;
@@ -380,10 +466,22 @@
       font-size: 0.82rem;
       line-height: 1.6;
     }
+
+    .timestamp-badge {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-family: monospace;
+      margin-top: 6px;
+      display: block;
+    }
   </style>
 </head>
 <body data-theme="clean-light">
 
+  <!-- Dynamic Simulated Push Alert Container -->
+  <div id="push-container" class="push-notif-container"></div>
+
+  <!-- Instant Gate -->
   <div id="gate-overlay" class="gate-overlay" onclick="closeGate()">
     <div class="gate-card" onclick="event.stopPropagation()">
       <div class="badge">SECURE HANDSHAKE</div>
@@ -399,32 +497,38 @@
     </div>
   </div>
 
+  <!-- Top Navbar with Live Telemetry Ping -->
   <header class="navbar">
     <div class="brand">
       <span class="brand-pill">FZ-OS</span>
       <span class="brand-title">THE FRIENDZONE</span>
     </div>
     <div class="nav-controls" style="display: flex; align-items: center; gap: 10px;">
+      <div class="ping-widget">
+        <div class="pulse-dot"></div>
+        <span id="live-ping">28 ms</span> (Mumbai Node)
+      </div>
       <select id="theme-switcher" class="dropdown-select" style="margin-bottom: 0; padding: 6px 10px; font-size: 0.78rem; width: auto;" onchange="changeTheme(this.value)">
         <option value="clean-light">Silicon Valley</option>
         <option value="clean-dark">Midnight Slate</option>
         <option value="cyber-matrix">Cyber Matrix</option>
       </select>
-      <span class="status-indicator"><span class="dot"></span> Online</span>
     </div>
   </header>
 
+  <!-- Main Container -->
   <main class="container">
     <section class="hero-card">
       <div class="hero-content">
         <h2>Friendship Evaluation Terminal</h2>
         <p>Active squad surveillance & clinical diagnostics: Mahesh, Maaz, Tushar, Faiz, Farhan.</p>
+        <span id="live-system-time" class="timestamp-badge">SESSION INITIALIZED: INITIALIZING...</span>
       </div>
     </section>
 
     <div class="modules-grid">
 
-      <!-- BRAND NEW 1: UPI Bhikhari QR Generator -->
+      <!-- UPI Bhikhari QR Generator -->
       <section class="card" style="border: 2px solid #0284C7;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <span class="module-number" style="background: #E0F2FE; color: #0284C7;">CROWDFUNDING</span>
@@ -445,7 +549,7 @@
         <div id="upi-display" class="bhikhari-card" style="display: none;"></div>
       </section>
 
-      <!-- BRAND NEW 2: Brainrot Detox Prescription -->
+      <!-- Brainrot Detox Prescription -->
       <section class="card" style="border: 2px solid #16A34A;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <span class="module-number" style="background: #DCFCE7; color: #15803D;">PSYCHIATRY</span>
@@ -466,7 +570,7 @@
         <div id="rx-display" class="rx-paper" style="display: none;"></div>
       </section>
 
-      <!-- RADAR LIE DETECTOR & EXCUSE DECRYPTER -->
+      <!-- Radar Lie Detector & Excuse Decrypter -->
       <section class="card" style="border: 2px solid #10B981;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <span class="module-number" style="background: #D1FAE5; color: #047857;">ACOUSTIC RADAR</span>
@@ -499,7 +603,7 @@
         <div id="lie-output" class="output-box" style="display: none; border-left-color: #10B981;"></div>
       </section>
 
-      <!-- OFFICIAL POLICE FIR GENERATOR -->
+      <!-- Official Police FIR Generator -->
       <section class="card" style="border: 2px solid #EF4444;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <span class="module-number" style="background: #FEE2E2; color: #B91C1C;">CRIMINAL BRANCH</span>
@@ -799,16 +903,69 @@
   </footer>
 
   <script>
+    // Live Clock & Ping Simulator
+    function updateSystemStatus() {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      const dateStr = now.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+      const el = document.getElementById("live-system-time");
+      if (el) el.innerText = `SESSION VERIFIED: ${dateStr} ${timeStr} IST (MUMBAI NODE)`;
+
+      // Ping oscillation
+      const pingEl = document.getElementById("live-ping");
+      if (pingEl) {
+        const ping = Math.floor(Math.random() * 15 + 24);
+        pingEl.innerText = `${ping} ms`;
+      }
+    }
+    setInterval(updateSystemStatus, 1500);
+    updateSystemStatus();
+
+    // Haptic Vibration Helper
+    function triggerHaptic(pattern = [50]) {
+      if ('vibrate' in navigator) {
+        navigator.vibrate(pattern);
+      }
+    }
+
+    // Realistic System Notification Spawner
+    function showSystemPush(app, icon, title, msg) {
+      const container = document.getElementById("push-container");
+      const push = document.createElement("div");
+      push.className = "system-push";
+      push.innerHTML = `
+        <div class="push-app-icon">${icon}</div>
+        <div class="push-details">
+          <div class="push-title"><span>${app.toUpperCase()}</span> <span>now</span></div>
+          <div class="push-body">${title}: ${msg}</div>
+        </div>
+      `;
+      container.appendChild(push);
+      triggerHaptic([40, 60, 40]);
+
+      setTimeout(() => {
+        push.style.opacity = '0';
+        push.style.transform = 'translateY(-20px)';
+        push.style.transition = 'all 0.3s ease';
+        setTimeout(() => push.remove(), 300);
+      }, 4500);
+    }
+
     function closeGate() {
+      triggerHaptic(50);
       const gate = document.getElementById("gate-overlay");
       if (gate) {
         gate.style.opacity = "0";
         setTimeout(() => gate.style.display = "none", 300);
       }
+      setTimeout(() => {
+        showSystemPush("WhatsApp", "💬", "Mummy", "Beta dhaniya lekar kab aaoge? Ghar aao jaldi.");
+      }, 1800);
     }
 
     function changeTheme(theme) {
       document.body.setAttribute("data-theme", theme);
+      triggerHaptic(30);
     }
 
     // Audio Engine
@@ -820,6 +977,7 @@
     }
 
     function playMemeSound(type) {
+      triggerHaptic([30]);
       const ctx = getAudioContext();
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
@@ -876,7 +1034,7 @@
       }
     }
 
-    // UPI Bhikhari QR Logic
+    // UPI Beggar Generator
     const upiData = {
       Maaz: { title: "BHAGWAN KE NAAM PE CHAI PILADO", reason: "Maaz ka GPay pichle 2 saal se down chal raha hai. Total udhari ₹1028.", vpa: "maaz.udhari@okhdfc" },
       Mahesh: { title: "1.5GB 4G EMERGENCY RELIEF FUND", reason: "Mahesh ka data roz dopahar 1 baje khatam ho jata hai JCB reels dekh kar.", vpa: "mahesh.reels@okaxis" },
@@ -886,6 +1044,7 @@
     };
 
     function generateUPI() {
+      triggerHaptic([60, 40]);
       const target = document.getElementById("upi-name").value;
       const d = upiData[target];
       const display = document.getElementById("upi-display");
@@ -899,9 +1058,10 @@
         <span style="font-size:0.72rem; background:#F1F5F9; padding:4px 8px; border-radius:4px; font-family:monospace;">VPA: ${d.vpa}</span>
       `;
       playMemeSound('fart');
+      showSystemPush("HDFC Bank", "🏦", "UPI Transaction Failed", `Debtor ${target} has insufficient moral balance.`);
     }
 
-    // Prescription Logic
+    // Prescription Generator
     const rxData = {
       Mahesh: "DIAGNOSIS: Acute Doomscrolling & Brain Paralysis.<br>SYMPTOMS: Watches Russian memes and JCB digger compilations until 4:30 AM.<br>MEDICATION:<br>1. Tab. Touch Grass 500mg (Daily Morning)<br>2. Syp. Throw Phone In Well (Before Sleeping)<br>PRECAUTION: Avoid asking 'Aur bhai kya chal raha hai' without listening to answer.",
       Maaz: "DIAGNOSIS: Pathological Tardiness & Selective Blindness.<br>SYMPTOMS: Types 'Bhai nikal gaya' while wrapped in blanket.<br>MEDICATION:<br>1. Inj. Punctuality 100ml (Direct into nervous system)<br>2. Compulsory GPay QR on forehead.<br>PRECAUTION: Stop lying about bike puncture.",
@@ -911,12 +1071,13 @@
     };
 
     function generatePrescription() {
+      triggerHaptic(40);
       const target = document.getElementById("rx-name").value;
       const display = document.getElementById("rx-display");
       display.style.display = "block";
       display.innerHTML = `
         <strong>CLINICAL NEUROLOGY DEPT // DR. NADIM (M.D. BAKCHODI)</strong><br>
-        PATIENT NAME: ${target.toUpperCase()} | DATE: 2026-FZ-CRITICAL<br>
+        PATIENT NAME: ${target.toUpperCase()} | DATE: ${new Date().toLocaleDateString('en-GB')}<br>
         -------------------------------------------------------------<br>
         ${rxData[target]}<br>
         -------------------------------------------------------------<br>
@@ -934,6 +1095,7 @@
     };
 
     function runLieDetector() {
+      triggerHaptic([30, 30, 50]);
       const name = document.getElementById("lie-name").value;
       const excuse = document.getElementById("lie-excuse").value;
       const status = document.getElementById("radar-status");
@@ -943,10 +1105,12 @@
       playMemeSound('siren');
 
       setTimeout(() => {
+        triggerHaptic([100, 50, 100]);
         status.innerText = "SIGNAL DECRYPTED [99.8% ACCURACY]";
         out.style.display = "block";
         out.innerHTML = `<strong>Subject:</strong> ${name}<br><strong>Deception Index:</strong> 99.4% (CRITICAL LIE)<br><strong>Forensic Truth:</strong> ${lieDatabase[excuse]}`;
         playMemeSound('damage');
+        showSystemPush("Jio", "📡", "Data Warning", `100% daily high-speed quota consumed by ${name}.`);
       }, 1200);
     }
 
@@ -960,6 +1124,7 @@
     };
 
     function generateFIR() {
+      triggerHaptic([120, 80]);
       const target = document.getElementById("fir-target").value;
       const display = document.getElementById("fir-display");
       display.style.display = "block";
@@ -967,6 +1132,7 @@
 MAHARASHTRA CYBER CELL // SQUAD CRIME DOCKET<br>
 FIR NO: 2026/FZ/${Math.floor(Math.random()*8999+1000)}<br>
 INVESTIGATING OFFICER: ROOT ADMIN NADIM<br>
+TIME STAMP: ${new Date().toLocaleTimeString('en-IN')}<br>
 -------------------------------------------------<br>
 ${firDatabase[target]}<br>
 -------------------------------------------------<br>
@@ -974,6 +1140,7 @@ STATUS: NON-BAILABLE WARRANT ISSUED.<br>
 PENALTY: Compulsory canteen funding for next 30 days.<br>
 =================================================`;
       playMemeSound('bruh');
+      showSystemPush("Police Notice", "🚨", "Summons Issued", `Non-bailable docket logged against ${target}.`);
     }
 
     // Squad Wrapped 2026 Data
@@ -986,6 +1153,7 @@ PENALTY: Compulsory canteen funding for next 30 days.<br>
     };
 
     function generateWrapped() {
+      triggerHaptic(50);
       const target = document.getElementById("wrapped-target").value;
       const data = wrappedStats[target];
       document.getElementById("wrap-name").innerText = `${target.toUpperCase()}'S 2026 WRAPPED`;
@@ -998,6 +1166,7 @@ PENALTY: Compulsory canteen funding for next 30 days.<br>
     }
 
     function downloadWrapped() {
+      triggerHaptic([40, 40]);
       const target = document.getElementById("wrapped-target").value;
       const canvas = document.createElement("canvas");
       canvas.width = 1080;
@@ -1057,6 +1226,7 @@ PENALTY: Compulsory canteen funding for next 30 days.<br>
       Maaz: `====================================<br>
 MUMBAI TAPRI FISCAL RECOVERY CELL<br>
 GSTIN: 27AABCT9999FZ<br>
+TIME: ${new Date().toLocaleTimeString('en-IN')}<br>
 ====================================<br>
 DEBTOR: MAAZ (PRIME OFFENDER)<br>
 INSPECTOR: NADIM (ROOT ADMIN)<br>
@@ -1105,6 +1275,7 @@ TOTAL PENALTY: ₹824.00<br>
     };
 
     function generateReceipt() {
+      triggerHaptic(50);
       const t = document.getElementById("tapri-target").value;
       const display = document.getElementById("receipt-display");
       display.style.display = "block";
@@ -1122,6 +1293,7 @@ TOTAL PENALTY: ₹824.00<br>
     };
 
     function calcSantulan() {
+      triggerHaptic(40);
       const t = document.getElementById("santulan-target").value;
       const out = document.getElementById("santulan-output");
       out.style.display = "block";
@@ -1139,6 +1311,7 @@ TOTAL PENALTY: ₹824.00<br>
     };
 
     function calcJalan() {
+      triggerHaptic(40);
       const t = document.getElementById("jalan-target").value;
       const out = document.getElementById("jalan-output");
       out.style.display = "block";
@@ -1156,6 +1329,7 @@ TOTAL PENALTY: ₹824.00<br>
     };
 
     function calcFemale() {
+      triggerHaptic(50);
       const t = document.getElementById("female-target").value;
       const data = femaleData[t];
       const out = document.getElementById("female-output");
@@ -1174,6 +1348,7 @@ TOTAL PENALTY: ₹824.00<br>
     };
 
     function calcRehab() {
+      triggerHaptic(40);
       const t = document.getElementById("rehab-target").value;
       const out = document.getElementById("rehab-output");
       out.style.display = "block";
@@ -1183,6 +1358,7 @@ TOTAL PENALTY: ₹824.00<br>
 
     // Biometric Scanner
     function startScanner() {
+      triggerHaptic([50, 50, 50]);
       const name = document.getElementById("scanner-name").value;
       const terminal = document.getElementById("scan-terminal");
       const log = document.getElementById("scan-log");
@@ -1198,6 +1374,7 @@ TOTAL PENALTY: ₹824.00<br>
 
       logs.forEach((txt, idx) => {
         setTimeout(() => {
+          triggerHaptic(30);
           log.innerHTML += `<br>> ${txt}`;
         }, (idx + 1) * 450);
       });
@@ -1206,6 +1383,7 @@ TOTAL PENALTY: ₹824.00<br>
     // Roast Logic
     let currentRoastLevel = "mild";
     function setRoastLevel(btn, level) {
+      triggerHaptic(20);
       document.querySelectorAll(".seg-btn").forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
       currentRoastLevel = level;
@@ -1240,6 +1418,7 @@ TOTAL PENALTY: ₹824.00<br>
     };
 
     function triggerRoast() {
+      triggerHaptic(50);
       const name = document.getElementById("roast-name").value;
       const roast = personalRoasts[name][currentRoastLevel];
       document.getElementById("roast-output").innerText = `${name} ${roast}`;
@@ -1247,6 +1426,7 @@ TOTAL PENALTY: ₹824.00<br>
     }
 
     function speakRoast() {
+      triggerHaptic(30);
       const text = document.getElementById("roast-output").innerText;
       if (!text || text.includes("Waiting")) return;
       if ('speechSynthesis' in window) {
@@ -1262,6 +1442,7 @@ TOTAL PENALTY: ₹824.00<br>
     let arcadeState = "idle";
 
     function startArcade() {
+      triggerHaptic(40);
       const zone = document.getElementById("reaction-box");
       const score = document.getElementById("reaction-score");
       clearTimeout(reactTimeout);
@@ -1278,6 +1459,7 @@ TOTAL PENALTY: ₹824.00<br>
         zone.style.color = "#065F46";
         zone.innerText = "CLICK NOW!";
         startTime = Date.now();
+        triggerHaptic(100);
       }, delay);
     }
 
@@ -1290,6 +1472,7 @@ TOTAL PENALTY: ₹824.00<br>
         zone.style.background = "#FEE2E2";
         zone.style.color = "#991B1B";
         zone.innerText = "Too early! Jaldbazi mat kar.";
+        triggerHaptic([80, 50, 80]);
         playMemeSound('bruh');
       } else if (arcadeState === "ready") {
         const diff = Date.now() - startTime;
@@ -1298,6 +1481,7 @@ TOTAL PENALTY: ₹824.00<br>
         zone.style.color = "var(--text-main)";
         zone.innerText = `Finished: ${diff} ms`;
         score.innerText = `${diff} ms`;
+        triggerHaptic(60);
         playMemeSound('siren');
       }
     }
@@ -1310,6 +1494,7 @@ TOTAL PENALTY: ₹824.00<br>
     };
 
     function openVault(key) {
+      triggerHaptic(40);
       document.getElementById("vault-output").innerText = vaultData[key];
       playMemeSound('crickets');
     }
@@ -1317,6 +1502,7 @@ TOTAL PENALTY: ₹824.00<br>
     // Meltdown Protocol
     let meltdownTimer = null;
     function triggerMeltdown() {
+      triggerHaptic([200, 100, 200, 100, 300]);
       document.body.classList.add("meltdown-active");
       document.getElementById("nuclear-modal").style.display = "flex";
       playMemeSound('siren');
@@ -1328,11 +1514,13 @@ TOTAL PENALTY: ₹824.00<br>
         if (p >= 100) {
           clearInterval(meltdownTimer);
           document.getElementById("nuclear-status").innerText = "💥 100% UPLOAD COMPLETE! Ab sab doston ke ghar pe police aur rishtedaar dono aa rahe hain.";
+          showSystemPush("Family WhatsApp", "⚠️", "Group Notice", "Explicit screenshots uploaded to Family Group.");
         }
       }, 300);
     }
 
     function cancelMeltdown() {
+      triggerHaptic(50);
       clearInterval(meltdownTimer);
       document.body.classList.remove("meltdown-active");
       document.getElementById("nuclear-modal").style.display = "none";
