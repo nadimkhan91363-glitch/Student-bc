@@ -65,6 +65,38 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
-</body>
-</html>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const loaderBar = document.getElementById("loader-bar");
+      const loaderText = document.getElementById("loader-text");
+      const enterBtn = document.getElementById("enter-btn");
+      const gateOverlay = document.getElementById("gate-overlay");
+
+      let progress = 0;
+      const messages = [
+        "Pinging central node...",
+        "Scanning moral compromises...",
+        "Bypassing common sense filters...",
+        "Friendship credentials verified."
+      ];
+
+      const interval = setInterval(() => {
+        progress += 25;
+        loaderBar.style.width = `${progress}%`;
+        loaderText.innerText = messages[Math.min(Math.floor(progress / 25), messages.length - 1)];
+
+        if (progress >= 100) {
+          clearInterval(interval);
+          enterBtn.classList.remove("hidden");
+        }
+      }, 400);
+
+      enterBtn.addEventListener("click", () => {
+        gateOverlay.style.opacity = "0";
+        setTimeout(() => {
+          gateOverlay.classList.add("hidden");
+        }, 500);
+      });
+    });
+  </script>
+
