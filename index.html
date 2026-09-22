@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* Dynamic Theme Variables */
     body[data-theme="clean-dark"] {
       --bg-primary: #090D16;
       --bg-surface: #111827;
@@ -178,8 +177,6 @@
       width: 100%;
       letter-spacing: 0.05em;
     }
-
-    /* Quiz Specific Styles */
     .quiz-question-box {
       font-weight: 700;
       font-size: 0.95rem;
@@ -253,6 +250,16 @@
       line-height: 1.6;
       margin-bottom: 20px;
     }
+
+    .spy-badge {
+      background: #18181B;
+      color: #EF4444;
+      padding: 2px 8px;
+      font-size: 0.7rem;
+      border-radius: 4px;
+      font-weight: 800;
+      font-family: monospace;
+    }
   </style>
 </head>
 <body data-theme="clean-light">
@@ -273,7 +280,7 @@
     </div>
   </div>
 
-  <!-- Top Navbar with Theme Switcher -->
+  <!-- Top Navbar -->
   <header class="navbar">
     <div class="brand">
       <span class="brand-pill">FZ-OS</span>
@@ -301,7 +308,46 @@
     <!-- Modules Grid -->
     <div class="modules-grid">
 
-      <!-- Module 01: Biometric Scanner -->
+      <!-- Telemetry Spy -->
+      <section class="card" style="border: 1px solid #EF4444;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span class="module-number" style="background: #FEE2E2; color: #B91C1C;">SURVEILLANCE</span>
+          <span class="spy-badge">INTERCEPTING</span>
+        </div>
+        <h3>Live Device Telemetry</h3>
+        <p class="card-desc">Target hardware credentials intercepted in real-time.</p>
+        
+        <div class="future-row"><span>Device Cores:</span> <strong id="spy-cores">Detecting...</strong></div>
+        <div class="future-row"><span>Target Battery:</span> <strong id="spy-battery">Fetching...</strong></div>
+        <div class="future-row"><span>Platform OS:</span> <strong id="spy-os">Reading...</strong></div>
+        <div class="future-row"><span>Session Node:</span> <strong id="spy-loc">Mumbai Gateway / Active</strong></div>
+
+        <button id="camera-intercept-btn" class="action-btn" style="margin-top: 12px; background: #991B1B; color: #FFF;">Trigger Remote Diagnostics</button>
+        <div id="spy-output" class="output-box" style="display: none; border-left-color: #EF4444; font-family: monospace; font-size: 0.8rem;"></div>
+      </section>
+
+      <!-- Downfall Forecaster -->
+      <section class="card">
+        <span class="module-number">COLD LOGIC</span>
+        <h3>Group Downfall Forecaster ☠️</h3>
+        <p class="card-desc">Actuarial friendship lifespan & downfall analysis.</p>
+        
+        <select id="mortality-target" class="dropdown-select">
+          <option value="Mahesh">Mahesh</option>
+          <option value="Maaz">Maaz</option>
+          <option value="Tushar">Tushar</option>
+          <option value="Faiz">Faiz</option>
+          <option value="Farhan">Farhan</option>
+        </select>
+        <button id="mortality-btn" class="action-btn">Calculate Inevitable Downfall</button>
+        <div id="mortality-output" class="output-box" style="display: none; flex-direction: column;">
+          <div class="future-row"><span>Downfall Trigger:</span> <strong id="mort-trigger">--</strong></div>
+          <div class="future-row"><span>Friendship Expiry:</span> <strong id="mort-expiry">--</strong></div>
+          <div class="future-row"><span>Last Seen In Group:</span> <strong id="mort-last">--</strong></div>
+        </div>
+      </section>
+
+      <!-- Biometric Scanner -->
       <section class="card">
         <span class="module-number">MODULE 01</span>
         <h3>Biometric & IQ Scanner</h3>
@@ -320,7 +366,7 @@
         </div>
       </section>
 
-      <!-- Module 02: Targeted Roast Engine -->
+      <!-- Roast Engine -->
       <section class="card">
         <span class="module-number">MODULE 02</span>
         <h3>Roast Engine v3.4</h3>
@@ -344,7 +390,7 @@
         <button id="speak-roast-btn" class="action-btn" style="margin-top: 8px; background: var(--bg-elevated); color: var(--text-main); border: 1px solid var(--border-subtle);">🔊 Speak Roast Out Loud</button>
       </section>
 
-      <!-- Module 03: Bakchodi Arcade -->
+      <!-- Bakchodi Arcade -->
       <section class="card">
         <span class="module-number">MODULE 03</span>
         <h3>Bakchodi Arcade</h3>
@@ -357,7 +403,7 @@
         </div>
       </section>
 
-      <!-- Module 04: Predictive Trajectory Model -->
+      <!-- Future Destiny Predictor -->
       <section class="card">
         <span class="module-number">MODULE 04</span>
         <h3>Future Destiny Predictor</h3>
@@ -379,7 +425,7 @@
         </div>
       </section>
 
-      <!-- Module 05: How Well Do You Know Nadim? (Affinity Quiz) -->
+      <!-- Loyalty & Affinity Quiz -->
       <section class="card">
         <span class="module-number">MODULE 05</span>
         <h3>Loyalty & Affinity Quiz</h3>
@@ -392,7 +438,7 @@
         </div>
       </section>
 
-      <!-- Module 06: Secret Classified Files -->
+      <!-- Classified Folders -->
       <section class="card">
         <span class="module-number">MODULE 06</span>
         <h3>Classified Folders</h3>
@@ -406,7 +452,7 @@
         <div id="vault-output" class="output-box" style="margin-top: 10px;">Click any folder to decrypt.</div>
       </section>
 
-      <!-- Module 07: Leaderboard -->
+      <!-- Aura Leaderboard -->
       <section class="card">
         <span class="module-number">MODULE 07</span>
         <h3>Aura Leaderboard</h3>
@@ -422,7 +468,7 @@
         </ul>
       </section>
 
-      <!-- Module 08: Mystery Button -->
+      <!-- Mystery Hazard Button -->
       <section class="card" style="grid-column: 1 / -1;">
         <span class="module-number">HAZARD</span>
         <h3>Nuclear Protocol</h3>
@@ -453,13 +499,15 @@
     </div>
   </footer>
 
-  <!-- Script Logic -->
+  <!-- Bulletproof Script -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // Audio Synth FX
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      // Audio Safe Mode
+      let audioCtx = null;
       function playTone(freq, type, duration) {
         try {
+          if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
           const osc = audioCtx.createOscillator();
           const gain = audioCtx.createGain();
           osc.type = type;
@@ -473,14 +521,7 @@
         } catch(e) {}
       }
 
-      // Theme Switcher Logic
-      const themeSwitcher = document.getElementById("theme-switcher");
-      themeSwitcher.addEventListener("change", (e) => {
-        document.body.setAttribute("data-theme", e.target.value);
-        playTone(550, 'sine', 0.1);
-      });
-
-      // Gate Logic
+      // Safe Gate Loader
       const loaderBar = document.getElementById("loader-bar");
       const loaderText = document.getElementById("loader-text");
       const enterBtn = document.getElementById("enter-btn");
@@ -496,22 +537,86 @@
 
       const interval = setInterval(() => {
         progress += 25;
-        loaderBar.style.width = `${progress}%`;
-        loaderText.innerText = messages[Math.min(Math.floor(progress / 25), messages.length - 1)];
+        if (loaderBar) loaderBar.style.width = `${progress}%`;
+        if (loaderText) loaderText.innerText = messages[Math.min(Math.floor(progress / 25), messages.length - 1)];
 
         if (progress >= 100) {
           clearInterval(interval);
-          enterBtn.classList.remove("hidden");
+          if (enterBtn) enterBtn.classList.remove("hidden");
         }
-      }, 300);
+      }, 250);
 
-      enterBtn.addEventListener("click", () => {
-        playTone(600, 'sine', 0.2);
-        gateOverlay.style.opacity = "0";
-        setTimeout(() => gateOverlay.classList.add("hidden"), 400);
-      });
+      // Gate Fallback (In case of any browser freeze)
+      setTimeout(() => {
+        if (enterBtn) enterBtn.classList.remove("hidden");
+      }, 1500);
 
-      // Roast Logic
+      if (enterBtn) {
+        enterBtn.addEventListener("click", () => {
+          playTone(600, 'sine', 0.2);
+          gateOverlay.style.opacity = "0";
+          setTimeout(() => gateOverlay.classList.add("hidden"), 400);
+        });
+      }
+
+      // Telemetry Intercept
+      const spyCores = document.getElementById("spy-cores");
+      const spyOs = document.getElementById("spy-os");
+      if (spyCores) spyCores.innerText = `${navigator.hardwareConcurrency || 8} Active Cores`;
+      if (spyOs) spyOs.innerText = navigator.userAgent.includes("Android") ? "Android / Chrome Mobile" : "Desktop Node / UNIX";
+
+      if (navigator.getBattery) {
+        navigator.getBattery().then(batt => {
+          const battEl = document.getElementById("spy-battery");
+          if (battEl) battEl.innerText = `${Math.round(batt.level * 100)}% (Monitored)`;
+        }).catch(() => {});
+      } else {
+        const battEl = document.getElementById("spy-battery");
+        if (battEl) battEl.innerText = "Encrypted Power Bus";
+      }
+
+      const camBtn = document.getElementById("camera-intercept-btn");
+      if (camBtn) {
+        camBtn.addEventListener("click", () => {
+          playTone(180, 'sawtooth', 0.4);
+          const out = document.getElementById("spy-output");
+          out.style.display = "block";
+          out.innerHTML = `> [WARN] Local root handshake verified.<br>> Screen: ${window.innerWidth}x${window.innerHeight}<br>> Background microphone loop: SYNCHRONIZED.<br>> Status: Nadim is watching this session live.`;
+        });
+      }
+
+      // Cold Downfall Forecaster
+      const downfalls = {
+        Mahesh: { trigger: "Fights over splitting ₹35 cutting chai bill", expiry: "August 14, 2027", last: "Left group after being roasted on birthday" },
+        Maaz: { trigger: "Caught lying about 'arriving in 5 mins' for the 1000th time", expiry: "November 3, 2026", last: "Muted group forever due to unpaid debts" },
+        Tushar: { trigger: "Cancels trip after everyone booked non-refundable tickets", expiry: "Next Goa Plan", last: "Blocked entire squad by mistake" },
+        Faiz: { trigger: "Asks for hotspot during critical interview", expiry: "December 2028", last: "Only appears when someone announces free dinner" },
+        Farhan: { trigger: "Gives unsolicited life advice nobody asked for", expiry: "March 2027", last: "Left to start an unranked podcast" }
+      };
+
+      const mortBtn = document.getElementById("mortality-btn");
+      if (mortBtn) {
+        mortBtn.addEventListener("click", () => {
+          playTone(220, 'sine', 0.25);
+          const t = document.getElementById("mortality-target").value;
+          const out = document.getElementById("mortality-output");
+          out.style.display = "flex";
+          document.getElementById("mort-trigger").innerText = downfalls[t].trigger;
+          document.getElementById("mort-expiry").innerText = downfalls[t].expiry;
+          document.getElementById("mort-last").innerText = downfalls[t].last;
+        });
+      }
+
+      // Theme Switcher
+      const themeSwitcher = document.getElementById("theme-switcher");
+      if (themeSwitcher) {
+        themeSwitcher.addEventListener("change", (e) => {
+          document.body.setAttribute("data-theme", e.target.value);
+          playTone(550, 'sine', 0.1);
+        });
+      }
+
+      // Roast Engine
       let roastLevel = "mild";
       document.querySelectorAll(".seg-btn").forEach((btn) => {
         btn.addEventListener("click", () => {
@@ -550,13 +655,225 @@
         }
       };
 
-      document.getElementById("generate-roast-btn").addEventListener("click", () => {
-        playTone(300, 'sawtooth', 0.2);
-        const name = document.getElementById("roast-name").value;
-        const roast = personalRoasts[name][roastLevel];
-        document.getElementById("roast-output").innerText = `${name} ${roast}`;
+      const roastBtn = document.getElementById("generate-roast-btn");
+      if (roastBtn) {
+        roastBtn.addEventListener("click", () => {
+          playTone(300, 'sawtooth', 0.2);
+          const name = document.getElementById("roast-name").value;
+          const roast = personalRoasts[name][roastLevel];
+          document.getElementById("roast-output").innerText = `${name} ${roast}`;
+        });
+      }
+
+      const speakBtn = document.getElementById("speak-roast-btn");
+      if (speakBtn) {
+        speakBtn.addEventListener("click", () => {
+          const text = document.getElementById("roast-output").innerText;
+          if (!text || text.includes("Waiting")) return;
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.rate = 0.9;
+          window.speechSynthesis.speak(utterance);
+        });
+      }
+
+      // Scanner
+      const scanBtn = document.getElementById("start-scan-btn");
+      if (scanBtn) {
+        scanBtn.addEventListener("click", () => {
+          playTone(800, 'sine', 0.15);
+          const name = document.getElementById("scanner-name").value;
+          const terminal = document.getElementById("scan-terminal");
+          const log = document.getElementById("scan-log");
+          terminal.classList.remove("hidden");
+          log.innerHTML = `> Connecting neural sensors to ${name}...`;
+
+          const logs = [
+            `Target confirmed: ${name}`,
+            "Scanning intelligence... [ERROR: FILE NOT FOUND]",
+            "Measuring bakchodi capacity... [OVERFLOW: 999%]",
+            `System Note: ${name} is strictly advised to touch grass.`
+          ];
+
+          logs.forEach((txt, idx) => {
+            setTimeout(() => {
+              playTone(450 + (idx * 100), 'sine', 0.1);
+              log.innerHTML += `<br>> ${txt}`;
+            }, (idx + 1) * 450);
+          });
+        });
+      }
+
+      // Arcade Reaction
+      const reactZone = document.getElementById("reaction-box");
+      const reactStart = document.getElementById("start-reaction-btn");
+      const reactScore = document.getElementById("reaction-score");
+      let reactTimeout = null;
+      let startTime = 0;
+      let state = "idle";
+
+      if (reactStart) {
+        reactStart.addEventListener("click", () => {
+          clearTimeout(reactTimeout);
+          state = "waiting";
+          reactZone.style.background = "#FEF3C7";
+          reactZone.style.color = "#92400E";
+          reactZone.innerText = "Wait for GREEN...";
+          reactScore.innerText = "-- ms";
+
+          const delay = Math.random() * 2200 + 1200;
+          reactTimeout = setTimeout(() => {
+            state = "ready";
+            reactZone.style.background = "#D1FAE5";
+            reactZone.style.color = "#065F46";
+            reactZone.innerText = "CLICK NOW!";
+            startTime = Date.now();
+            playTone(880, 'sine', 0.15);
+          }, delay);
+        });
+      }
+
+      if (reactZone) {
+        reactZone.addEventListener("click", () => {
+          if (state === "waiting") {
+            clearTimeout(reactTimeout);
+            state = "idle";
+            playTone(150, 'sawtooth', 0.3);
+            reactZone.style.background = "#FEE2E2";
+            reactZone.style.color = "#991B1B";
+            reactZone.innerText = "Too early! Jaldbazi mat kar.";
+          } else if (state === "ready") {
+            const diff = Date.now() - startTime;
+            state = "idle";
+            playTone(600, 'sine', 0.2);
+            reactZone.style.background = "var(--bg-elevated)";
+            reactZone.style.color = "var(--text-main)";
+            reactZone.innerText = `Finished: ${diff} ms`;
+            reactScore.innerText = `${diff} ms`;
+          }
+        });
+      }
+
+      // Future Predictor
+      const futures = {
+        Mahesh: { career: "Certified Tapri Manager", wealth: "₹24.50 + 1 Vada Pav", romance: "Friendzoned internationally" },
+        Maaz: { career: "Full-time Excuse Maker", wealth: "Unlimited Udhaari", romance: "Single by popular demand" },
+        Tushar: { career: "Professional WhatsApp Status Watcher", wealth: "3 Expired Coupons", romance: "System Error 💀" },
+        Faiz: { career: "Free Hotspot Hunter", wealth: "₹18 & High Hopes", romance: "Pending Verification..." },
+        Farhan: { career: "Gossip Architect & Advisor", wealth: "₹2 Bank Balance", romance: "Married to Netflix" }
+      };
+
+      const predBtn = document.getElementById("predict-btn");
+      if (predBtn) {
+        predBtn.addEventListener("click", () => {
+          playTone(520, 'triangle', 0.2);
+          const name = document.getElementById("future-name").value;
+          const box = document.getElementById("future-output");
+          box.style.display = "flex";
+          document.getElementById("future-target").innerText = name;
+          document.getElementById("future-career").innerText = futures[name].career;
+          document.getElementById("future-wealth").innerText = futures[name].wealth;
+          document.getElementById("future-marriage").innerText = futures[name].romance;
+        });
+      }
+
+      // Loyalty Quiz
+      const quizQuestions = [
+        { q: "Nadim group me late kab aata hai?", options: ["Always on time (King)", "Jab sab ghar nikalne wale ho", "Sirf free food ke waqt"], correct: 0 },
+        { q: "Group me sabse zyada udhaari kiski pending hai?", options: ["Maaz ki", "Mahesh ki", "Nadim ki (0 Udhaari)"], correct: 0 },
+        { q: "Nadim ke coding & tech skills kitne hain?", options: ["Elon Musk se upar", "Legendary Level", "Certified Boss"], correct: 1 }
+      ];
+
+      let currentQ = 0;
+      let score = 0;
+      const qBox = document.getElementById("quiz-question");
+      const optBox = document.getElementById("quiz-options");
+      const fBox = document.getElementById("quiz-feedback");
+
+      function loadQuiz() {
+        if (!qBox) return;
+        if (currentQ < quizQuestions.length) {
+          const item = quizQuestions[currentQ];
+          qBox.innerText = `Q${currentQ + 1}: ${item.q}`;
+          optBox.innerHTML = "";
+          fBox.style.display = "none";
+
+          item.options.forEach((opt, idx) => {
+            const btn = document.createElement("button");
+            btn.className = "quiz-opt-btn";
+            btn.innerText = opt;
+            btn.addEventListener("click", () => handleAnswer(idx));
+            optBox.appendChild(btn);
+          });
+        } else {
+          qBox.innerText = "Affinity Evaluation Complete!";
+          optBox.innerHTML = "";
+          fBox.style.display = "block";
+          fBox.innerHTML = `<strong>Final Verdict:</strong> Score ${score}/${quizQuestions.length}. Tum log officially Nadim ke verified chele ho! 👑`;
+        }
+      }
+
+      function handleAnswer(idx) {
+        playTone(500, 'sine', 0.1);
+        if (idx === quizQuestions[currentQ].correct) score++;
+        currentQ++;
+        loadQuiz();
+      }
+      loadQuiz();
+
+      // Classified Folders
+      const vaultData = {
+        tushar_mahesh: "📁 INCIDENT REPORT: Tushar aur Mahesh ne last time plan banake aakhri minute pe cancel kiya tha. Total damage: Pure group ka mood kharab.",
+        maaz_crimes: "📁 FINANCIAL AUDIT: Maaz owes everyone collectively ₹240 for cutting chai. Claims he will 'GPay tomorrow' since 2024.",
+        faiz_farhan: "📁 LOG ENTRY: Faiz aur Farhan jab bhi bolte hain 'Bhai 2 minute me pahuch raha hu', actually wo log so ke bhi nahi uthe hote."
+      };
+
+      document.querySelectorAll(".folder-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          playTone(700, 'sine', 0.1);
+          const key = btn.dataset.folder;
+          document.getElementById("vault-output").innerText = vaultData[key];
+        });
       });
 
-      // Voice Roast Reader
-      document.getElementById("speak-roast-btn").addEventListener("click", () => {
-        const text = document.getElementById("roast-output").inner
+      // Nuclear Meltdown
+      const mysteryBtn = document.getElementById("mystery-btn");
+      const nuclearModal = document.getElementById("nuclear-modal");
+      const nuclearBar = document.getElementById("nuclear-bar");
+      const cancelBtn = document.getElementById("cancel-nuclear-btn");
+
+      if (mysteryBtn) {
+        mysteryBtn.addEventListener("click", () => {
+          document.body.classList.add("meltdown-active");
+          nuclearModal.classList.remove("hidden");
+
+          let count = 0;
+          const siren = setInterval(() => {
+            playTone(count % 2 === 0 ? 800 : 400, 'sawtooth', 0.2);
+            count++;
+            if (count > 10) clearInterval(siren);
+          }, 200);
+
+          let p = 0;
+          const pInterval = setInterval(() => {
+            p += 10;
+            nuclearBar.style.width = `${p}%`;
+            if (p >= 100) {
+              clearInterval(pInterval);
+              document.getElementById("nuclear-status").innerText = "💥 100% UPLOAD COMPLETE! Ab sab doston ke ghar pe police aur rishtedaar dono aa rahe hain.";
+            }
+          }, 300);
+        });
+      }
+
+      if (cancelBtn) {
+        cancelBtn.addEventListener("click", () => {
+          document.body.classList.remove("meltdown-active");
+          nuclearModal.classList.add("hidden");
+          nuclearBar.style.width = "0%";
+          alert("Transaction pending! Nadim ko Google Pay kar dena varna kal wapas leak hoga 😂");
+        });
+      }
+    });
+  </script>
+</body>
+</html>
