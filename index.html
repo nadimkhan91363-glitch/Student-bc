@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* Deploy 2 Extra Styles */
     .input-field {
       width: 100%;
       padding: 12px 14px;
@@ -36,7 +35,7 @@
       font-size: 0.9rem;
       cursor: pointer;
       width: 100%;
-      transition: opacity 0.2s;
+      transition: opacity 0.2s, transform 0.1s;
     }
     .action-btn:active {
       transform: scale(0.98);
@@ -72,9 +71,6 @@
       border-radius: var(--radius-sm);
       font-size: 0.88rem;
       border-left: 3px solid var(--accent);
-      min-height: 48px;
-      display: flex;
-      align-items: center;
     }
     .terminal-box {
       background: #090D16;
@@ -87,6 +83,48 @@
       min-height: 80px;
       text-align: left;
       line-height: 1.6;
+    }
+    /* Arcade & Future Styles */
+    .reaction-zone {
+      background: var(--bg-elevated);
+      height: 110px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      user-select: none;
+      margin-bottom: 12px;
+      transition: background 0.15s ease, color 0.15s ease;
+      border: 1px dashed var(--border-subtle);
+    }
+    .arcade-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .score-display {
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--accent);
+    }
+    .future-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .future-row:last-child {
+      border-bottom: none;
+    }
+    .future-row span {
+      color: var(--text-muted);
+    }
+    .future-row strong {
+      color: var(--text-main);
     }
   </style>
 </head>
@@ -131,7 +169,7 @@
     <!-- Modules Grid -->
     <div class="modules-grid">
 
-      <!-- Module 01: Biometric & Bakchodi Scanner -->
+      <!-- Module 01: Biometric Scanner -->
       <section class="card">
         <span class="module-number">MODULE 01</span>
         <h3>Biometric & IQ Scanner</h3>
@@ -164,6 +202,39 @@
         </div>
       </section>
 
+      <!-- Module 03: Bakchodi Arcade -->
+      <section class="card">
+        <span class="module-number">MODULE 03</span>
+        <h3>Bakchodi Arcade</h3>
+        <p class="card-desc">Reflex evaluation. Click the pad the instant it turns GREEN.</p>
+        
+        <div class="arcade-viewport">
+          <div id="reaction-box" class="reaction-zone">Click "Start Test" Below</div>
+          <div class="arcade-actions">
+            <button id="start-reaction-btn" class="action-btn" style="flex: 1;">Start Test</button>
+            <span id="reaction-score" class="score-display">-- ms</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Module 04: Predictive Trajectory Model -->
+      <section class="card">
+        <span class="module-number">MODULE 04</span>
+        <h3>Predictive Trajectory Model</h3>
+        <p class="card-desc">Calculates 10-year financial, personal, and career milestones.</p>
+        
+        <div class="future-form">
+          <input type="text" id="future-name" placeholder="Enter target name..." class="input-field" />
+          <button id="predict-btn" class="action-btn">Calculate Destiny</button>
+          <div id="future-output" class="output-box" style="display: none; flex-direction: column;">
+            <div class="future-row"><span>Target:</span> <strong id="future-target">--</strong></div>
+            <div class="future-row"><span>Career:</span> <strong id="future-career">--</strong></div>
+            <div class="future-row"><span>Net Worth:</span> <strong id="future-wealth">--</strong></div>
+            <div class="future-row"><span>Romance:</span> <strong id="future-marriage">--</strong></div>
+          </div>
+        </div>
+      </section>
+
     </div>
   </main>
 
@@ -175,10 +246,10 @@
     </div>
   </footer>
 
-  <!-- Single Embedded Script -->
+  <!-- Script Logic -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // 1. Gate Logic
+      // Gate Logic
       const loaderBar = document.getElementById("loader-bar");
       const loaderText = document.getElementById("loader-text");
       const enterBtn = document.getElementById("enter-btn");
@@ -201,14 +272,14 @@
           clearInterval(interval);
           enterBtn.classList.remove("hidden");
         }
-      }, 350);
+      }, 300);
 
       enterBtn.addEventListener("click", () => {
         gateOverlay.style.opacity = "0";
         setTimeout(() => gateOverlay.classList.add("hidden"), 400);
       });
 
-      // 2. Roast Machine Logic
+      // Roast Logic
       let roastLevel = "mild";
       document.querySelectorAll(".seg-btn").forEach((btn) => {
         btn.addEventListener("click", () => {
@@ -243,7 +314,7 @@
         document.getElementById("roast-output").innerText = `${name} ${picked}`;
       });
 
-      // 3. Biometric Scanner Logic
+      // Biometric Scanner Logic
       const scanBtn = document.getElementById("start-scan-btn");
       const scanTerminal = document.getElementById("scan-terminal");
       const scanLog = document.getElementById("scan-log");
@@ -263,8 +334,67 @@
         logs.forEach((txt, idx) => {
           setTimeout(() => {
             scanLog.innerHTML += `<br>> ${txt}`;
-          }, (idx + 1) * 600);
+          }, (idx + 1) * 500);
         });
+      });
+
+      // Module 03: Arcade Reaction Logic
+      const reactZone = document.getElementById("reaction-box");
+      const reactBtn = document.getElementById("start-reaction-btn");
+      const reactScore = document.getElementById("reaction-score");
+      let reactTimeout = null;
+      let startTime = 0;
+      let state = "idle"; // idle | waiting | ready
+
+      reactBtn.addEventListener("click", () => {
+        clearTimeout(reactTimeout);
+        state = "waiting";
+        reactZone.style.background = "#FEF3C7";
+        reactZone.style.color = "#92400E";
+        reactZone.innerText = "Wait for GREEN...";
+        reactScore.innerText = "-- ms";
+
+        const delay = Math.random() * 2500 + 1500;
+        reactTimeout = setTimeout(() => {
+          state = "ready";
+          reactZone.style.background = "#D1FAE5";
+          reactZone.style.color = "#065F46";
+          reactZone.innerText = "CLICK NOW!";
+          startTime = Date.now();
+        }, delay);
+      });
+
+      reactZone.addEventListener("click", () => {
+        if (state === "waiting") {
+          clearTimeout(reactTimeout);
+          state = "idle";
+          reactZone.style.background = "#FEE2E2";
+          reactZone.style.color = "#991B1B";
+          reactZone.innerText = "Too early! Jaldbazi mat karo.";
+        } else if (state === "ready") {
+          const diff = Date.now() - startTime;
+          state = "idle";
+          reactZone.style.background = "var(--bg-elevated)";
+          reactZone.style.color = "var(--text-main)";
+          reactZone.innerText = `Logged: ${diff} ms`;
+          reactScore.innerText = `${diff} ms`;
+        }
+      });
+
+      // Module 04: Future Machine Logic
+      const careers = ["Certified WhatsApp Admin", "Professional Reels Critic", "Tapri Tea Consultant", "Senior Overthinker", "Part-time Influencer (0 Followers)"];
+      const fortunes = ["₹17.50 + 2 Center Fresh", "3 Dairy Milk Silk", "Unlimited Chillar & Debt", "₹2,500 Amazon Gift Voucher (Expired)"];
+      const romances = ["System Error 💀", "Friendzoned in 4 continents", "Arranged match pending...", "Single forever with high standards"];
+
+      document.getElementById("predict-btn").addEventListener("click", () => {
+        const name = document.getElementById("future-name").value.trim() || "Subject";
+        const box = document.getElementById("future-output");
+        box.style.display = "flex";
+        
+        document.getElementById("future-target").innerText = name;
+        document.getElementById("future-career").innerText = careers[Math.floor(Math.random() * careers.length)];
+        document.getElementById("future-wealth").innerText = fortunes[Math.floor(Math.random() * fortunes.length)];
+        document.getElementById("future-marriage").innerText = romances[Math.floor(Math.random() * romances.length)];
       });
     });
   </script>
