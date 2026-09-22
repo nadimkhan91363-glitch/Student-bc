@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <style>
-    .input-field {
+    .input-field, .dropdown-select {
       width: 100%;
       padding: 12px 14px;
       border: 1px solid var(--border-subtle);
@@ -21,9 +21,6 @@
       outline: none;
       margin-bottom: 12px;
       box-sizing: border-box;
-    }
-    .input-field:focus {
-      border-color: var(--accent);
     }
     .action-btn {
       background: var(--text-main);
@@ -84,10 +81,9 @@
       text-align: left;
       line-height: 1.6;
     }
-    /* Arcade & Future Styles */
     .reaction-zone {
       background: var(--bg-elevated);
-      height: 110px;
+      height: 105px;
       border-radius: var(--radius-sm);
       display: flex;
       align-items: center;
@@ -97,7 +93,7 @@
       cursor: pointer;
       user-select: none;
       margin-bottom: 12px;
-      transition: background 0.15s ease, color 0.15s ease;
+      transition: background 0.15s ease;
       border: 1px dashed var(--border-subtle);
     }
     .arcade-actions {
@@ -117,14 +113,48 @@
       padding: 6px 0;
       border-bottom: 1px solid rgba(0,0,0,0.05);
     }
-    .future-row:last-child {
-      border-bottom: none;
+    .vault-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
-    .future-row span {
-      color: var(--text-muted);
-    }
-    .future-row strong {
+    .folder-btn {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
       color: var(--text-main);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+    }
+    .leader-list {
+      list-style: none;
+      margin-top: 8px;
+    }
+    .leader-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+    .leader-list li:first-child {
+      color: var(--accent);
+      background: #EFF6FF;
+      border-radius: var(--radius-sm);
+    }
+    .danger-pill-btn {
+      background: #FEE2E2;
+      color: #B91C1C;
+      border: 1px solid #FECACA;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
     }
   </style>
 </head>
@@ -162,7 +192,7 @@
     <section class="hero-card">
       <div class="hero-content">
         <h2>Friendship Evaluation Terminal</h2>
-        <p>A multi-module algorithmic workspace designed to measure intelligence, loyalty, and undeniable bakchodi.</p>
+        <p>Target squad verified: Mahesh, Maaz, Tushar, Faiz, Farhan.</p>
       </div>
     </section>
 
@@ -173,66 +203,115 @@
       <section class="card">
         <span class="module-number">MODULE 01</span>
         <h3>Biometric & IQ Scanner</h3>
-        <p class="card-desc">Simulated sensory verification via optical cursor tracking.</p>
+        <p class="card-desc">Simulated deep sensory verification.</p>
         
-        <div class="scanner-box">
-          <input type="text" id="scanner-name" placeholder="Target's legal name..." class="input-field" />
-          <button id="start-scan-btn" class="action-btn">Initialize Deep Scan</button>
-          <div id="scan-terminal" class="terminal-box hidden">
-            <p id="scan-log">> System ready...</p>
-          </div>
+        <select id="scanner-name" class="dropdown-select">
+          <option value="Mahesh">Mahesh</option>
+          <option value="Maaz">Maaz</option>
+          <option value="Tushar">Tushar</option>
+          <option value="Faiz">Faiz</option>
+          <option value="Farhan">Farhan</option>
+        </select>
+        <button id="start-scan-btn" class="action-btn">Initialize Deep Scan</button>
+        <div id="scan-terminal" class="terminal-box hidden">
+          <p id="scan-log">> System ready...</p>
         </div>
       </section>
 
-      <!-- Module 02: Roast Engine -->
+      <!-- Module 02: Targeted Roast Engine -->
       <section class="card">
         <span class="module-number">MODULE 02</span>
         <h3>Roast Engine v3.4</h3>
-        <p class="card-desc">Algorithmic behavioral critique based on custom parameters.</p>
+        <p class="card-desc">Specially calibrated for the group.</p>
         
-        <div class="roast-form">
-          <input type="text" id="roast-name" placeholder="Friend's Name / Nickname" class="input-field" />
-          <div class="segmented-control">
-            <button class="seg-btn active" data-level="mild">Mild</button>
-            <button class="seg-btn" data-level="dangerous">Dangerous</button>
-            <button class="seg-btn" data-level="nuclear">Nuclear ☢️</button>
-          </div>
-          <button id="generate-roast-btn" class="action-btn">Generate Critique</button>
-          <div id="roast-output" class="output-box">Waiting for subject...</div>
+        <select id="roast-name" class="dropdown-select">
+          <option value="Mahesh">Mahesh</option>
+          <option value="Maaz">Maaz</option>
+          <option value="Tushar">Tushar</option>
+          <option value="Faiz">Faiz</option>
+          <option value="Farhan">Farhan</option>
+        </select>
+
+        <div class="segmented-control">
+          <button class="seg-btn active" data-level="mild">Mild</button>
+          <button class="seg-btn" data-level="dangerous">Dangerous</button>
+          <button class="seg-btn" data-level="nuclear">Nuclear ☢️</button>
         </div>
+        <button id="generate-roast-btn" class="action-btn">Generate Critique</button>
+        <div id="roast-output" class="output-box">Waiting for subject...</div>
       </section>
 
       <!-- Module 03: Bakchodi Arcade -->
       <section class="card">
         <span class="module-number">MODULE 03</span>
         <h3>Bakchodi Arcade</h3>
-        <p class="card-desc">Reflex evaluation. Click the pad the instant it turns GREEN.</p>
+        <p class="card-desc">Click the pad as soon as it turns GREEN.</p>
         
-        <div class="arcade-viewport">
-          <div id="reaction-box" class="reaction-zone">Click "Start Test" Below</div>
-          <div class="arcade-actions">
-            <button id="start-reaction-btn" class="action-btn" style="flex: 1;">Start Test</button>
-            <span id="reaction-score" class="score-display">-- ms</span>
-          </div>
+        <div id="reaction-box" class="reaction-zone">Click "Start Test" Below</div>
+        <div class="arcade-actions">
+          <button id="start-reaction-btn" class="action-btn" style="flex: 1;">Start Test</button>
+          <span id="reaction-score" class="score-display">-- ms</span>
         </div>
       </section>
 
       <!-- Module 04: Predictive Trajectory Model -->
       <section class="card">
         <span class="module-number">MODULE 04</span>
-        <h3>Predictive Trajectory Model</h3>
-        <p class="card-desc">Calculates 10-year financial, personal, and career milestones.</p>
+        <h3>Future Destiny Predictor</h3>
+        <p class="card-desc">10-year algorithmic prediction.</p>
         
-        <div class="future-form">
-          <input type="text" id="future-name" placeholder="Enter target name..." class="input-field" />
-          <button id="predict-btn" class="action-btn">Calculate Destiny</button>
-          <div id="future-output" class="output-box" style="display: none; flex-direction: column;">
-            <div class="future-row"><span>Target:</span> <strong id="future-target">--</strong></div>
-            <div class="future-row"><span>Career:</span> <strong id="future-career">--</strong></div>
-            <div class="future-row"><span>Net Worth:</span> <strong id="future-wealth">--</strong></div>
-            <div class="future-row"><span>Romance:</span> <strong id="future-marriage">--</strong></div>
-          </div>
+        <select id="future-name" class="dropdown-select">
+          <option value="Mahesh">Mahesh</option>
+          <option value="Maaz">Maaz</option>
+          <option value="Tushar">Tushar</option>
+          <option value="Faiz">Faiz</option>
+          <option value="Farhan">Farhan</option>
+        </select>
+        <button id="predict-btn" class="action-btn">Calculate Destiny</button>
+        <div id="future-output" class="output-box" style="display: none; flex-direction: column;">
+          <div class="future-row"><span>Target:</span> <strong id="future-target">--</strong></div>
+          <div class="future-row"><span>Career:</span> <strong id="future-career">--</strong></div>
+          <div class="future-row"><span>Net Worth:</span> <strong id="future-wealth">--</strong></div>
+          <div class="future-row"><span>Romance:</span> <strong id="future-marriage">--</strong></div>
         </div>
+      </section>
+
+      <!-- Module 05: Secret Classified Files -->
+      <section class="card">
+        <span class="module-number">MODULE 05</span>
+        <h3>Classified Folders</h3>
+        <p class="card-desc">Encrypted evidence files.</p>
+        
+        <div class="vault-grid">
+          <button class="folder-btn" data-folder="tushar_mahesh">📁 Tushar & Mahesh Top Secrets</button>
+          <button class="folder-btn" data-folder="maaz_crimes">📁 Maaz Pending Udhari</button>
+          <button class="folder-btn" data-folder="faiz_farhan">📁 Faiz & Farhan Late Arrivals</button>
+        </div>
+        <div id="vault-output" class="output-box" style="margin-top: 10px;">Click any folder to decrypt.</div>
+      </section>
+
+      <!-- Module 06: Leaderboard -->
+      <section class="card">
+        <span class="module-number">MODULE 06</span>
+        <h3>Aura Leaderboard</h3>
+        <p class="card-desc">Live status verified by system.</p>
+        
+        <ul class="leader-list">
+          <li><span>👑 Nadim (Admin)</span> <span>+999,999 Aura</span></li>
+          <li><span>Mahesh</span> <span>-420 Aura</span></li>
+          <li><span>Maaz</span> <span>-69 Aura</span></li>
+          <li><span>Tushar</span> <span>0 Aura</span></li>
+          <li><span>Faiz</span> <span>-150 Aura</span></li>
+          <li><span>Farhan</span> <span>-850 Aura</span></li>
+        </ul>
+      </section>
+
+      <!-- Module 07: Mystery Button -->
+      <section class="card" style="grid-column: 1 / -1;">
+        <span class="module-number">HAZARD</span>
+        <h3>Nuclear Protocol</h3>
+        <p class="card-desc">Strictly prohibited from user interaction.</p>
+        <button id="mystery-btn" class="danger-pill-btn">⚠️ DO NOT PRESS UNDER ANY CIRCUMSTANCE</button>
       </section>
 
     </div>
@@ -249,7 +328,7 @@
   <!-- Script Logic -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // Gate Logic
+      // 1. Gate Logic
       const loaderBar = document.getElementById("loader-bar");
       const loaderText = document.getElementById("loader-text");
       const enterBtn = document.getElementById("enter-btn");
@@ -257,10 +336,10 @@
 
       let progress = 0;
       const messages = [
-        "Pinging central node...",
-        "Scanning moral compromises...",
-        "Bypassing common sense filters...",
-        "Friendship credentials verified."
+        "Scanning squad database...",
+        "Identifying Mahesh, Maaz, Tushar, Faiz, Farhan...",
+        "Confirming Nadim as Root Admin...",
+        "Access Granted."
       ];
 
       const interval = setInterval(() => {
@@ -279,7 +358,7 @@
         setTimeout(() => gateOverlay.classList.add("hidden"), 400);
       });
 
-      // Roast Logic
+      // 2. Roast Logic
       let roastLevel = "mild";
       document.querySelectorAll(".seg-btn").forEach((btn) => {
         btn.addEventListener("click", () => {
@@ -289,62 +368,69 @@
         });
       });
 
-      const roasts = {
-        mild: [
-          "has the battery life of an iPhone 6.",
-          "walks into a room and the Wi-Fi speed drops automatically.",
-          "replies after 6 business days with just 'ha'."
-        ],
-        dangerous: [
-          "studies for 12 hours straight just to forget their own roll number.",
-          "confidence Ambani jaisa, bank balance ₹14.50.",
-          "typing speed 120 WPM, common sense 0 WPM."
-        ],
-        nuclear: [
-          "is living proof that oxygen can be wasted in 4K resolution.",
-          "their future is blurrier than a 144p video clip from 2007.",
-          "born to be iconic, forced to beg for hotspot daily."
-        ]
+      const personalRoasts = {
+        Mahesh: {
+          mild: "walks into a room and background noise automatically drops.",
+          dangerous: "plans to study for 8 hours, ends up watching reels about JCB excavation.",
+          nuclear: "bhai ka confidence Ambani jaisa hai, lekin bank account me ₹11.20 bache hain."
+        },
+        Maaz: {
+          mild: "replies to important group texts after 3 full business days.",
+          dangerous: "bhai humesha bolta hai '5 minute me aya' aur 2 ghante baad nikalta hai.",
+          nuclear: "is living proof that you can waste 1.5GB daily data with zero productive output."
+        },
+        Tushar: {
+          mild: "looks like someone who pays full price for free trial apps.",
+          dangerous: "phone ki battery 3% pe chalti hai, aur dimaag 1% pe.",
+          nuclear: "agla plan banayega to guarantee cancel karega, ye universal truth hai."
+        },
+        Faiz: {
+          mild: "humesha hotspot maangne ke liye sabse aage rehta hai.",
+          dangerous: "bolta hai 'aaj treat meri taraf se', bill aane pe bathroom chala jata hai.",
+          nuclear: "their future is blurrier than a 144p video clip from 2005."
+        },
+        Farhan: {
+          mild: "has the physical stamina of an uncharged torch.",
+          dangerous: "advice sabko deta hai jaise IAS officer ho, khud attendance ke liye rota hai.",
+          nuclear: "bhai ka aura itna negative hai ki room ka temperature gir jaata hai."
+        }
       };
 
       document.getElementById("generate-roast-btn").addEventListener("click", () => {
-        const name = document.getElementById("roast-name").value.trim() || "Subject";
-        const bank = roasts[roastLevel];
-        const picked = bank[Math.floor(Math.random() * bank.length)];
-        document.getElementById("roast-output").innerText = `${name} ${picked}`;
+        const name = document.getElementById("roast-name").value;
+        const roast = personalRoasts[name][roastLevel];
+        document.getElementById("roast-output").innerText = `${name} ${roast}`;
       });
 
-      // Biometric Scanner Logic
-      const scanBtn = document.getElementById("start-scan-btn");
-      const scanTerminal = document.getElementById("scan-terminal");
-      const scanLog = document.getElementById("scan-log");
-
-      scanBtn.addEventListener("click", () => {
-        const name = document.getElementById("scanner-name").value.trim() || "Target Human";
-        scanTerminal.classList.remove("hidden");
-        scanLog.innerHTML = `> Initializing neural link for ${name}...`;
+      // 3. Biometric Scanner
+      document.getElementById("start-scan-btn").addEventListener("click", () => {
+        const name = document.getElementById("scanner-name").value;
+        const terminal = document.getElementById("scan-terminal");
+        const log = document.getElementById("scan-log");
+        terminal.classList.remove("hidden");
+        log.innerHTML = `> Connecting neural sensors to ${name}...`;
 
         const logs = [
-          "Bypassing cranial firewall...",
-          "Searching for common sense... [ERROR: 0 FOUND]",
-          "Measuring gossip bandwidth... [MAX LEVEL]",
-          `Verdict: ${name} is 99.8% Certified Bakchod.`
+          `Target confirmed: ${name}`,
+          "Scanning intelligence... [ERROR: FILE NOT FOUND]",
+          "Measuring bakchodi capacity... [OVERFLOW: 999%]",
+          `System Note: ${name} is strictly advised to touch grass.`
         ];
 
         logs.forEach((txt, idx) => {
           setTimeout(() => {
-            scanLog.innerHTML += `<br>> ${txt}`;
-          }, (idx + 1) * 500);
+            log.innerHTML += `<br>> ${txt}`;
+          }, (idx + 1) * 450);
         });
       });
 
-      // Module 03: Arcade Reaction Logic
+      // 4. Arcade Reaction
       const reactZone = document.getElementById("reaction-box");
       const reactBtn = document.getElementById("start-reaction-btn");
       const reactScore = document.getElementById("reaction-score");
       let reactTimeout = null;
       let startTime = 0;
-      let state = "idle"; // idle | waiting | ready
+      let state = "idle";
 
       reactBtn.addEventListener("click", () => {
         clearTimeout(reactTimeout);
@@ -354,7 +440,7 @@
         reactZone.innerText = "Wait for GREEN...";
         reactScore.innerText = "-- ms";
 
-        const delay = Math.random() * 2500 + 1500;
+        const delay = Math.random() * 2200 + 1200;
         reactTimeout = setTimeout(() => {
           state = "ready";
           reactZone.style.background = "#D1FAE5";
@@ -370,31 +456,54 @@
           state = "idle";
           reactZone.style.background = "#FEE2E2";
           reactZone.style.color = "#991B1B";
-          reactZone.innerText = "Too early! Jaldbazi mat karo.";
+          reactZone.innerText = "Too early! Jaldbazi mat kar.";
         } else if (state === "ready") {
           const diff = Date.now() - startTime;
           state = "idle";
           reactZone.style.background = "var(--bg-elevated)";
           reactZone.style.color = "var(--text-main)";
-          reactZone.innerText = `Logged: ${diff} ms`;
+          reactZone.innerText = `Finished: ${diff} ms`;
           reactScore.innerText = `${diff} ms`;
         }
       });
 
-      // Module 04: Future Machine Logic
-      const careers = ["Certified WhatsApp Admin", "Professional Reels Critic", "Tapri Tea Consultant", "Senior Overthinker", "Part-time Influencer (0 Followers)"];
-      const fortunes = ["₹17.50 + 2 Center Fresh", "3 Dairy Milk Silk", "Unlimited Chillar & Debt", "₹2,500 Amazon Gift Voucher (Expired)"];
-      const romances = ["System Error 💀", "Friendzoned in 4 continents", "Arranged match pending...", "Single forever with high standards"];
+      // 5. Future Predictor
+      const futures = {
+        Mahesh: { career: "Certified Tapri Manager", wealth: "₹24.50 + 1 Vada Pav", romance: "Friendzoned internationally" },
+        Maaz: { career: "Full-time Excuse Maker", wealth: "Unlimited Udhaari", romance: "Single by popular demand" },
+        Tushar: { career: "Professional WhatsApp Status Watcher", wealth: "3 Expired Coupons", romance: "System Error 💀" },
+        Faiz: { career: "Free Hotspot Hunter", wealth: "₹18 & High Hopes", romance: "Pending Verification..." },
+        Farhan: { career: "Gossip Architect & Advisor", wealth: "₹2 Bank Balance", romance: "Married to Netflix" }
+      };
 
       document.getElementById("predict-btn").addEventListener("click", () => {
-        const name = document.getElementById("future-name").value.trim() || "Subject";
+        const name = document.getElementById("future-name").value;
         const box = document.getElementById("future-output");
         box.style.display = "flex";
         
         document.getElementById("future-target").innerText = name;
-        document.getElementById("future-career").innerText = careers[Math.floor(Math.random() * careers.length)];
-        document.getElementById("future-wealth").innerText = fortunes[Math.floor(Math.random() * fortunes.length)];
-        document.getElementById("future-marriage").innerText = romances[Math.floor(Math.random() * romances.length)];
+        document.getElementById("future-career").innerText = futures[name].career;
+        document.getElementById("future-wealth").innerText = futures[name].wealth;
+        document.getElementById("future-marriage").innerText = futures[name].romance;
+      });
+
+      // 6. Classified Folders
+      const vaultData = {
+        tushar_mahesh: "📁 INCIDENT REPORT: Tushar aur Mahesh ne last time plan banake aakhri minute pe cancel kiya tha. Total damage: Pure group ka mood kharab.",
+        maaz_crimes: "📁 FINANCIAL AUDIT: Maaz owes everyone collectively ₹240 for cutting chai. Claims he will 'GPay tomorrow' since 2024.",
+        faiz_farhan: "📁 LOG ENTRY: Faiz aur Farhan jab bhi bolte hain 'Bhai 2 minute me pahuch raha hu', actually wo log so ke bhi nahi uthe hote."
+      };
+
+      document.querySelectorAll(".folder-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const key = btn.dataset.folder;
+          document.getElementById("vault-output").innerText = vaultData[key];
+        });
+      });
+
+      // 7. Mystery Button
+      document.getElementById("mystery-btn").addEventListener("click", () => {
+        alert("⚠️ WARNING: Nadim's Admin System has initiated full device lockdown.\n\nResult: Mahesh, Maaz, Tushar, Faiz aur Farhan ki sab chats leak hone wali hain 💀");
       });
     });
   </script>
