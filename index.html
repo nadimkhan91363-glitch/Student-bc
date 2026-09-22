@@ -3,832 +3,341 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>THE FRIENDZONE — Secret Portal</title>
+  <title>MANSIK SANTULAN CLINIC — Unhinged Diagnostics</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <style>
-    body[data-theme="clean-dark"] {
-      --bg-primary: #090D16;
-      --bg-surface: #111827;
-      --bg-elevated: #1F2937;
-      --text-main: #F9FAFB;
-      --text-muted: #9CA3AF;
-      --border-subtle: #374151;
-      --accent: #3B82F6;
+    :root {
+      --bg-dark: #0A0A0C;
+      --card-dark: #121318;
+      --border-dark: #22242D;
+      --accent-red: #EF4444;
+      --accent-yellow: #EAB308;
+      --accent-green: #10B981;
+      --text-pure: #FFFFFF;
+      --text-dim: #94A3B8;
     }
-    body[data-theme="cyber-matrix"] {
-      --bg-primary: #050505;
-      --bg-surface: #0D1117;
-      --bg-elevated: #161B22;
-      --text-main: #00FF66;
-      --text-muted: #008F11;
-      --border-subtle: #003B00;
-      --accent: #00FF66;
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-pure);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto 80px auto;
+      padding: 20px;
+    }
+
+    .header-box {
+      text-align: center;
+      padding: 30px 10px;
+      border-bottom: 1px solid var(--border-dark);
+      margin-bottom: 30px;
+    }
+
+    .header-box h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+      color: var(--text-pure);
+    }
+
+    .header-box p {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+    }
+
+    .clinic-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: var(--accent-red);
+      font-size: 0.75rem;
+      font-weight: 800;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+
+    .grid-clinic {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .dark-card {
+      background: var(--card-dark);
+      border: 1px solid var(--border-dark);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .dark-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 6px;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .card-meta {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      margin-bottom: 18px;
     }
 
     .input-field, .dropdown-select {
       width: 100%;
       padding: 12px 14px;
-      border: 1px solid var(--border-subtle);
-      background: var(--bg-elevated);
-      color: var(--text-main);
-      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-dark);
+      background: #181920;
+      color: #FFF;
+      border-radius: 8px;
       font-family: inherit;
       font-size: 0.9rem;
       outline: none;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       box-sizing: border-box;
     }
-    .action-btn {
-      background: var(--text-main);
-      color: var(--bg-surface);
+
+    .slider-row {
+      margin-bottom: 16px;
+    }
+
+    .slider-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      margin-bottom: 6px;
+    }
+
+    .slider-input {
+      width: 100%;
+      accent-color: var(--accent-red);
+    }
+
+    .btn-fire {
+      background: var(--text-pure);
+      color: #000;
       border: none;
       padding: 12px 16px;
-      border-radius: var(--radius-sm);
-      font-weight: 600;
+      border-radius: 8px;
+      font-weight: 700;
       font-size: 0.9rem;
       cursor: pointer;
       width: 100%;
-      transition: opacity 0.2s, transform 0.1s;
+      transition: all 0.2s;
     }
-    .action-btn:active {
-      transform: scale(0.98);
+
+    .btn-fire:active {
+      transform: scale(0.97);
     }
-    .segmented-control {
-      display: flex;
-      background: var(--bg-elevated);
-      padding: 4px;
-      border-radius: var(--radius-sm);
-      margin-bottom: 12px;
-      gap: 4px;
-    }
-    .seg-btn {
-      flex: 1;
-      border: none;
-      background: transparent;
-      color: var(--text-muted);
-      padding: 8px 4px;
-      border-radius: var(--radius-sm);
-      font-size: 0.78rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    .seg-btn.active {
-      background: var(--bg-surface);
-      color: var(--text-main);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-    }
-    .output-box {
-      margin-top: 14px;
-      background: var(--bg-elevated);
-      padding: 14px;
-      border-radius: var(--radius-sm);
+
+    .output-panel {
+      margin-top: 16px;
+      background: #181920;
+      border: 1px solid var(--border-dark);
+      border-radius: 8px;
+      padding: 16px;
       font-size: 0.88rem;
-      border-left: 3px solid var(--accent);
-    }
-    .terminal-box {
-      background: #090D16;
-      color: #10B981;
-      padding: 14px;
-      border-radius: var(--radius-sm);
-      font-family: monospace;
-      font-size: 0.8rem;
-      margin-top: 12px;
-      min-height: 80px;
-      text-align: left;
       line-height: 1.6;
+      border-left: 3px solid var(--accent-red);
     }
-    .reaction-zone {
-      background: var(--bg-elevated);
-      height: 105px;
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 0.95rem;
-      cursor: pointer;
-      user-select: none;
-      margin-bottom: 12px;
-      transition: background 0.15s ease;
-      border: 1px dashed var(--border-subtle);
-    }
-    .arcade-actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-    }
-    .score-display {
-      font-weight: 800;
-      font-size: 1.05rem;
-      color: var(--accent);
-    }
-    .future-row {
+
+    .report-stat {
       display: flex;
       justify-content: space-between;
       padding: 6px 0;
-      border-bottom: 1px solid rgba(0,0,0,0.05);
-    }
-    .vault-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .folder-btn {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-main);
-      padding: 10px 14px;
-      border-radius: var(--radius-sm);
-      text-align: left;
-      font-weight: 600;
-      font-size: 0.88rem;
-      cursor: pointer;
-    }
-    .leader-list {
-      list-style: none;
-      margin-top: 8px;
-    }
-    .leader-list li {
-      display: flex;
-      justify-content: space-between;
-      padding: 8px 10px;
-      border-bottom: 1px solid var(--border-subtle);
-      font-size: 0.88rem;
-      font-weight: 600;
-    }
-    .leader-list li:first-child {
-      color: var(--accent);
-      background: rgba(37, 99, 235, 0.1);
-      border-radius: var(--radius-sm);
-    }
-    .danger-pill-btn {
-      background: #FEE2E2;
-      color: #B91C1C;
-      border: 1px solid #FECACA;
-      padding: 14px 18px;
-      border-radius: 999px;
-      font-weight: 800;
-      font-size: 0.95rem;
-      cursor: pointer;
-      width: 100%;
-      letter-spacing: 0.05em;
-    }
-    .quiz-question-box {
-      font-weight: 700;
-      font-size: 0.95rem;
-      margin-bottom: 12px;
-      color: var(--text-main);
-    }
-    .quiz-options {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-    .quiz-opt-btn {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-main);
-      padding: 10px 12px;
-      border-radius: var(--radius-sm);
-      text-align: left;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .quiz-opt-btn:hover {
-      border-color: var(--accent);
+      border-bottom: 1px solid #22242D;
     }
 
-    /* Screen Meltdown FX */
-    @keyframes screenShake {
-      0% { transform: translate(1px, 1px) rotate(0deg); }
-      20% { transform: translate(-3px, 0px) rotate(1deg); }
-      40% { transform: translate(3px, -1px) rotate(-1deg); }
-      60% { transform: translate(-3px, 1px) rotate(0deg); }
-      80% { transform: translate(2px, 1px) rotate(1deg); }
-      100% { transform: translate(1px, -2px) rotate(0deg); }
+    .report-stat:last-child {
+      border-bottom: none;
     }
-    .meltdown-active {
-      animation: screenShake 0.1s infinite !important;
-      background: #7F1D1D !important;
-      color: #FFF !important;
-    }
-    .nuclear-modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.95);
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .nuclear-content {
-      background: #18181B;
-      color: #EF4444;
-      border: 2px solid #EF4444;
-      border-radius: var(--radius-lg);
-      padding: 30px;
+
+    .footer {
       text-align: center;
-      max-width: 400px;
-      box-shadow: 0 0 50px rgba(239, 68, 68, 0.5);
-    }
-    .nuclear-content h2 {
-      font-size: 1.4rem;
-      margin-bottom: 12px;
-      color: #FFF;
-    }
-    .nuclear-content p {
-      color: #D4D4D8;
-      font-size: 0.88rem;
-      line-height: 1.6;
-      margin-bottom: 20px;
+      padding: 40px 20px;
+      border-top: 1px solid var(--border-dark);
+      color: var(--text-dim);
+      font-size: 0.85rem;
     }
 
-    .spy-badge {
-      background: #18181B;
-      color: #EF4444;
-      padding: 2px 8px;
-      font-size: 0.7rem;
-      border-radius: 4px;
-      font-weight: 800;
-      font-family: monospace;
-    }
-    .legal-doc {
-      font-family: monospace;
-      font-size: 0.8rem;
-      background: #000;
-      color: #F87171;
-      padding: 14px;
-      border-radius: var(--radius-sm);
-      line-height: 1.6;
-      margin-top: 10px;
+    .footer span {
+      color: var(--text-pure);
+      font-weight: 700;
     }
   </style>
 </head>
-<body data-theme="clean-light">
+<body>
 
-  <!-- Cinematic Gate with Native Instant Button -->
-  <div id="gate-overlay" class="gate-overlay" onclick="closeGate()">
-    <div class="gate-card" onclick="event.stopPropagation()">
-      <div class="badge">SECURE HANDSHAKE</div>
-      <h1>WELCOME, HUMAN.</h1>
-      <p class="gate-subtitle">Your friendship credentials are being verified with quantum precision...</p>
-      
-      <div class="loader-track">
-        <div id="loader-bar" class="loader-bar" style="width: 100%;"></div>
-      </div>
-      <p id="loader-text" class="status-text" style="color: #10B981; font-weight: 700;">Credentials Verified ✓</p>
-      
-      <button id="enter-btn" class="primary-btn" onclick="closeGate()" style="margin-top: 18px; display: block;">Access Portal →</button>
+  <div class="container">
+    <header class="header-box">
+      <div class="clinic-badge">DEPT OF MENTAL INSTABILITY 💀</div>
+      <h1>MANSIK SANTULAN CLINIC</h1>
+      <p>Algorithmic diagnosis for the clinically online. Target squad: Mahesh, Maaz, Tushar, Faiz, Farhan.</p>
+    </header>
+
+    <div class="grid-clinic">
+
+      <!-- 1. Mansik Santulan Analyzer (Oggy & Jack Scale) -->
+      <section class="dark-card">
+        <h3>1. Mansik Santulan Calculator 💔🥀</h3>
+        <p class="card-meta">Measures neural rot based on daily consumption patterns[span_4](start_span)[span_4](end_span).</p>
+        
+        <div class="slider-row">
+          <div class="slider-label"><span>Screen Time</span> <strong id="val-time">8 Hours</strong></div>
+          <input type="range" min="1" max="16" value="8" class="slider-input" id="slide-time" oninput="updateTime(this.value)">
+        </div>
+
+        <div class="slider-row">
+          <div class="slider-label"><span>Bank Balance</span> <strong id="val-money">₹34</strong></div>
+          <input type="range" min="0" max="5000" value="34" class="slider-input" id="slide-money" oninput="updateMoney(this.value)">
+        </div>
+
+        <button class="btn-fire" onclick="calcSantulan()">Run Neural Audit</button>
+        <div id="santulan-output" class="output-panel" style="display: none;"></div>
+      </section>
+
+      <!-- 2. Instagram Gand Jalao Index -->
+      <section class="dark-card">
+        <h3>2. G@nd Jalao Index 🌚</h3>
+        <p class="card-meta">Instagram kholte hi reality check evaluation[span_5](start_span)[span_5](end_span).</p>
+
+        <select id="target-gand" class="dropdown-select">
+          <option value="Mahesh">Mahesh</option>
+          <option value="Maaz">Maaz</option>
+          <option value="Tushar">Tushar</option>
+          <option value="Faiz">Faiz</option>
+          <option value="Farhan">Farhan</option>
+        </select>
+
+        <button class="btn-fire" onclick="calcJalan()">Check Daily Reality</button>
+        <div id="jalan-output" class="output-panel" style="display: none;"></div>
+      </section>
+
+      <!-- 3. Female Filter Reality Distortion -->
+      <section class="dark-card">
+        <h3>3. Female Filter Distortion 💅</h3>
+        <p class="card-meta">Realizing you would've been the finest girl in the squad[span_6](start_span)[span_6](end_span).</p>
+
+        <select id="target-female" class="dropdown-select">
+          <option value="Mahesh">Mahesh</option>
+          <option value="Maaz">Maaz</option>
+          <option value="Tushar">Tushar</option>
+          <option value="Faiz">Faiz</option>
+          <option value="Farhan">Farhan</option>
+        </select>
+
+        <button class="btn-fire" onclick="calcFemaleFilter()">Simulate Parallel Universe</button>
+        <div id="female-output" class="output-panel" style="display: none;"></div>
+      </section>
+
+      <!-- 4. Dog Haircut Rehab Index -->
+      <section class="dark-card">
+        <h3>4. Life Rehabilitation Index 👔</h3>
+        <p class="card-meta">"Looks like he gave up drinking and got his life together[span_7](start_span)"[span_7](end_span).</p>
+
+        <select id="target-haircut" class="dropdown-select">
+          <option value="Mahesh">Mahesh</option>
+          <option value="Maaz">Maaz</option>
+          <option value="Tushar">Tushar</option>
+          <option value="Faiz">Faiz</option>
+          <option value="Farhan">Farhan</option>
+        </select>
+
+        <button class="btn-fire" onclick="calcRehab()">Audit Cleanliness & Aura</button>
+        <div id="rehab-output" class="output-panel" style="display: none;"></div>
+      </section>
+
     </div>
   </div>
 
-  <!-- Top Navbar -->
-  <header class="navbar">
-    <div class="brand">
-      <span class="brand-pill">FZ-OS</span>
-      <span class="brand-title">THE FRIENDZONE</span>
-    </div>
-    <div class="nav-controls" style="display: flex; align-items: center; gap: 10px;">
-      <select id="theme-switcher" class="dropdown-select" style="margin-bottom: 0; padding: 6px 10px; font-size: 0.78rem; width: auto;" onchange="changeTheme(this.value)">
-        <option value="clean-light">Silicon Valley</option>
-        <option value="clean-dark">Midnight Slate</option>
-        <option value="cyber-matrix">Cyber Matrix</option>
-      </select>
-      <span class="status-indicator"><span class="dot"></span> Online</span>
-    </div>
-  </header>
-
-  <!-- Main Container -->
-  <main class="container">
-    <section class="hero-card">
-      <div class="hero-content">
-        <h2>Friendship Evaluation Terminal</h2>
-        <p>Active surveillance targets: Mahesh, Maaz, Tushar, Faiz, Farhan.</p>
-      </div>
-    </section>
-
-    <!-- Modules Grid -->
-    <div class="modules-grid">
-
-      <!-- DARK FEATURE 1: Dark Market Identity Ledger -->
-      <section class="card" style="border: 1px solid #374151;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <span class="module-number" style="background: #1F2937; color: #9CA3AF;">VALUATION</span>
-          <span class="spy-badge" style="color: #60A5FA;">DARK LEDGER</span>
-        </div>
-        <h3>Black Market Value Index ☠️</h3>
-        <p class="card-desc">Simulated darknet broker estimate for target identity.</p>
-        
-        <select id="valuation-target" class="dropdown-select">
-          <option value="Mahesh">Mahesh</option>
-          <option value="Maaz">Maaz</option>
-          <option value="Tushar">Tushar</option>
-          <option value="Faiz">Faiz</option>
-          <option value="Farhan">Farhan</option>
-        </select>
-        <button class="action-btn" onclick="calcValuation()">Query Dark Index</button>
-        <div id="valuation-output" class="output-box" style="display: none; flex-direction: column;">
-          <div class="future-row"><span>Identity Liquidity:</span> <strong id="val-price">--</strong></div>
-          <div class="future-row"><span>Risk Classification:</span> <strong id="val-risk">--</strong></div>
-          <div class="future-row"><span>Broker Advice:</span> <strong id="val-advice">--</strong></div>
-        </div>
-      </section>
-
-      <!-- DARK FEATURE 2: Cold Group Subpoena -->
-      <section class="card" style="border: 1px solid #7F1D1D;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <span class="module-number" style="background: #450A0A; color: #F87171;">SUBPOENA</span>
-          <span class="spy-badge">SECTION 404</span>
-        </div>
-        <h3>Friendship Deposition Order 💀</h3>
-        <p class="card-desc">Formal charges drawn by Root Admin Nadim.</p>
-        
-        <select id="subpoena-target" class="dropdown-select">
-          <option value="Mahesh">Mahesh</option>
-          <option value="Maaz">Maaz</option>
-          <option value="Tushar">Tushar</option>
-          <option value="Faiz">Faiz</option>
-          <option value="Farhan">Farhan</option>
-        </select>
-        <button class="action-btn" style="background: #991B1B; color: #FFF;" onclick="issueSubpoena()">Draft Formal Notice</button>
-        <div id="subpoena-output" class="legal-doc" style="display: none;"></div>
-      </section>
-
-      <!-- Live Telemetry -->
-      <section class="card" style="border: 1px solid #EF4444;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <span class="module-number" style="background: #FEE2E2; color: #B91C1C;">SURVEILLANCE</span>
-          <span class="spy-badge">INTERCEPTING</span>
-        </div>
-        <h3>Live Device Telemetry</h3>
-        <p class="card-desc">Target hardware credentials intercepted in real-time.</p>
-        
-        <div class="future-row"><span>Device Cores:</span> <strong id="spy-cores">8 Active Cores</strong></div>
-        <div class="future-row"><span>Target Battery:</span> <strong id="spy-battery">Monitored (94%)</strong></div>
-        <div class="future-row"><span>Platform OS:</span> <strong id="spy-os">Mobile Client / UNIX</strong></div>
-        <div class="future-row"><span>Session Node:</span> <strong id="spy-loc">Mumbai Gateway / Active</strong></div>
-
-        <button class="action-btn" style="margin-top: 12px; background: #991B1B; color: #FFF;" onclick="triggerSpy()">Trigger Remote Diagnostics</button>
-        <div id="spy-output" class="output-box" style="display: none; border-left-color: #EF4444; font-family: monospace; font-size: 0.8rem;"></div>
-      </section>
-
-      <!-- Downfall Forecaster -->
-      <section class="card">
-        <span class="module-number">COLD LOGIC</span>
-        <h3>Group Downfall Forecaster</h3>
-        <p class="card-desc">Actuarial friendship lifespan & downfall analysis.</p>
-        
-        <select id="mortality-target" class="dropdown-select">
-          <option value="Mahesh">Mahesh</option>
-          <option value="Maaz">Maaz</option>
-          <option value="Tushar">Tushar</option>
-          <option value="Faiz">Faiz</option>
-          <option value="Farhan">Farhan</option>
-        </select>
-        <button class="action-btn" onclick="calcDownfall()">Calculate Inevitable Downfall</button>
-        <div id="mortality-output" class="output-box" style="display: none; flex-direction: column;">
-          <div class="future-row"><span>Downfall Trigger:</span> <strong id="mort-trigger">--</strong></div>
-          <div class="future-row"><span>Friendship Expiry:</span> <strong id="mort-expiry">--</strong></div>
-          <div class="future-row"><span>Last Seen In Group:</span> <strong id="mort-last">--</strong></div>
-        </div>
-      </section>
-
-      <!-- Biometric Scanner -->
-      <section class="card">
-        <span class="module-number">MODULE 01</span>
-        <h3>Biometric & IQ Scanner</h3>
-        <p class="card-desc">Simulated deep sensory verification.</p>
-        
-        <select id="scanner-name" class="dropdown-select">
-          <option value="Mahesh">Mahesh</option>
-          <option value="Maaz">Maaz</option>
-          <option value="Tushar">Tushar</option>
-          <option value="Faiz">Faiz</option>
-          <option value="Farhan">Farhan</option>
-        </select>
-        <button class="action-btn" onclick="startScanner()">Initialize Deep Scan</button>
-        <div id="scan-terminal" class="terminal-box" style="display: none;">
-          <p id="scan-log">> System ready...</p>
-        </div>
-      </section>
-
-      <!-- Roast Engine -->
-      <section class="card">
-        <span class="module-number">MODULE 02</span>
-        <h3>Roast Engine v3.4</h3>
-        <p class="card-desc">Specially calibrated for the group.</p>
-        
-        <select id="roast-name" class="dropdown-select">
-          <option value="Mahesh">Mahesh</option>
-          <option value="Maaz">Maaz</option>
-          <option value="Tushar">Tushar</option>
-          <option value="Faiz">Faiz</option>
-          <option value="Farhan">Farhan</option>
-        </select>
-
-        <div class="segmented-control">
-          <button class="seg-btn active" onclick="setRoastLevel(this, 'mild')">Mild</button>
-          <button class="seg-btn" onclick="setRoastLevel(this, 'dangerous')">Dangerous</button>
-          <button class="seg-btn" onclick="setRoastLevel(this, 'nuclear')">Nuclear ☢️</button>
-        </div>
-        <button class="action-btn" onclick="triggerRoast()">Generate Critique</button>
-        <div id="roast-output" class="output-box">Waiting for subject...</div>
-        <button class="action-btn" style="margin-top: 8px; background: var(--bg-elevated); color: var(--text-main); border: 1px solid var(--border-subtle);" onclick="speakRoast()">🔊 Speak Roast Out Loud</button>
-      </section>
-
-      <!-- Bakchodi Arcade -->
-      <section class="card">
-        <span class="module-number">MODULE 03</span>
-        <h3>Bakchodi Arcade</h3>
-        <p class="card-desc">Click the pad as soon as it turns GREEN.</p>
-        
-        <div id="reaction-box" class="reaction-zone" onclick="clickReactionZone()">Click "Start Test" Below</div>
-        <div class="arcade-actions">
-          <button id="start-reaction-btn" class="action-btn" style="flex: 1;" onclick="startArcade()">Start Test</button>
-          <span id="reaction-score" class="score-display">-- ms</span>
-        </div>
-      </section>
-
-      <!-- Future Destiny Predictor -->
-      <section class="card">
-        <span class="module-number">MODULE 04</span>
-        <h3>Future Destiny Predictor</h3>
-        <p class="card-desc">10-year algorithmic prediction.</p>
-        
-        <select id="future-name" class="dropdown-select">
-          <option value="Mahesh">Mahesh</option>
-          <option value="Maaz">Maaz</option>
-          <option value="Tushar">Tushar</option>
-          <option value="Faiz">Faiz</option>
-          <option value="Farhan">Farhan</option>
-        </select>
-        <button class="action-btn" onclick="calcFuture()">Calculate Destiny</button>
-        <div id="future-output" class="output-box" style="display: none; flex-direction: column;">
-          <div class="future-row"><span>Target:</span> <strong id="future-target">--</strong></div>
-          <div class="future-row"><span>Career:</span> <strong id="future-career">--</strong></div>
-          <div class="future-row"><span>Net Worth:</span> <strong id="future-wealth">--</strong></div>
-          <div class="future-row"><span>Romance:</span> <strong id="future-marriage">--</strong></div>
-        </div>
-      </section>
-
-      <!-- Loyalty & Affinity Quiz -->
-      <section class="card">
-        <span class="module-number">MODULE 05</span>
-        <h3>Loyalty & Affinity Quiz</h3>
-        <p class="card-desc">Test: Kitna jante ho Nadim ko?</p>
-        
-        <div id="quiz-wrapper">
-          <div id="quiz-question" class="quiz-question-box">Loading question...</div>
-          <div id="quiz-options" class="quiz-options"></div>
-          <div id="quiz-feedback" class="output-box" style="display: none;"></div>
-        </div>
-      </section>
-
-      <!-- Classified Folders -->
-      <section class="card">
-        <span class="module-number">MODULE 06</span>
-        <h3>Classified Folders</h3>
-        <p class="card-desc">Encrypted evidence files.</p>
-        
-        <div class="vault-grid">
-          <button class="folder-btn" onclick="openVault('tushar_mahesh')">📁 Tushar & Mahesh Top Secrets</button>
-          <button class="folder-btn" onclick="openVault('maaz_crimes')">📁 Maaz Pending Udhari</button>
-          <button class="folder-btn" onclick="openVault('faiz_farhan')">📁 Faiz & Farhan Late Arrivals</button>
-        </div>
-        <div id="vault-output" class="output-box" style="margin-top: 10px;">Click any folder to decrypt.</div>
-      </section>
-
-      <!-- Aura Leaderboard -->
-      <section class="card">
-        <span class="module-number">MODULE 07</span>
-        <h3>Aura Leaderboard</h3>
-        <p class="card-desc">Live status verified by system.</p>
-        
-        <ul class="leader-list">
-          <li><span>👑 Nadim (Admin)</span> <span>+999,999 Aura</span></li>
-          <li><span>Mahesh</span> <span>-420 Aura</span></li>
-          <li><span>Maaz</span> <span>-69 Aura</span></li>
-          <li><span>Tushar</span> <span>0 Aura</span></li>
-          <li><span>Faiz</span> <span>-150 Aura</span></li>
-          <li><span>Farhan</span> <span>-850 Aura</span></li>
-        </ul>
-      </section>
-
-      <!-- Mystery Hazard Button -->
-      <section class="card" style="grid-column: 1 / -1;">
-        <span class="module-number">HAZARD</span>
-        <h3>Nuclear Protocol</h3>
-        <p class="card-desc">Strictly prohibited from user interaction.</p>
-        <button class="danger-pill-btn" onclick="triggerMeltdown()">⚠️ DO NOT PRESS UNDER ANY CIRCUMSTANCE</button>
-      </section>
-
-    </div>
-  </main>
-
-  <!-- Meltdown Modal -->
-  <div id="nuclear-modal" class="nuclear-modal" style="display: none;">
-    <div class="nuclear-content">
-      <h2>💀 PROTOCOL BREACH DETECTED!</h2>
-      <p id="nuclear-status">TRANSMITTING ALL DELETED SCREENSHOTS AND BROWSER HISTORY OF MAHESH, MAAZ, TUSHAR, FAIZ & FARHAN DIRECTLY TO FAMILY WHATSAPP GROUP...</p>
-      <div class="loader-track" style="margin-bottom: 20px;">
-        <div id="nuclear-bar" class="loader-bar" style="background: #EF4444; width: 0%;"></div>
-      </div>
-      <button class="action-btn" style="background: #EF4444; color: #FFF;" onclick="cancelMeltdown()">PAY NADIM ₹500 TO ABORT</button>
-    </div>
-  </div>
-
-  <!-- Footer -->
   <footer class="footer">
-    <div class="footer-inner">
-      <p class="curated">ENGINEERED WITH RIGOR</p>
-      <p class="credits">Designed & built by <span>Nadimmmm</span></p>
-    </div>
+    <p>MANSIK SANTULAN CLINIC — All diagnoses are legally binding and permanent.</p>
+    <p>Architected by <span>Nadimmmm</span></p>
   </footer>
 
-  <!-- Complete Bulletproof Functions -->
   <script>
-    function closeGate() {
-      const gate = document.getElementById("gate-overlay");
-      if (gate) {
-        gate.style.opacity = "0";
-        setTimeout(() => gate.style.display = "none", 300);
-      }
-    }
+    function updateTime(v) { document.getElementById("val-time").innerText = v + " Hours"; }
+    function updateMoney(v) { document.getElementById("val-money").innerText = "₹" + v; }
 
-    function changeTheme(theme) {
-      document.body.setAttribute("data-theme", theme);
-    }
-
-    // Feature 1: Dark Market Valuation
-    const marketIndex = {
-      Mahesh: { price: "$0.09 USD", risk: "CRITICAL: High probability of wasting buyer's bandwidth", advice: "Not recommended for auction; high chance of ghosting." },
-      Maaz: { price: "$0.0003 USD (Sub-penny)", risk: "UNRECOVERABLE: Deep debt liability to cutting chai tapri", advice: "Immediate write-off." },
-      Tushar: { price: "$0.42 USD", risk: "VOLATILE: Subject to last-minute cancellation", advice: "Sell before weekend plan." },
-      Faiz: { price: "$0.18 USD", risk: "PARASITIC: Constant Wi-Fi / Hotspot drain", advice: "Requires continuous external data supply." },
-      Farhan: { price: "$0.04 USD", risk: "HIGH NOISE: Generates 400 audio notes of zero value", advice: "Mute permanently." }
-    };
-
-    function calcValuation() {
-      const target = document.getElementById("valuation-target").value;
-      const data = marketIndex[target];
-      const box = document.getElementById("valuation-output");
-      box.style.display = "flex";
-      document.getElementById("val-price").innerText = data.price;
-      document.getElementById("val-risk").innerText = data.risk;
-      document.getElementById("val-advice").innerText = data.advice;
-    }
-
-    // Feature 2: Friendship Subpoena
-    const subpoenas = {
-      Mahesh: "CASE REF #913-M: You are formally subpoenaed by Root Admin Nadim for gross negligence, including watching JCB videos during group emergency meetings and disappearing when the check arrives.",
-      Maaz: "CASE REF #742-Z: Indictment for continuous fraudulent promises stating '5 minute me aya'. Total documented tardiness exceeds 482 cumulative hours since 2024.",
-      Tushar: "CASE REF #004-T: Criminal breach of squad trust. Accused of backing out of 6 confirmed trips within 2 hours of departure time.",
-      Faiz: "CASE REF #819-F: Unauthorized cellular exploitation. Documented theft of 140+ GB mobile data via hotspot without fiscal contribution.",
-      Farhan: "CASE REF #511-R: Unlicensed motivational lecturing. Accused of administering philosophical advice while carrying personal attendance deficit."
-    };
-
-    function issueSubpoena() {
-      const target = document.getElementById("subpoena-target").value;
-      const out = document.getElementById("subpoena-output");
+    // 1. Santulan Logic
+    function calcSantulan() {
+      const time = parseInt(document.getElementById("slide-time").value);
+      const money = parseInt(document.getElementById("slide-money").value);
+      const out = document.getElementById("santulan-output");
       out.style.display = "block";
-      out.innerHTML = `<strong>COURT OF ROOT ADMIN NADIM</strong><br>DOCKET: 2026-FZ-CRIMINAL<br><br>${subpoenas[target]}<br><br><em>PENALTY: Loss of remaining aura points and forced canteen funding.</em>`;
-    }
 
-    function triggerSpy() {
-      const out = document.getElementById("spy-output");
-      out.style.display = "block";
-      out.innerHTML = `> [WARN] Local root handshake verified.<br>> Screen: ${window.innerWidth}x${window.innerHeight}<br>> Background microphone loop: SYNCHRONIZED.<br>> Status: Nadim is watching this session live.`;
-    }
-
-    const downfalls = {
-      Mahesh: { trigger: "Fights over splitting ₹35 cutting chai bill", expiry: "August 14, 2027", last: "Left group after being roasted on birthday" },
-      Maaz: { trigger: "Caught lying about 'arriving in 5 mins' for the 1000th time", expiry: "November 3, 2026", last: "Muted group forever due to unpaid debts" },
-      Tushar: { trigger: "Cancels trip after everyone booked non-refundable tickets", expiry: "Next Goa Plan", last: "Blocked entire squad by mistake" },
-      Faiz: { trigger: "Asks for hotspot during critical interview", expiry: "December 2028", last: "Only appears when someone announces free dinner" },
-      Farhan: { trigger: "Gives unsolicited life advice nobody asked for", expiry: "March 2027", last: "Left to start an unranked podcast" }
-    };
-
-    function calcDownfall() {
-      const t = document.getElementById("mortality-target").value;
-      const out = document.getElementById("mortality-output");
-      out.style.display = "flex";
-      document.getElementById("mort-trigger").innerText = downfalls[t].trigger;
-      document.getElementById("mort-expiry").innerText = downfalls[t].expiry;
-      document.getElementById("mort-last").innerText = downfalls[t].last;
-    }
-
-    function startScanner() {
-      const name = document.getElementById("scanner-name").value;
-      const terminal = document.getElementById("scan-terminal");
-      const log = document.getElementById("scan-log");
-      terminal.style.display = "block";
-      log.innerHTML = `> Connecting neural sensors to ${name}...`;
-
-      const logs = [
-        `Target confirmed: ${name}`,
-        "Scanning intelligence... [ERROR: FILE NOT FOUND]",
-        "Measuring bakchodi capacity... [OVERFLOW: 999%]",
-        `System Note: ${name} is strictly advised to touch grass.`
-      ];
-
-      logs.forEach((txt, idx) => {
-        setTimeout(() => {
-          log.innerHTML += `<br>> ${txt}`;
-        }, (idx + 1) * 450);
-      });
-    }
-
-    let currentRoastLevel = "mild";
-    function setRoastLevel(btn, level) {
-      document.querySelectorAll(".seg-btn").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      currentRoastLevel = level;
-    }
-
-    const personalRoasts = {
-      Mahesh: {
-        mild: "walks into a room and background noise automatically drops.",
-        dangerous: "plans to study for 8 hours, ends up watching reels about JCB excavation.",
-        nuclear: "bhai ka confidence Ambani jaisa hai, lekin bank account me ₹11.20 bache hain."
-      },
-      Maaz: {
-        mild: "replies to important group texts after 3 full business days.",
-        dangerous: "bhai humesha bolta hai '5 minute me aya' aur 2 ghante baad nikalta hai.",
-        nuclear: "is living proof that you can waste 1.5GB daily data with zero productive output."
-      },
-      Tushar: {
-        mild: "looks like someone who pays full price for free trial apps.",
-        dangerous: "phone ki battery 3% pe chalti hai, aur dimaag 1% pe.",
-        nuclear: "agla plan banayega to guarantee cancel karega, ye universal truth hai."
-      },
-      Faiz: {
-        mild: "humesha hotspot maangne ke liye sabse aage rehta hai.",
-        dangerous: "bolta hai 'aaj treat meri taraf se', bill aane pe bathroom chala jata hai.",
-        nuclear: "their future is blurrier than a 144p video clip from 2005."
-      },
-      Farhan: {
-        mild: "has the physical stamina of an uncharged torch.",
-        dangerous: "advice sabko deta hai jaise IAS officer ho, khud attendance ke liye rota hai.",
-        nuclear: "bhai ka aura itna negative hai ki room ka temperature gir jaata hai."
-      }
-    };
-
-    function triggerRoast() {
-      const name = document.getElementById("roast-name").value;
-      const roast = personalRoasts[name][currentRoastLevel];
-      document.getElementById("roast-output").innerText = `${name} ${roast}`;
-    }
-
-    function speakRoast() {
-      const text = document.getElementById("roast-output").innerText;
-      if (!text || text.includes("Waiting")) return;
-      if ('speechSynthesis' in window) {
-        const u = new SpeechSynthesisUtterance(text);
-        u.rate = 0.9;
-        window.speechSynthesis.speak(u);
-      }
-    }
-
-    let reactTimeout = null;
-    let startTime = 0;
-    let arcadeState = "idle";
-
-    function startArcade() {
-      const zone = document.getElementById("reaction-box");
-      const score = document.getElementById("reaction-score");
-      clearTimeout(reactTimeout);
-      arcadeState = "waiting";
-      zone.style.background = "#FEF3C7";
-      zone.style.color = "#92400E";
-      zone.innerText = "Wait for GREEN...";
-      score.innerText = "-- ms";
-
-      const delay = Math.random() * 2000 + 1200;
-      reactTimeout = setTimeout(() => {
-        arcadeState = "ready";
-        zone.style.background = "#D1FAE5";
-        zone.style.color = "#065F46";
-        zone.innerText = "CLICK NOW!";
-        startTime = Date.now();
-      }, delay);
-    }
-
-    function clickReactionZone() {
-      const zone = document.getElementById("reaction-box");
-      const score = document.getElementById("reaction-score");
-      if (arcadeState === "waiting") {
-        clearTimeout(reactTimeout);
-        arcadeState = "idle";
-        zone.style.background = "#FEE2E2";
-        zone.style.color = "#991B1B";
-        zone.innerText = "Too early! Jaldbazi mat kar.";
-      } else if (arcadeState === "ready") {
-        const diff = Date.now() - startTime;
-        arcadeState = "idle";
-        zone.style.background = "var(--bg-elevated)";
-        zone.style.color = "var(--text-main)";
-        zone.innerText = `Finished: ${diff} ms`;
-        score.innerText = `${diff} ms`;
-      }
-    }
-
-    const futures = {
-      Mahesh: { career: "Certified Tapri Manager", wealth: "₹24.50 + 1 Vada Pav", romance: "Friendzoned internationally" },
-      Maaz: { career: "Full-time Excuse Maker", wealth: "Unlimited Udhaari", romance: "Single by popular demand" },
-      Tushar: { career: "Professional WhatsApp Status Watcher", wealth: "3 Expired Coupons", romance: "System Error 💀" },
-      Faiz: { career: "Free Hotspot Hunter", wealth: "₹18 & High Hopes", romance: "Pending Verification..." },
-      Farhan: { career: "Gossip Architect & Advisor", wealth: "₹2 Bank Balance", romance: "Married to Netflix" }
-    };
-
-    function calcFuture() {
-      const name = document.getElementById("future-name").value;
-      const box = document.getElementById("future-output");
-      box.style.display = "flex";
-      document.getElementById("future-target").innerText = name;
-      document.getElementById("future-career").innerText = futures[name].career;
-      document.getElementById("future-wealth").innerText = futures[name].wealth;
-      document.getElementById("future-marriage").innerText = futures[name].romance;
-    }
-
-    const vaultData = {
-      tushar_mahesh: "📁 INCIDENT REPORT: Tushar aur Mahesh ne last time plan banake aakhri minute pe cancel kiya tha. Total damage: Pure group ka mood kharab.",
-      maaz_crimes: "📁 FINANCIAL AUDIT: Maaz owes everyone collectively ₹240 for cutting chai. Claims he will 'GPay tomorrow' since 2024.",
-      faiz_farhan: "📁 LOG ENTRY: Faiz aur Farhan jab bhi bolte hain 'Bhai 2 minute me pahuch raha hu', actually wo log so ke bhi nahi uthe hote."
-    };
-
-    function openVault(key) {
-      document.getElementById("vault-output").innerText = vaultData[key];
-    }
-
-    const quizQuestions = [
-      { q: "Nadim group me late kab aata hai?", options: ["Always on time (King)", "Jab sab ghar nikalne wale ho", "Sirf free food ke waqt"], correct: 0 },
-      { q: "Group me sabse zyada udhaari kiski pending hai?", options: ["Maaz ki", "Mahesh ki", "Nadim ki (0 Udhaari)"], correct: 0 },
-      { q: "Nadim ke coding & tech skills kitne hain?", options: ["Elon Musk se upar", "Legendary Level", "Certified Boss"], correct: 1 }
-    ];
-    let qIdx = 0;
-    let quizScore = 0;
-
-    function renderQuiz() {
-      const qBox = document.getElementById("quiz-question");
-      const optBox = document.getElementById("quiz-options");
-      const fBox = document.getElementById("quiz-feedback");
-
-      if (qIdx < quizQuestions.length) {
-        const item = quizQuestions[qIdx];
-        qBox.innerText = `Q${qIdx + 1}: ${item.q}`;
-        optBox.innerHTML = "";
-        fBox.style.display = "none";
-
-        item.options.forEach((opt, idx) => {
-          const btn = document.createElement("button");
-          btn.className = "quiz-opt-btn";
-          btn.innerText = opt;
-          btn.onclick = () => {
-            if (idx === item.correct) quizScore++;
-            qIdx++;
-            renderQuiz();
-          };
-          optBox.appendChild(btn);
-        });
+      let diagnosis = "";
+      if (time > 10 && money < 100) {
+        diagnosis = "STAGE 5 CRITICAL: Mansik santulan 100% nasht ho chuka hai[span_8](start_span)[span_8](end_span). Subah 4 baje tak reels scroll hoti hain, 2 ghante neend aur subah chai pine ke liye bhi doston ke muh dekhne padte hain.";
+      } else if (time > 6) {
+        diagnosis = "STAGE 3 MODERATE: JCB excavation aur Russian meme content consumption peak pe hai. Dimag me sirf background music baj raha hai.";
       } else {
-        qBox.innerText = "Affinity Evaluation Complete!";
-        optBox.innerHTML = "";
-        fBox.style.display = "block";
-        fBox.innerHTML = `<strong>Final Verdict:</strong> Score ${quizScore}/${quizQuestions.length}. Tum log officially Nadim ke verified chele ho! 👑`;
+        diagnosis = "STAGE 1 SURVIVOR: Acting normal in public, but internally screaming.";
       }
-    }
-    renderQuiz();
 
-    let meltdownTimer = null;
-    function triggerMeltdown() {
-      document.body.classList.add("meltdown-active");
-      document.getElementById("nuclear-modal").style.display = "flex";
-      let p = 0;
-      const bar = document.getElementById("nuclear-bar");
-      meltdownTimer = setInterval(() => {
-        p += 10;
-        bar.style.width = `${p}%`;
-        if (p >= 100) {
-          clearInterval(meltdownTimer);
-          document.getElementById("nuclear-status").innerText = "💥 100% UPLOAD COMPLETE! Ab sab doston ke ghar pe police aur rishtedaar dono aa rahe hain.";
-        }
-      }, 300);
+      out.innerHTML = `<strong>Diagnosis:</strong><br>${diagnosis}<br><br><em>Prescription: Delete Instagram, touch actual grass, return cutting chai udhari.</em>`;
     }
 
-    function cancelMeltdown() {
-      clearInterval(meltdownTimer);
-      document.body.classList.remove("meltdown-active");
-      document.getElementById("nuclear-modal").style.display = "none";
-      document.getElementById("nuclear-bar").style.width = "0%";
-      alert("Transaction pending! Nadim ko Google Pay kar dena varna kal wapas leak hoga 😂");
+    // 2. G@nd Jalao Index
+    const jalanStories = {
+      Mahesh: "09:30 AM: School classmate got a €80k tech offer in Amsterdam.<br>02:15 PM: 18-year-old crypto bro bought an apartment.<br><strong>Mahesh's Status:</strong> Sitting in vest, watching Jio 1.5GB daily data limit warning popup[span_9](start_span)[span_9](end_span).",
+      Maaz: "11:00 AM: Mutual friend posting aesthetic sunset cafe reels with girlfriend.<br><strong>Maaz's Status:</strong> Still lying in WhatsApp DM: 'Bas 5 minute me bike nikaal raha hu' while wearing pajamas.",
+      Tushar: "01:00 PM: Group planned Goa reunion with verified flight bookings.<br><strong>Tushar's Status:</strong> Already calculating how to cancel at 11:45 PM the night before departure.",
+      Faiz: "04:30 PM: Entire feed flexing personal hot-pot laptops and unlimited fiber.<br><strong>Faiz's Status:</strong> Creeping near canteen router trying to guess the Wi-Fi password.",
+      Farhan: "08:00 PM: 20-year-olds launching podcasts with sponsors.<br><strong>Farhan's Status:</strong> Giving unprompted 40-minute gyaan to squad while having 3 pending backlogs."
+    };
+
+    function calcJalan() {
+      const t = document.getElementById("target-gand").value;
+      const out = document.getElementById("jalan-output");
+      out.style.display = "block";
+      out.innerHTML = jalanStories[t];
+    }
+
+    // 3. Female Filter Distortion
+    const femaleAlters = {
+      Mahesh: { alter: "Mahima", aesthetic: "Bandra cafe crawler, iced Americano lover, 840k followers[span_10](start_span)[span_10](end_span)", current: "Mahesh: Wears same oversized graphic tee for 4 straight days" },
+      Maaz: { alter: "Mazin", aesthetic: "K-pop enthusiast, receives 40 Instagram DMs per minute, 0 replies given[span_11](start_span)[span_11](end_span)", current: "Maaz: Leaves squad on seen for 96 hours" },
+      Tushar: { alter: "Tanya", aesthetic: "South Delhi aesthetic, has 4 iPhone 16 Pro Max options in her cart[span_12](start_span)[span_12](end_span)", current: "Tushar: Screen cracked in 6 places, held together by hope" },
+      Faiz: { alter: "Faiza", aesthetic: "Pilates influencer, aesthetic gym sets, never paid for coffee in her life[span_13](start_span)[span_13](end_span)", current: "Faiz: Survives strictly on borrowed hotspot" },
+      Farhan: { alter: "Farah", aesthetic: "Luxury lifestyle curator, vacationing in Cappadocia[span_14](start_span)[span_14](end_span)", current: "Farhan: Giving geopolitical advice at local tapri" }
+    };
+
+    function calcFemaleFilter() {
+      const t = document.getElementById("target-female").value;
+      const data = femaleAlters[t];
+      const out = document.getElementById("female-output");
+      out.style.display = "block";
+      out.innerHTML = `<strong>Parallel Universe Alter Ego:</strong> ${data.alter}<br><strong>Vibe:</strong> ${data.aesthetic}<br><br><strong>Current Reality:</strong> ${data.current}`;
+    }
+
+    // 4. Rehab Index
+    const rehabData = {
+      Mahesh: { state: "Pre-Haircut Disheveled[span_15](start_span)[span_15](end_span)", score: "12% Put Together", verdict: "Looks like he just escaped a 72-hour gaming dungeon." },
+      Maaz: { state: "Post-Salon Clean Shave[span_16](start_span)[span_16](end_span)", score: "89% Illusion", verdict: "Looks like he gave up bad habits and founded a tech startup, but bank balance is still ₹14.50[span_17](start_span)[span_17](end_span)." },
+      Tushar: { state: "Unkempt Overgrowth[span_18](start_span)[span_18](end_span)", score: "4% Put Together", verdict: "Hair looks like an abandoned bird sanctuary." },
+      Faiz: { state: "Standard Fade[span_19](start_span)[span_19](end_span)", score: "45% Put Together", verdict: "Clean on the outside, borrowing ₹20 for metro inside." },
+      Farhan: { state: "Formal Beard Trim[span_20](start_span)[span_20](end_span)", score: "78% Illusion", verdict: "Looks like an executive consultant, acts like an unhinged WhatsApp forward admin[span_21](start_span)[span_21](end_span)." }
+    };
+
+    function calcRehab() {
+      const t = document.getElementById("target-haircut").value;
+      const data = rehabData[t];
+      const out = document.getElementById("rehab-output");
+      out.style.display = "block";
+      out.innerHTML = `<div class="report-stat"><span>Condition:</span> <strong>${data.state}</strong></div><div class="report-stat"><span>Rehab Rating:</span> <strong>${data.score}</strong></div><div class="report-stat"><span>Forensic Verdict:</span> <strong>${data.verdict}</strong></div>`;
     }
   </script>
 </body>
