@@ -222,6 +222,99 @@
       background: #450A0A;
       color: #F87171;
     }
+
+    /* Brand Wrapped Card Preview */
+    .wrapped-card {
+      background: linear-gradient(135deg, #18181B 0%, #09090B 100%);
+      border: 2px solid #27272A;
+      border-radius: 16px;
+      padding: 20px;
+      color: #FFF;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      position: relative;
+      overflow: hidden;
+      margin-top: 14px;
+    }
+    .wrapped-card::before {
+      content: "";
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle, rgba(37,99,235,0.4) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .wrapped-title {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: #A1A1AA;
+      font-weight: 800;
+    }
+    .wrapped-user {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin: 4px 0 16px 0;
+      color: #38BDF8;
+    }
+    .wrapped-stat-box {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+    }
+    .wrapped-stat-label {
+      font-size: 0.7rem;
+      color: #94A3B8;
+      text-transform: uppercase;
+    }
+    .wrapped-stat-val {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #F8FAFC;
+    }
+
+    /* Soundboard Grid */
+    .soundboard-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .sound-btn {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 12px 10px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+    .sound-btn:active {
+      transform: scale(0.95);
+      border-color: var(--accent);
+    }
+
+    /* Tapri Receipt */
+    .receipt-paper {
+      background: #FFFDF0;
+      color: #1C1917;
+      font-family: monospace;
+      padding: 18px;
+      border-radius: 6px;
+      margin-top: 14px;
+      border: 1px dashed #D6D3D1;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
   </style>
 </head>
 <body data-theme="clean-light">
@@ -270,7 +363,90 @@
     <!-- Modules Grid -->
     <div class="modules-grid">
 
-      <!-- DANK 1: Mansik Santulan Calculator -->
+      <!-- BRAND NEW 1: Squad Wrapped 2026 -->
+      <section class="card" style="border: 2px solid #38BDF8;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span class="module-number" style="background: #E0F2FE; color: #0284C7;">ANNUAL REVIEW</span>
+          <span class="dank-badge" style="background: #0369A1; color: #FFF;">WRAPPED 2026</span>
+        </div>
+        <h3>Squad Wrapped Exporter 🏆</h3>
+        <p class="card-desc">Generate Instagram-story metrics for selected squad member.</p>
+        
+        <select id="wrapped-target" class="dropdown-select">
+          <option value="Mahesh">Mahesh</option>
+          <option value="Maaz">Maaz</option>
+          <option value="Tushar">Tushar</option>
+          <option value="Faiz">Faiz</option>
+          <option value="Farhan">Farhan</option>
+        </select>
+        <button class="action-btn" style="background: #0284C7; color: #FFF;" onclick="generateWrapped()">Compile Wrapped Card</button>
+        
+        <div id="wrapped-display" class="wrapped-card" style="display: none;">
+          <div class="wrapped-title">FRIENDZONE // 2026 ARCHIVE</div>
+          <div class="wrapped-user" id="wrap-name">USER WRAPPED</div>
+          
+          <div class="wrapped-stat-box">
+            <div class="wrapped-stat-label">Top Mental Affliction</div>
+            <div class="wrapped-stat-val" id="wrap-trait">--</div>
+          </div>
+          <div class="wrapped-stat-box">
+            <div class="wrapped-stat-label">Hours Made Squad Wait</div>
+            <div class="wrapped-stat-val" id="wrap-hours">--</div>
+          </div>
+          <div class="wrapped-stat-box">
+            <div class="wrapped-stat-label">Primary Excusal Phrase</div>
+            <div class="wrapped-stat-val" id="wrap-phrase">--</div>
+          </div>
+          <div class="wrapped-stat-box">
+            <div class="wrapped-stat-label">Year-End Net Aura</div>
+            <div class="wrapped-stat-val" id="wrap-aura" style="color: #F87171;">--</div>
+          </div>
+          
+          <button class="action-btn" style="margin-top: 12px; background: #FFF; color: #000;" onclick="downloadWrapped()">📥 Download Story PNG</button>
+        </div>
+      </section>
+
+      <!-- BRAND NEW 2: Soundboard of Shame -->
+      <section class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span class="module-number">AUDIO SANCTUARY</span>
+          <span class="dank-badge" style="background: #312E81; color: #C7D2FE;">FX SYNTH 🔊</span>
+        </div>
+        <h3>Soundboard of Shame</h3>
+        <p class="card-desc">Fire live acoustic punishment directly into group calls.</p>
+        
+        <div class="soundboard-grid">
+          <button class="sound-btn" onclick="playMemeSound('bruh')">🗿 Bruh Tone</button>
+          <button class="sound-btn" onclick="playMemeSound('damage')">💔 Damage</button>
+          <button class="sound-btn" onclick="playMemeSound('siren')">🚨 Police Raid</button>
+          <button class="sound-btn" onclick="playMemeSound('crickets')">🦗 Awkward Cricket</button>
+          <button class="sound-btn" onclick="playMemeSound('flatline')">💀 Flatline</button>
+          <button class="sound-btn" onclick="playMemeSound('fart')">🎺 Reverb Brass</button>
+        </div>
+      </section>
+
+      <!-- BRAND NEW 3: Tapri Udhaari Settle Engine -->
+      <section class="card" style="border: 1px solid #78350F;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span class="module-number" style="background: #FEF3C7; color: #B45309;">FISCAL DEBT</span>
+          <span class="dank-badge" style="background: #78350F; color: #FDE68A;">TAPRI AUDIT ☕</span>
+        </div>
+        <h3>Tapri Udhaari Receipt Engine</h3>
+        <p class="card-desc">Calculate outstanding cutting chai & bun maska debt.</p>
+        
+        <select id="tapri-target" class="dropdown-select">
+          <option value="Maaz">Maaz (Prime Debtor)</option>
+          <option value="Mahesh">Mahesh (Lost Wallet Syndrome)</option>
+          <option value="Tushar">Tushar (Ate Full Samosa, Left ₹10)</option>
+          <option value="Faiz">Faiz (Hotspot + Free Chai Leech)</option>
+          <option value="Farhan">Farhan (Gave Gyaan in Place of Cash)</option>
+        </select>
+        
+        <button class="action-btn" onclick="generateReceipt()">Print Formal Tax Invoice</button>
+        <div id="receipt-display" class="receipt-paper" style="display: none;"></div>
+      </section>
+
+      <!-- DANK: Mansik Santulan Calculator -->
       <section class="card" style="border: 1px solid #7F1D1D;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <span class="module-number" style="background: #450A0A; color: #F87171;">DIAGNOSIS</span>
@@ -290,7 +466,7 @@
         <div id="santulan-output" class="output-box" style="display: none; border-left-color: #EF4444;"></div>
       </section>
 
-      <!-- DANK 2: G@nd Jalao Index -->
+      <!-- DANK: G@nd Jalao Index -->
       <section class="card" style="border: 1px solid #78350F;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <span class="module-number" style="background: #451A03; color: #FBBF24;">REALITY CHECK</span>
@@ -310,7 +486,7 @@
         <div id="jalan-output" class="output-box" style="display: none; border-left-color: #F59E0B;"></div>
       </section>
 
-      <!-- DANK 3: Female Filter Distortion -->
+      <!-- DANK: Female Filter Distortion -->
       <section class="card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <span class="module-number">PARALLEL UNIVERSE</span>
@@ -330,7 +506,7 @@
         <div id="female-output" class="output-box" style="display: none; border-left-color: #A855F7;"></div>
       </section>
 
-      <!-- DANK 4: Dog Haircut Rehab Index -->
+      <!-- DANK: Dog Haircut Rehab Index -->
       <section class="card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <span class="module-number">REHABILITATION</span>
@@ -350,7 +526,7 @@
         <div id="rehab-output" class="output-box" style="display: none; border-left-color: #10B981;"></div>
       </section>
 
-      <!-- Module 01: Biometric Scanner -->
+      <!-- Biometric Scanner -->
       <section class="card">
         <span class="module-number">MODULE 01</span>
         <h3>Biometric & IQ Scanner</h3>
@@ -369,7 +545,7 @@
         </div>
       </section>
 
-      <!-- Module 02: Roast Engine -->
+      <!-- Roast Engine -->
       <section class="card">
         <span class="module-number">MODULE 02</span>
         <h3>Roast Engine v3.4</h3>
@@ -393,7 +569,7 @@
         <button class="action-btn" style="margin-top: 8px; background: var(--bg-elevated); color: var(--text-main); border: 1px solid var(--border-subtle);" onclick="speakRoast()">🔊 Speak Roast Out Loud</button>
       </section>
 
-      <!-- Module 03: Bakchodi Arcade -->
+      <!-- Bakchodi Arcade -->
       <section class="card">
         <span class="module-number">MODULE 03</span>
         <h3>Bakchodi Arcade</h3>
@@ -406,7 +582,7 @@
         </div>
       </section>
 
-      <!-- Module 04: Classified Folders -->
+      <!-- Classified Folders -->
       <section class="card">
         <span class="module-number">MODULE 04</span>
         <h3>Classified Folders</h3>
@@ -420,7 +596,7 @@
         <div id="vault-output" class="output-box" style="margin-top: 10px;">Click any folder to decrypt.</div>
       </section>
 
-      <!-- Module 05: Aura Leaderboard -->
+      <!-- Aura Leaderboard -->
       <section class="card">
         <span class="module-number">MODULE 05</span>
         <h3>Aura Leaderboard</h3>
@@ -467,7 +643,7 @@
     </div>
   </footer>
 
-  <!-- Complete Integrated Script -->
+  <!-- Scripts -->
   <script>
     function closeGate() {
       const gate = document.getElementById("gate-overlay");
@@ -481,7 +657,213 @@
       document.body.setAttribute("data-theme", theme);
     }
 
-    // 1. Mansik Santulan Logic
+    // Audio Synthesizer
+    let audioCtx = null;
+    function getAudioContext() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      return audioCtx;
+    }
+
+    function playMemeSound(type) {
+      const ctx = getAudioContext();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      if (type === 'bruh') {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(140, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(70, ctx.currentTime + 0.4);
+        gain.gain.setValueAtTime(0.3, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.4);
+      } else if (type === 'damage') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(450, ctx.currentTime);
+        osc.frequency.setValueAtTime(300, ctx.currentTime + 0.1);
+        gain.gain.setValueAtTime(0.3, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.3);
+      } else if (type === 'siren') {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(600, ctx.currentTime);
+        osc.frequency.linearRampToValueAtTime(900, ctx.currentTime + 0.2);
+        osc.frequency.linearRampToValueAtTime(600, ctx.currentTime + 0.4);
+        gain.gain.setValueAtTime(0.2, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.5);
+      } else if (type === 'crickets') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(4000, ctx.currentTime);
+        gain.gain.setValueAtTime(0.05, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.3);
+      } else if (type === 'flatline') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(880, ctx.currentTime);
+        gain.gain.setValueAtTime(0.2, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.8);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.8);
+      } else if (type === 'fart') {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(90, ctx.currentTime);
+        osc.frequency.linearRampToValueAtTime(50, ctx.currentTime + 0.3);
+        gain.gain.setValueAtTime(0.35, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.35);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.35);
+      }
+    }
+
+    // Squad Wrapped 2026 Data
+    const wrappedStats = {
+      Mahesh: { trait: "Uncontrolled Reels Hypnosis", hours: "348 Hours", phrase: "'Ha bhai bas nikal raha hu'", aura: "-420 Aura" },
+      Maaz: { trait: "Fiscal Ghosting Syndrome", hours: "612 Hours", phrase: "'GPay kal kar dunga pakka'", aura: "-690 Aura" },
+      Tushar: { trait: "Sudden Plan Evaporation", hours: "189 Hours", phrase: "'Bhai tabiyat theek nahi lag rahi'", aura: "-80 Aura" },
+      Faiz: { trait: "Chronic Hotspot Hunting", hours: "420 Hours", phrase: "'Ek baar hotspot on karna urgent kaam hai'", aura: "-150 Aura" },
+      Farhan: { trait: "Unsolicited Life Consulting", hours: "510 Hours", phrase: "'Meri baat sun, dimaag se soch'", aura: "-850 Aura" }
+    };
+
+    function generateWrapped() {
+      const target = document.getElementById("wrapped-target").value;
+      const data = wrappedStats[target];
+      document.getElementById("wrap-name").innerText = `${target.toUpperCase()}'S 2026 WRAPPED`;
+      document.getElementById("wrap-trait").innerText = data.trait;
+      document.getElementById("wrap-hours").innerText = data.hours;
+      document.getElementById("wrap-phrase").innerText = data.phrase;
+      document.getElementById("wrap-aura").innerText = data.aura;
+      document.getElementById("wrapped-display").style.display = "block";
+      playMemeSound('damage');
+    }
+
+    function downloadWrapped() {
+      const target = document.getElementById("wrapped-target").value;
+      const canvas = document.createElement("canvas");
+      canvas.width = 1080;
+      canvas.height = 1920;
+      const ctx = canvas.getContext("2d");
+
+      // Card Background
+      ctx.fillStyle = "#0A0A0C";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Gradient Accent
+      const grad = ctx.createLinearGradient(0, 0, 1080, 1920);
+      grad.addColorStop(0, '#0F172A');
+      grad.addColorStop(1, '#020617');
+      ctx.fillStyle = grad;
+      ctx.fillRect(40, 40, 1000, 1840);
+
+      // Border
+      ctx.strokeStyle = '#38BDF8';
+      ctx.lineWidth = 8;
+      ctx.strokeRect(40, 40, 1000, 1840);
+
+      // Header Text
+      ctx.fillStyle = "#94A3B8";
+      ctx.font = "bold 32px 'Space Grotesk', sans-serif";
+      ctx.fillText("THE FRIENDZONE // 2026 OFFICIAL ARCHIVE", 100, 160);
+
+      ctx.fillStyle = "#FFFFFF";
+      ctx.font = "800 72px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText(`${target.toUpperCase()}'S DOSSIER`, 100, 260);
+
+      const d = wrappedStats[target];
+      function drawBox(y, label, val) {
+        ctx.fillStyle = "#1E293B";
+        ctx.fillRect(100, y, 880, 180);
+        ctx.fillStyle = "#38BDF8";
+        ctx.font = "bold 28px sans-serif";
+        ctx.fillText(label.toUpperCase(), 130, y + 60);
+        ctx.fillStyle = "#F8FAFC";
+        ctx.font = "bold 44px sans-serif";
+        ctx.fillText(val, 130, y + 130);
+      }
+
+      drawBox(400, "Top Mental Affliction", d.trait);
+      drawBox(640, "Cumulative Time Wasted", d.hours);
+      drawBox(880, "Default Defense Phrase", d.phrase);
+      drawBox(1120, "Total Aura Deficit", d.aura);
+
+      // Watermark
+      ctx.fillStyle = "#64748B";
+      ctx.font = "bold 36px sans-serif";
+      ctx.fillText("Verified & Executed by Nadimmmm", 100, 1750);
+
+      const a = document.createElement("a");
+      a.download = `${target}-2026-wrapped.png`;
+      a.href = canvas.toDataURL("image/png");
+      a.click();
+    }
+
+    // Tapri Receipt Engine
+    const receipts = {
+      Maaz: `====================================<br>
+MUMBAI TAPRI FISCAL RECOVERY CELL<br>
+GSTIN: 27AABCT9999FZ<br>
+====================================<br>
+DEBTOR: MAAZ (PRIME OFFENDER)<br>
+INSPECTOR: NADIM (ROOT ADMIN)<br>
+------------------------------------<br>
+[x] 24x Cutting Special Chai : ₹288.00<br>
+[x] 08x Bun Maska Loaded     : ₹240.00<br>
+[x] Excusal Fee ('5 Min Me') : ₹500.00<br>
+------------------------------------<br>
+TOTAL UNPAID DEBT: ₹1,028.00<br>
+STATUS: ARREST WARRANT PREPARED<br>
+====================================<br>
+*Pay immediately via UPI to Nadim.*`,
+      Mahesh: `====================================<br>
+MUMBAI TAPRI FISCAL RECOVERY CELL<br>
+------------------------------------<br>
+DEBTOR: MAHESH<br>
+[x] 12x Chai While Scrolling : ₹144.00<br>
+[x] Phantom Wallet Fee       : ₹250.00<br>
+TOTAL OUTSTANDING: ₹394.00<br>
+STATUS: UPI DECLINED FOREVER<br>
+====================================`,
+      Tushar: `====================================<br>
+MUMBAI TAPRI FISCAL RECOVERY CELL<br>
+------------------------------------<br>
+DEBTOR: TUSHAR<br>
+[x] Late-Cancellation Tax    : ₹450.00<br>
+[x] Half Samosa Abandonment  : ₹30.00<br>
+TOTAL RECOVERY: ₹480.00<br>
+====================================`,
+      Faiz: `====================================<br>
+MUMBAI TAPRI FISCAL RECOVERY CELL<br>
+------------------------------------<br>
+DEBTOR: FAIZ<br>
+[x] Hotspot Bandwidth (48GB) : ₹480.00<br>
+[x] Free Samosa Nibbling     : ₹60.00<br>
+TOTAL RECOVERY: ₹540.00<br>
+====================================`,
+      Farhan: `====================================<br>
+MUMBAI TAPRI FISCAL RECOVERY CELL<br>
+------------------------------------<br>
+DEBTOR: FARHAN<br>
+[x] 40 Mins Gyaan Penalty    : ₹800.00<br>
+[x] 2x Chai Actually Drank   : ₹24.00<br>
+TOTAL PENALTY: ₹824.00<br>
+====================================`
+    };
+
+    function generateReceipt() {
+      const t = document.getElementById("tapri-target").value;
+      const display = document.getElementById("receipt-display");
+      display.style.display = "block";
+      display.innerHTML = receipts[t];
+      playMemeSound('fart');
+    }
+
+    // Mansik Santulan Logic
     const santulanReports = {
       Mahesh: "<strong>Status: STAGE 5 CRITICAL (Jack Psycho Mode)</strong><br>Subah 4 baje tak reels scroll hoti hain, 2 ghante neend aur subah chai pine ke liye bhi doston ke muh dekhne padte hain.",
       Maaz: "<strong>Status: STAGE 4 (Brain completely disconnected)</strong><br>Lying continuously on WhatsApp DM saying 'Bhai 2 min me bike start kar raha hu' while wearing a towel.",
@@ -495,9 +877,10 @@
       const out = document.getElementById("santulan-output");
       out.style.display = "block";
       out.innerHTML = santulanReports[t];
+      playMemeSound('bruh');
     }
 
-    // 2. G@nd Jalao Index
+    // G@nd Jalao Index
     const jalanData = {
       Mahesh: "09:30 AM: School classmate got €80k tech offer in Amsterdam.<br>02:15 PM: 19-year-old crypto bro buys apartment.<br><strong>Mahesh's Status:</strong> Sitting in torn vest watching Jio 1.5GB data limit alert.",
       Maaz: "11:00 AM: Mutual friends posting aesthetic sunset cafe reels.<br><strong>Maaz's Status:</strong> Eating cold biscuits while ignoring 14 pending GPay requests.",
@@ -511,9 +894,10 @@
       const out = document.getElementById("jalan-output");
       out.style.display = "block";
       out.innerHTML = jalanData[t];
+      playMemeSound('damage');
     }
 
-    // 3. Female Filter Distortion
+    // Female Filter Distortion
     const femaleData = {
       Mahesh: { alter: "Mahima", aesthetic: "Bandra cafe aesthetic, iced matcha latte, 840k followers", current: "Mahesh: Wears same faded graphic tee for 4 straight days" },
       Maaz: { alter: "Mazin", aesthetic: "K-pop aesthetic, 40 Instagram DMs per minute, 0 replies given", current: "Maaz: Leaves important messages on seen for 96 hours" },
@@ -528,9 +912,10 @@
       const out = document.getElementById("female-output");
       out.style.display = "block";
       out.innerHTML = `<strong>Parallel Universe:</strong> ${data.alter}<br><strong>Vibe:</strong> ${data.aesthetic}<br><br><strong>Current Reality:</strong> ${data.current}`;
+      playMemeSound('flatline');
     }
 
-    // 4. Rehab Index
+    // Rehab Index
     const rehabData = {
       Mahesh: "Condition: Pre-Haircut Disheveled<br>Rehab Rating: 12% Put Together<br>Verdict: Looks like he just escaped a 72-hour gaming dungeon.",
       Maaz: "Condition: Post-Salon Clean Shave<br>Rehab Rating: 89% Illusion<br>Verdict: Looks like he gave up bad habits and founded a tech startup, but bank balance is still ₹14.50.",
@@ -544,6 +929,7 @@
       const out = document.getElementById("rehab-output");
       out.style.display = "block";
       out.innerHTML = rehabData[t];
+      playMemeSound('fart');
     }
 
     // Biometric Scanner
@@ -608,6 +994,7 @@
       const name = document.getElementById("roast-name").value;
       const roast = personalRoasts[name][currentRoastLevel];
       document.getElementById("roast-output").innerText = `${name} ${roast}`;
+      playMemeSound('damage');
     }
 
     function speakRoast() {
@@ -654,6 +1041,7 @@
         zone.style.background = "#FEE2E2";
         zone.style.color = "#991B1B";
         zone.innerText = "Too early! Jaldbazi mat kar.";
+        playMemeSound('bruh');
       } else if (arcadeState === "ready") {
         const diff = Date.now() - startTime;
         arcadeState = "idle";
@@ -661,10 +1049,11 @@
         zone.style.color = "var(--text-main)";
         zone.innerText = `Finished: ${diff} ms`;
         score.innerText = `${diff} ms`;
+        playMemeSound('siren');
       }
     }
 
-    // Classified Folders
+    // Vault
     const vaultData = {
       tushar_mahesh: "📁 INCIDENT REPORT: Tushar aur Mahesh ne last time plan banake aakhri minute pe cancel kiya tha. Total damage: Pure group ka mood kharab.",
       maaz_crimes: "📁 FINANCIAL AUDIT: Maaz owes everyone collectively ₹240 for cutting chai. Claims he will 'GPay tomorrow' since 2024.",
@@ -673,6 +1062,7 @@
 
     function openVault(key) {
       document.getElementById("vault-output").innerText = vaultData[key];
+      playMemeSound('crickets');
     }
 
     // Meltdown Protocol
@@ -680,6 +1070,7 @@
     function triggerMeltdown() {
       document.body.classList.add("meltdown-active");
       document.getElementById("nuclear-modal").style.display = "flex";
+      playMemeSound('siren');
       let p = 0;
       const bar = document.getElementById("nuclear-bar");
       meltdownTimer = setInterval(() => {
