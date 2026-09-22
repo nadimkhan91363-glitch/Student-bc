@@ -150,17 +150,66 @@
       background: #FEE2E2;
       color: #B91C1C;
       border: 1px solid #FECACA;
-      padding: 10px 18px;
+      padding: 14px 18px;
       border-radius: 999px;
-      font-weight: 700;
+      font-weight: 800;
+      font-size: 0.95rem;
       cursor: pointer;
       width: 100%;
+      letter-spacing: 0.05em;
+    }
+
+    /* Screen Meltdown FX */
+    @keyframes screenShake {
+      0% { transform: translate(1px, 1px) rotate(0deg); }
+      20% { transform: translate(-3px, 0px) rotate(1deg); }
+      40% { transform: translate(3px, -1px) rotate(-1deg); }
+      60% { transform: translate(-3px, 1px) rotate(0deg); }
+      80% { transform: translate(2px, 1px) rotate(1deg); }
+      100% { transform: translate(1px, -2px) rotate(0deg); }
+    }
+    .meltdown-active {
+      animation: screenShake 0.1s infinite !important;
+      background: #7F1D1D !important;
+      color: #FFF !important;
+    }
+
+    .nuclear-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .nuclear-content {
+      background: #18181B;
+      color: #EF4444;
+      border: 2px solid #EF4444;
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      text-align: center;
+      max-width: 400px;
+      box-shadow: 0 0 50px rgba(239, 68, 68, 0.5);
+    }
+    .nuclear-content h2 {
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+      color: #FFF;
+    }
+    .nuclear-content p {
+      color: #D4D4D8;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
     }
   </style>
 </head>
 <body data-theme="clean-light">
 
-  <!-- Cinematic Gate Overlay -->
+  <!-- Cinematic Gate -->
   <div id="gate-overlay" class="gate-overlay">
     <div class="gate-card">
       <div class="badge">SECURE HANDSHAKE</div>
@@ -192,7 +241,7 @@
     <section class="hero-card">
       <div class="hero-content">
         <h2>Friendship Evaluation Terminal</h2>
-        <p>Target squad verified: Mahesh, Maaz, Tushar, Faiz, Farhan.</p>
+        <p>Active surveillance targets: Mahesh, Maaz, Tushar, Faiz, Farhan.</p>
       </div>
     </section>
 
@@ -239,6 +288,7 @@
         </div>
         <button id="generate-roast-btn" class="action-btn">Generate Critique</button>
         <div id="roast-output" class="output-box">Waiting for subject...</div>
+        <button id="speak-roast-btn" class="action-btn" style="margin-top: 8px; background: var(--bg-elevated); color: var(--text-main); border: 1px solid var(--border-subtle);">🔊 Speak Roast Out Loud</button>
       </section>
 
       <!-- Module 03: Bakchodi Arcade -->
@@ -317,6 +367,18 @@
     </div>
   </main>
 
+  <!-- Meltdown Modal (Hidden by Default) -->
+  <div id="nuclear-modal" class="nuclear-modal hidden">
+    <div class="nuclear-content">
+      <h2>💀 PROTOCOL BREACH DETECTED!</h2>
+      <p id="nuclear-status">TRANSMITTING ALL DELETED SCREENSHOTS AND BROWSER HISTORY OF MAHESH, MAAZ, TUSHAR, FAIZ & FARHAN DIRECTLY TO FAMILY WHATSAPP GROUP...</p>
+      <div class="loader-track" style="margin-bottom: 20px;">
+        <div id="nuclear-bar" class="loader-bar" style="background: #EF4444; width: 0%;"></div>
+      </div>
+      <button id="cancel-nuclear-btn" class="action-btn" style="background: #EF4444; color: #FFF;">PAY NADIM ₹500 TO ABORT</button>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-inner">
@@ -328,7 +390,24 @@
   <!-- Script Logic -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // 1. Gate Logic
+      // Audio Synth FX (No external audio files needed)
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      function playTone(freq, type, duration) {
+        try {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = type;
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+          gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + duration);
+        } catch(e) {}
+      }
+
+      // Gate Logic
       const loaderBar = document.getElementById("loader-bar");
       const loaderText = document.getElementById("loader-text");
       const enterBtn = document.getElementById("enter-btn");
@@ -354,17 +433,19 @@
       }, 300);
 
       enterBtn.addEventListener("click", () => {
+        playTone(600, 'sine', 0.2);
         gateOverlay.style.opacity = "0";
         setTimeout(() => gateOverlay.classList.add("hidden"), 400);
       });
 
-      // 2. Roast Logic
+      // Roast Logic
       let roastLevel = "mild";
       document.querySelectorAll(".seg-btn").forEach((btn) => {
         btn.addEventListener("click", () => {
           document.querySelectorAll(".seg-btn").forEach((b) => b.classList.remove("active"));
           btn.classList.add("active");
           roastLevel = btn.dataset.level;
+          playTone(400, 'triangle', 0.1);
         });
       });
 
@@ -397,13 +478,24 @@
       };
 
       document.getElementById("generate-roast-btn").addEventListener("click", () => {
+        playTone(300, 'sawtooth', 0.2);
         const name = document.getElementById("roast-name").value;
         const roast = personalRoasts[name][roastLevel];
         document.getElementById("roast-output").innerText = `${name} ${roast}`;
       });
 
-      // 3. Biometric Scanner
+      // Voice Roast Reader
+      document.getElementById("speak-roast-btn").addEventListener("click", () => {
+        const text = document.getElementById("roast-output").innerText;
+        if (!text || text.includes("Waiting")) return;
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 0.9;
+        window.speechSynthesis.speak(utterance);
+      });
+
+      // Biometric Scanner
       document.getElementById("start-scan-btn").addEventListener("click", () => {
+        playTone(800, 'sine', 0.15);
         const name = document.getElementById("scanner-name").value;
         const terminal = document.getElementById("scan-terminal");
         const log = document.getElementById("scan-log");
@@ -419,12 +511,13 @@
 
         logs.forEach((txt, idx) => {
           setTimeout(() => {
+            playTone(450 + (idx * 100), 'sine', 0.1);
             log.innerHTML += `<br>> ${txt}`;
           }, (idx + 1) * 450);
         });
       });
 
-      // 4. Arcade Reaction
+      // Arcade Reaction
       const reactZone = document.getElementById("reaction-box");
       const reactBtn = document.getElementById("start-reaction-btn");
       const reactScore = document.getElementById("reaction-score");
@@ -447,6 +540,7 @@
           reactZone.style.color = "#065F46";
           reactZone.innerText = "CLICK NOW!";
           startTime = Date.now();
+          playTone(880, 'sine', 0.15);
         }, delay);
       });
 
@@ -454,12 +548,14 @@
         if (state === "waiting") {
           clearTimeout(reactTimeout);
           state = "idle";
+          playTone(150, 'sawtooth', 0.3);
           reactZone.style.background = "#FEE2E2";
           reactZone.style.color = "#991B1B";
           reactZone.innerText = "Too early! Jaldbazi mat kar.";
         } else if (state === "ready") {
           const diff = Date.now() - startTime;
           state = "idle";
+          playTone(600, 'sine', 0.2);
           reactZone.style.background = "var(--bg-elevated)";
           reactZone.style.color = "var(--text-main)";
           reactZone.innerText = `Finished: ${diff} ms`;
@@ -467,7 +563,7 @@
         }
       });
 
-      // 5. Future Predictor
+      // Future Predictor
       const futures = {
         Mahesh: { career: "Certified Tapri Manager", wealth: "₹24.50 + 1 Vada Pav", romance: "Friendzoned internationally" },
         Maaz: { career: "Full-time Excuse Maker", wealth: "Unlimited Udhaari", romance: "Single by popular demand" },
@@ -477,6 +573,7 @@
       };
 
       document.getElementById("predict-btn").addEventListener("click", () => {
+        playTone(520, 'triangle', 0.2);
         const name = document.getElementById("future-name").value;
         const box = document.getElementById("future-output");
         box.style.display = "flex";
@@ -487,7 +584,7 @@
         document.getElementById("future-marriage").innerText = futures[name].romance;
       });
 
-      // 6. Classified Folders
+      // Classified Folders
       const vaultData = {
         tushar_mahesh: "📁 INCIDENT REPORT: Tushar aur Mahesh ne last time plan banake aakhri minute pe cancel kiya tha. Total damage: Pure group ka mood kharab.",
         maaz_crimes: "📁 FINANCIAL AUDIT: Maaz owes everyone collectively ₹240 for cutting chai. Claims he will 'GPay tomorrow' since 2024.",
@@ -496,14 +593,47 @@
 
       document.querySelectorAll(".folder-btn").forEach((btn) => {
         btn.addEventListener("click", () => {
+          playTone(700, 'sine', 0.1);
           const key = btn.dataset.folder;
           document.getElementById("vault-output").innerText = vaultData[key];
         });
       });
 
-      // 7. Mystery Button
-      document.getElementById("mystery-btn").addEventListener("click", () => {
-        alert("⚠️ WARNING: Nadim's Admin System has initiated full device lockdown.\n\nResult: Mahesh, Maaz, Tushar, Faiz aur Farhan ki sab chats leak hone wali hain 💀");
+      // Wild Nuclear Meltdown Protocol
+      const mysteryBtn = document.getElementById("mystery-btn");
+      const nuclearModal = document.getElementById("nuclear-modal");
+      const nuclearBar = document.getElementById("nuclear-bar");
+      const cancelBtn = document.getElementById("cancel-nuclear-btn");
+
+      mysteryBtn.addEventListener("click", () => {
+        // Meltdown FX
+        document.body.classList.add("meltdown-active");
+        nuclearModal.classList.remove("hidden");
+
+        // Alarm siren
+        let count = 0;
+        const siren = setInterval(() => {
+          playTone(count % 2 === 0 ? 800 : 400, 'sawtooth', 0.2);
+          count++;
+          if (count > 10) clearInterval(siren);
+        }, 200);
+
+        let p = 0;
+        const pInterval = setInterval(() => {
+          p += 10;
+          nuclearBar.style.width = `${p}%`;
+          if (p >= 100) {
+            clearInterval(pInterval);
+            document.getElementById("nuclear-status").innerText = "💥 100% UPLOAD COMPLETE! Ab sab doston ke ghar pe police aur rishtedaar dono aa rahe hain.";
+          }
+        }, 300);
+      });
+
+      cancelBtn.addEventListener("click", () => {
+        document.body.classList.remove("meltdown-active");
+        nuclearModal.classList.add("hidden");
+        nuclearBar.style.width = "0%";
+        alert("Transaction pending! Nadim ko Google Pay kar dena varna kal wapas leak hoga 😂");
       });
     });
   </script>
