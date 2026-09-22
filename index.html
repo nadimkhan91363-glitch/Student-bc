@@ -127,12 +127,6 @@
       font-size: 1.05rem;
       color: var(--accent);
     }
-    .future-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 6px 0;
-      border-bottom: 1px solid rgba(0,0,0,0.05);
-    }
     .vault-grid {
       display: flex;
       flex-direction: column;
@@ -223,7 +217,6 @@
       color: #F87171;
     }
 
-    /* Brand Wrapped Card Preview */
     .wrapped-card {
       background: linear-gradient(135deg, #18181B 0%, #09090B 100%);
       border: 2px solid #27272A;
@@ -234,16 +227,6 @@
       position: relative;
       overflow: hidden;
       margin-top: 14px;
-    }
-    .wrapped-card::before {
-      content: "";
-      position: absolute;
-      top: -50px;
-      right: -50px;
-      width: 140px;
-      height: 140px;
-      background: radial-gradient(circle, rgba(37,99,235,0.4) 0%, transparent 70%);
-      pointer-events: none;
     }
     .wrapped-title {
       font-size: 0.75rem;
@@ -275,7 +258,6 @@
       color: #F8FAFC;
     }
 
-    /* Soundboard Grid */
     .soundboard-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -302,7 +284,6 @@
       border-color: var(--accent);
     }
 
-    /* Tapri Receipt */
     .receipt-paper {
       background: #FFFDF0;
       color: #1C1917;
@@ -315,11 +296,57 @@
       line-height: 1.5;
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
+
+    /* Radar Canvas Box */
+    .radar-box {
+      width: 100%;
+      height: 120px;
+      background: #000;
+      border-radius: 8px;
+      border: 1px solid #10B981;
+      position: relative;
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .radar-sweep {
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: #10B981;
+      box-shadow: 0 0 10px #10B981;
+      animation: sweepAnim 1.8s linear infinite;
+    }
+    @keyframes sweepAnim {
+      0% { top: 0%; opacity: 0.2; }
+      50% { opacity: 1; }
+      100% { top: 100%; opacity: 0.2; }
+    }
+    .radar-text {
+      color: #10B981;
+      font-family: monospace;
+      font-size: 0.85rem;
+      z-index: 2;
+    }
+
+    /* FIR Paper */
+    .fir-slip {
+      background: #F8FAFC;
+      color: #0F172A;
+      font-family: monospace;
+      border: 2px solid #DC2626;
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 14px;
+      font-size: 0.8rem;
+      line-height: 1.6;
+    }
   </style>
 </head>
 <body data-theme="clean-light">
 
-  <!-- Instant Safe Gate -->
   <div id="gate-overlay" class="gate-overlay" onclick="closeGate()">
     <div class="gate-card" onclick="event.stopPropagation()">
       <div class="badge">SECURE HANDSHAKE</div>
@@ -335,7 +362,6 @@
     </div>
   </div>
 
-  <!-- Top Navbar -->
   <header class="navbar">
     <div class="brand">
       <span class="brand-pill">FZ-OS</span>
@@ -351,7 +377,6 @@
     </div>
   </header>
 
-  <!-- Main Container -->
   <main class="container">
     <section class="hero-card">
       <div class="hero-content">
@@ -360,10 +385,63 @@
       </div>
     </section>
 
-    <!-- Modules Grid -->
     <div class="modules-grid">
 
-      <!-- BRAND NEW 1: Squad Wrapped 2026 -->
+      <!-- RADAR LIE DETECTOR & EXCUSE DECRYPTER -->
+      <section class="card" style="border: 2px solid #10B981;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span class="module-number" style="background: #D1FAE5; color: #047857;">ACOUSTIC RADAR</span>
+          <span class="dank-badge" style="background: #064E3B; color: #6EE7B7;">LIE DETECTOR 🛰️</span>
+        </div>
+        <h3>Excuse Decrypter 3000</h3>
+        <p class="card-desc">Intercept squad member's voice frequency and expose the real truth.</p>
+
+        <select id="lie-name" class="dropdown-select">
+          <option value="Maaz">Maaz</option>
+          <option value="Mahesh">Mahesh</option>
+          <option value="Tushar">Tushar</option>
+          <option value="Faiz">Faiz</option>
+          <option value="Farhan">Farhan</option>
+        </select>
+
+        <select id="lie-excuse" class="dropdown-select">
+          <option value="e1">"Bhai bas 5 minute me nikal raha hu"</option>
+          <option value="e2">"Phone silent pe tha awaz nahi aayi"</option>
+          <option value="e3">"Mummy ne urgent market bhej diya"</option>
+          <option value="e4">"GPay limit exceed ho gayi kal subah pakka"</option>
+        </select>
+
+        <div class="radar-box">
+          <div class="radar-sweep"></div>
+          <div id="radar-status" class="radar-text">READY FOR SIGNAL LOCK</div>
+        </div>
+
+        <button class="action-btn" style="background: #047857; color: #FFF;" onclick="runLieDetector()">Analyze Voice Pulse</button>
+        <div id="lie-output" class="output-box" style="display: none; border-left-color: #10B981;"></div>
+      </section>
+
+      <!-- OFFICIAL POLICE FIR GENERATOR -->
+      <section class="card" style="border: 2px solid #EF4444;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span class="module-number" style="background: #FEE2E2; color: #B91C1C;">CRIMINAL BRANCH</span>
+          <span class="dank-badge">MAHARASHTRA FIR 🚨</span>
+        </div>
+        <h3>Squad Non-Bailable FIR</h3>
+        <p class="card-desc">Draft an official non-bailable cyber notice against squad delinquencies.</p>
+
+        <select id="fir-target" class="dropdown-select">
+          <option value="Mahesh">Mahesh (Severe WhatsApp Status Crime)</option>
+          <option value="Maaz">Maaz (Chronic 5-Minute Deception)</option>
+          <option value="Tushar">Tushar (Pre-Meditated Trip Cancellation)</option>
+          <option value="Faiz">Faiz (Grand Hotspot Data Heist)</option>
+          <option value="Farhan">Farhan (Unregistered Tapri Philosophy)</option>
+        </select>
+
+        <button class="action-btn" style="background: #B91C1C; color: #FFF;" onclick="generateFIR()">Lodge Police Cyber FIR</button>
+        <div id="fir-display" class="fir-slip" style="display: none;"></div>
+      </section>
+
+      <!-- Squad Wrapped 2026 -->
       <section class="card" style="border: 2px solid #38BDF8;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <span class="module-number" style="background: #E0F2FE; color: #0284C7;">ANNUAL REVIEW</span>
@@ -406,7 +484,7 @@
         </div>
       </section>
 
-      <!-- BRAND NEW 2: Soundboard of Shame -->
+      <!-- Soundboard of Shame -->
       <section class="card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <span class="module-number">AUDIO SANCTUARY</span>
@@ -425,7 +503,7 @@
         </div>
       </section>
 
-      <!-- BRAND NEW 3: Tapri Udhaari Settle Engine -->
+      <!-- Tapri Udhaari Settle Engine -->
       <section class="card" style="border: 1px solid #78350F;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <span class="module-number" style="background: #FEF3C7; color: #B45309;">FISCAL DEBT</span>
@@ -446,7 +524,7 @@
         <div id="receipt-display" class="receipt-paper" style="display: none;"></div>
       </section>
 
-      <!-- DANK: Mansik Santulan Calculator -->
+      <!-- Mansik Santulan Calculator -->
       <section class="card" style="border: 1px solid #7F1D1D;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <span class="module-number" style="background: #450A0A; color: #F87171;">DIAGNOSIS</span>
@@ -466,7 +544,7 @@
         <div id="santulan-output" class="output-box" style="display: none; border-left-color: #EF4444;"></div>
       </section>
 
-      <!-- DANK: G@nd Jalao Index -->
+      <!-- G@nd Jalao Index -->
       <section class="card" style="border: 1px solid #78350F;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <span class="module-number" style="background: #451A03; color: #FBBF24;">REALITY CHECK</span>
@@ -486,7 +564,7 @@
         <div id="jalan-output" class="output-box" style="display: none; border-left-color: #F59E0B;"></div>
       </section>
 
-      <!-- DANK: Female Filter Distortion -->
+      <!-- Female Filter Distortion -->
       <section class="card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <span class="module-number">PARALLEL UNIVERSE</span>
@@ -506,7 +584,7 @@
         <div id="female-output" class="output-box" style="display: none; border-left-color: #A855F7;"></div>
       </section>
 
-      <!-- DANK: Dog Haircut Rehab Index -->
+      <!-- Dog Haircut Rehab Index -->
       <section class="card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <span class="module-number">REHABILITATION</span>
@@ -623,7 +701,6 @@
     </div>
   </main>
 
-  <!-- Meltdown Modal -->
   <div id="nuclear-modal" class="nuclear-modal" style="display: none;">
     <div class="nuclear-content">
       <h2>💀 PROTOCOL BREACH DETECTED!</h2>
@@ -635,7 +712,6 @@
     </div>
   </div>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="footer-inner">
       <p class="curated">ENGINEERED WITH RIGOR</p>
@@ -643,7 +719,6 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
   <script>
     function closeGate() {
       const gate = document.getElementById("gate-overlay");
@@ -657,7 +732,7 @@
       document.body.setAttribute("data-theme", theme);
     }
 
-    // Audio Synthesizer
+    // Audio Engine
     let audioCtx = null;
     function getAudioContext() {
       if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -722,6 +797,57 @@
       }
     }
 
+    // Lie Detector Logic
+    const lieDatabase = {
+      e1: "DECRYPTION: Subject is currently wearing towel, lying horizontally in bed, looking for clean socks. Estimated arrival latency: +114 Minutes.",
+      e2: "DECRYPTION: Subject saw notification in real-time, stared at it for 12 seconds, locked screen, and continued scrolling memes.",
+      e3: "DECRYPTION: Subject simply lacks social battery and is pretending to negotiate vegetables at the market.",
+      e4: "DECRYPTION: Balance is ₹4.20. Server is fully operational; subject's bank account has reached liquidity zero."
+    };
+
+    function runLieDetector() {
+      const name = document.getElementById("lie-name").value;
+      const excuse = document.getElementById("lie-excuse").value;
+      const status = document.getElementById("radar-status");
+      const out = document.getElementById("lie-output");
+      
+      status.innerText = "SCANNING VOCAL FREQUENCY...";
+      playMemeSound('siren');
+
+      setTimeout(() => {
+        status.innerText = "SIGNAL DECRYPTED [99.8% ACCURACY]";
+        out.style.display = "block";
+        out.innerHTML = `<strong>Subject:</strong> ${name}<br><strong>Deception Index:</strong> 99.4% (CRITICAL LIE)<br><strong>Forensic Truth:</strong> ${lieDatabase[excuse]}`;
+        playMemeSound('damage');
+      }, 1200);
+    }
+
+    // FIR Generator Logic
+    const firDatabase = {
+      Mahesh: "ACCUSED: MAHESH<br>CHARGES: IPC Section 420 (Phantom Wallet Scheme). Documented history of ordering 2 cold drinks and disappearing into the bathroom right when bill reaches table.",
+      Maaz: "ACCUSED: MAAZ<br>CHARGES: IPC Section 308 (Severe Fraudulent ETA). Stating 'Nikal gaya hu' 42 consecutive times while sitting under ceiling fan in shorts.",
+      Tushar: "ACCUSED: TUSHAR<br>CHARGES: IPC Section 120-B (Pre-meditated Trip Sabotage). Confirmed booking cancellation 45 minutes prior to train departure causing mental trauma to 4 co-passengers.",
+      Faiz: "ACCUSED: FAIZ<br>CHARGES: Information Technology Act Sec 66 (Grand Hotspot Leeching). Consuming 82 GB mobile hotspot without offering cutting chai compensation.",
+      Farhan: "ACCUSED: FARHAN<br>CHARGES: IPC Section 504 (Unlicensed Philosophical Lecturing). Administering unsolicited 35-minute life guidance during tea break while holding active college backlogs."
+    };
+
+    function generateFIR() {
+      const target = document.getElementById("fir-target").value;
+      const display = document.getElementById("fir-display");
+      display.style.display = "block";
+      display.innerHTML = `=================================================<br>
+MAHARASHTRA CYBER CELL // SQUAD CRIME DOCKET<br>
+FIR NO: 2026/FZ/${Math.floor(Math.random()*8999+1000)}<br>
+INVESTIGATING OFFICER: ROOT ADMIN NADIM<br>
+-------------------------------------------------<br>
+${firDatabase[target]}<br>
+-------------------------------------------------<br>
+STATUS: NON-BAILABLE WARRANT ISSUED.<br>
+PENALTY: Compulsory canteen funding for next 30 days.<br>
+=================================================`;
+      playMemeSound('bruh');
+    }
+
     // Squad Wrapped 2026 Data
     const wrappedStats = {
       Mahesh: { trait: "Uncontrolled Reels Hypnosis", hours: "348 Hours", phrase: "'Ha bhai bas nikal raha hu'", aura: "-420 Aura" },
@@ -750,23 +876,19 @@
       canvas.height = 1920;
       const ctx = canvas.getContext("2d");
 
-      // Card Background
       ctx.fillStyle = "#0A0A0C";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Gradient Accent
       const grad = ctx.createLinearGradient(0, 0, 1080, 1920);
       grad.addColorStop(0, '#0F172A');
       grad.addColorStop(1, '#020617');
       ctx.fillStyle = grad;
       ctx.fillRect(40, 40, 1000, 1840);
 
-      // Border
       ctx.strokeStyle = '#38BDF8';
       ctx.lineWidth = 8;
       ctx.strokeRect(40, 40, 1000, 1840);
 
-      // Header Text
       ctx.fillStyle = "#94A3B8";
       ctx.font = "bold 32px 'Space Grotesk', sans-serif";
       ctx.fillText("THE FRIENDZONE // 2026 OFFICIAL ARCHIVE", 100, 160);
@@ -792,7 +914,6 @@
       drawBox(880, "Default Defense Phrase", d.phrase);
       drawBox(1120, "Total Aura Deficit", d.aura);
 
-      // Watermark
       ctx.fillStyle = "#64748B";
       ctx.font = "bold 36px sans-serif";
       ctx.fillText("Verified & Executed by Nadimmmm", 100, 1750);
