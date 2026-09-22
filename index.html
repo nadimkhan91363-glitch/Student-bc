@@ -297,7 +297,6 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
 
-    /* Radar Canvas Box */
     .radar-box {
       width: 100%;
       height: 120px;
@@ -331,7 +330,6 @@
       z-index: 2;
     }
 
-    /* FIR Paper */
     .fir-slip {
       background: #F8FAFC;
       color: #0F172A;
@@ -341,6 +339,45 @@
       padding: 16px;
       margin-top: 14px;
       font-size: 0.8rem;
+      line-height: 1.6;
+    }
+
+    /* UPI Bhikhari QR Card */
+    .bhikhari-card {
+      background: #FFFFFF;
+      color: #0F172A;
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+      margin-top: 14px;
+      border: 2px solid #0284C7;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    .fake-qr {
+      width: 140px;
+      height: 140px;
+      margin: 10px auto;
+      background: repeating-conic-gradient(#000 0% 25%, #FFF 0% 50%) 50% / 20px 20px;
+      border: 4px solid #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.75rem;
+      color: #EF4444;
+      background-color: #FFF;
+    }
+
+    /* Medical Rx Slip */
+    .rx-paper {
+      background: #F0FDF4;
+      color: #14532D;
+      border: 2px dashed #16A34A;
+      border-radius: 10px;
+      padding: 18px;
+      margin-top: 14px;
+      font-family: monospace;
+      font-size: 0.82rem;
       line-height: 1.6;
     }
   </style>
@@ -386,6 +423,48 @@
     </section>
 
     <div class="modules-grid">
+
+      <!-- BRAND NEW 1: UPI Bhikhari QR Generator -->
+      <section class="card" style="border: 2px solid #0284C7;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span class="module-number" style="background: #E0F2FE; color: #0284C7;">CROWDFUNDING</span>
+          <span class="dank-badge" style="background: #0284C7; color: #FFF;">UPI BEGGAR 💸</span>
+        </div>
+        <h3>UPI Bhikhari Scanner</h3>
+        <p class="card-desc">Generate official donation QR for squad member's unpaid bills.</p>
+
+        <select id="upi-name" class="dropdown-select">
+          <option value="Maaz">Maaz (Chai Udhaari Fund)</option>
+          <option value="Mahesh">Mahesh (Recharge Expired Relief)</option>
+          <option value="Tushar">Tushar (Petrol Contribution Beggar)</option>
+          <option value="Faiz">Faiz (Hotspot Data Subsidy)</option>
+          <option value="Farhan">Farhan (Life Coach Speaking Fee)</option>
+        </select>
+
+        <button class="action-btn" style="background: #0284C7; color: #FFF;" onclick="generateUPI()">Generate Beggar QR Slip</button>
+        <div id="upi-display" class="bhikhari-card" style="display: none;"></div>
+      </section>
+
+      <!-- BRAND NEW 2: Brainrot Detox Prescription -->
+      <section class="card" style="border: 2px solid #16A34A;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span class="module-number" style="background: #DCFCE7; color: #15803D;">PSYCHIATRY</span>
+          <span class="dank-badge" style="background: #15803D; color: #FFF;">REELS DETOX 💊</span>
+        </div>
+        <h3>Reels Addiction Prescription</h3>
+        <p class="card-desc">Official psychiatric detox slip for chronic Instagram doomscrollers.</p>
+
+        <select id="rx-name" class="dropdown-select">
+          <option value="Mahesh">Mahesh</option>
+          <option value="Maaz">Maaz</option>
+          <option value="Tushar">Tushar</option>
+          <option value="Faiz">Faiz</option>
+          <option value="Farhan">Farhan</option>
+        </select>
+
+        <button class="action-btn" style="background: #16A34A; color: #FFF;" onclick="generatePrescription()">Draft Medical Rx</button>
+        <div id="rx-display" class="rx-paper" style="display: none;"></div>
+      </section>
 
       <!-- RADAR LIE DETECTOR & EXCUSE DECRYPTER -->
       <section class="card" style="border: 2px solid #10B981;">
@@ -795,6 +874,55 @@
         osc.start();
         osc.stop(ctx.currentTime + 0.35);
       }
+    }
+
+    // UPI Bhikhari QR Logic
+    const upiData = {
+      Maaz: { title: "BHAGWAN KE NAAM PE CHAI PILADO", reason: "Maaz ka GPay pichle 2 saal se down chal raha hai. Total udhari ₹1028.", vpa: "maaz.udhari@okhdfc" },
+      Mahesh: { title: "1.5GB 4G EMERGENCY RELIEF FUND", reason: "Mahesh ka data roz dopahar 1 baje khatam ho jata hai JCB reels dekh kar.", vpa: "mahesh.reels@okaxis" },
+      Tushar: { title: "TRIP CANCELLATION FINE PAYER", reason: "Tushar ne confirm plan cancel kiya, ab group ko compensation de raha hai.", vpa: "tushar.cancel@oksbi" },
+      Faiz: { title: "HOTSPOT BANDWIDTH CHARITY", reason: "Faiz ne dusro ke phone se 80GB pel diya bina sharam ke.", vpa: "faiz.hotspot@paytm" },
+      Farhan: { title: "GYAAN REFUND SCHEME", reason: "Farhan ne bina mange 45 minute tak life advice de dali.", vpa: "farhan.gyaan@icici" }
+    };
+
+    function generateUPI() {
+      const target = document.getElementById("upi-name").value;
+      const d = upiData[target];
+      const display = document.getElementById("upi-display");
+      display.style.display = "block";
+      display.innerHTML = `
+        <h4 style="margin:0; color:#0284C7; font-weight:800;">BHIKHARI RECOVERY QR</h4>
+        <p style="font-size:0.8rem; margin:4px 0 10px 0; color:#64748B;">Target: <strong>${target}</strong></p>
+        <div class="fake-qr">PAY ₹10 TO RESTORE AURA</div>
+        <p style="font-size:0.85rem; font-weight:700; margin:8px 0; color:#0F172A;">"${d.title}"</p>
+        <p style="font-size:0.75rem; color:#475569; line-height:1.4;">${d.reason}</p>
+        <span style="font-size:0.72rem; background:#F1F5F9; padding:4px 8px; border-radius:4px; font-family:monospace;">VPA: ${d.vpa}</span>
+      `;
+      playMemeSound('fart');
+    }
+
+    // Prescription Logic
+    const rxData = {
+      Mahesh: "DIAGNOSIS: Acute Doomscrolling & Brain Paralysis.<br>SYMPTOMS: Watches Russian memes and JCB digger compilations until 4:30 AM.<br>MEDICATION:<br>1. Tab. Touch Grass 500mg (Daily Morning)<br>2. Syp. Throw Phone In Well (Before Sleeping)<br>PRECAUTION: Avoid asking 'Aur bhai kya chal raha hai' without listening to answer.",
+      Maaz: "DIAGNOSIS: Pathological Tardiness & Selective Blindness.<br>SYMPTOMS: Types 'Bhai nikal gaya' while wrapped in blanket.<br>MEDICATION:<br>1. Inj. Punctuality 100ml (Direct into nervous system)<br>2. Compulsory GPay QR on forehead.<br>PRECAUTION: Stop lying about bike puncture.",
+      Tushar: "DIAGNOSIS: Tripophobia & Sudden Disappearing Act.<br>SYMPTOMS: Heart rate spikes whenever group books train tickets.<br>MEDICATION:<br>1. Cap. Commitment 200mg<br>2. Passport confiscated by Nadim.<br>PRECAUTION: Do not let him make weekend plans.",
+      Faiz: "DIAGNOSIS: Parasitic Bandwidth Leech.<br>SYMPTOMS: Automatically pairs phone to other people's hotspot without asking.<br>MEDICATION:<br>1. Recharge ₹299 Unlimited Plan immediately.<br>2. Sit 5 meters away from canteen Wi-Fi.",
+      Farhan: "DIAGNOSIS: Uncertified Philosophical Syndrome.<br>SYMPTOMS: Speaks like a retired monk with 3 active college backlogs.<br>MEDICATION:<br>1. Tab. STFU 650mg (TDS - Thrice daily)<br>2. Study engineering books instead of podcast clips."
+    };
+
+    function generatePrescription() {
+      const target = document.getElementById("rx-name").value;
+      const display = document.getElementById("rx-display");
+      display.style.display = "block";
+      display.innerHTML = `
+        <strong>CLINICAL NEUROLOGY DEPT // DR. NADIM (M.D. BAKCHODI)</strong><br>
+        PATIENT NAME: ${target.toUpperCase()} | DATE: 2026-FZ-CRITICAL<br>
+        -------------------------------------------------------------<br>
+        ${rxData[target]}<br>
+        -------------------------------------------------------------<br>
+        <em>DOCTOR'S NOTE: Patient is clinically online. Immediate isolation recommended.</em>
+      `;
+      playMemeSound('damage');
     }
 
     // Lie Detector Logic
