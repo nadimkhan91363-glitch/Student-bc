@@ -260,6 +260,16 @@
       font-weight: 800;
       font-family: monospace;
     }
+    .legal-doc {
+      font-family: monospace;
+      font-size: 0.8rem;
+      background: #000;
+      color: #F87171;
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      line-height: 1.6;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body data-theme="clean-light">
@@ -308,7 +318,51 @@
     <!-- Modules Grid -->
     <div class="modules-grid">
 
-      <!-- Telemetry Spy -->
+      <!-- DARK FEATURE 1: Dark Market Identity Ledger -->
+      <section class="card" style="border: 1px solid #374151;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span class="module-number" style="background: #1F2937; color: #9CA3AF;">VALUATION</span>
+          <span class="spy-badge" style="color: #60A5FA;">DARK LEDGER</span>
+        </div>
+        <h3>Black Market Value Index ☠️</h3>
+        <p class="card-desc">Simulated darknet broker estimate for target identity.</p>
+        
+        <select id="valuation-target" class="dropdown-select">
+          <option value="Mahesh">Mahesh</option>
+          <option value="Maaz">Maaz</option>
+          <option value="Tushar">Tushar</option>
+          <option value="Faiz">Faiz</option>
+          <option value="Farhan">Farhan</option>
+        </select>
+        <button class="action-btn" onclick="calcValuation()">Query Dark Index</button>
+        <div id="valuation-output" class="output-box" style="display: none; flex-direction: column;">
+          <div class="future-row"><span>Identity Liquidity:</span> <strong id="val-price">--</strong></div>
+          <div class="future-row"><span>Risk Classification:</span> <strong id="val-risk">--</strong></div>
+          <div class="future-row"><span>Broker Advice:</span> <strong id="val-advice">--</strong></div>
+        </div>
+      </section>
+
+      <!-- DARK FEATURE 2: Cold Group Subpoena -->
+      <section class="card" style="border: 1px solid #7F1D1D;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span class="module-number" style="background: #450A0A; color: #F87171;">SUBPOENA</span>
+          <span class="spy-badge">SECTION 404</span>
+        </div>
+        <h3>Friendship Deposition Order 💀</h3>
+        <p class="card-desc">Formal charges drawn by Root Admin Nadim.</p>
+        
+        <select id="subpoena-target" class="dropdown-select">
+          <option value="Mahesh">Mahesh</option>
+          <option value="Maaz">Maaz</option>
+          <option value="Tushar">Tushar</option>
+          <option value="Faiz">Faiz</option>
+          <option value="Farhan">Farhan</option>
+        </select>
+        <button class="action-btn" style="background: #991B1B; color: #FFF;" onclick="issueSubpoena()">Draft Formal Notice</button>
+        <div id="subpoena-output" class="legal-doc" style="display: none;"></div>
+      </section>
+
+      <!-- Live Telemetry -->
       <section class="card" style="border: 1px solid #EF4444;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <span class="module-number" style="background: #FEE2E2; color: #B91C1C;">SURVEILLANCE</span>
@@ -329,7 +383,7 @@
       <!-- Downfall Forecaster -->
       <section class="card">
         <span class="module-number">COLD LOGIC</span>
-        <h3>Group Downfall Forecaster ☠️</h3>
+        <h3>Group Downfall Forecaster</h3>
         <p class="card-desc">Actuarial friendship lifespan & downfall analysis.</p>
         
         <select id="mortality-target" class="dropdown-select">
@@ -499,9 +553,8 @@
     </div>
   </footer>
 
-  <!-- Bulletproof Functions -->
+  <!-- Complete Bulletproof Functions -->
   <script>
-    // Direct Gate Close
     function closeGate() {
       const gate = document.getElementById("gate-overlay");
       if (gate) {
@@ -510,19 +563,51 @@
       }
     }
 
-    // Theme Switch
     function changeTheme(theme) {
       document.body.setAttribute("data-theme", theme);
     }
 
-    // Telemetry Spy
+    // Feature 1: Dark Market Valuation
+    const marketIndex = {
+      Mahesh: { price: "$0.09 USD", risk: "CRITICAL: High probability of wasting buyer's bandwidth", advice: "Not recommended for auction; high chance of ghosting." },
+      Maaz: { price: "$0.0003 USD (Sub-penny)", risk: "UNRECOVERABLE: Deep debt liability to cutting chai tapri", advice: "Immediate write-off." },
+      Tushar: { price: "$0.42 USD", risk: "VOLATILE: Subject to last-minute cancellation", advice: "Sell before weekend plan." },
+      Faiz: { price: "$0.18 USD", risk: "PARASITIC: Constant Wi-Fi / Hotspot drain", advice: "Requires continuous external data supply." },
+      Farhan: { price: "$0.04 USD", risk: "HIGH NOISE: Generates 400 audio notes of zero value", advice: "Mute permanently." }
+    };
+
+    function calcValuation() {
+      const target = document.getElementById("valuation-target").value;
+      const data = marketIndex[target];
+      const box = document.getElementById("valuation-output");
+      box.style.display = "flex";
+      document.getElementById("val-price").innerText = data.price;
+      document.getElementById("val-risk").innerText = data.risk;
+      document.getElementById("val-advice").innerText = data.advice;
+    }
+
+    // Feature 2: Friendship Subpoena
+    const subpoenas = {
+      Mahesh: "CASE REF #913-M: You are formally subpoenaed by Root Admin Nadim for gross negligence, including watching JCB videos during group emergency meetings and disappearing when the check arrives.",
+      Maaz: "CASE REF #742-Z: Indictment for continuous fraudulent promises stating '5 minute me aya'. Total documented tardiness exceeds 482 cumulative hours since 2024.",
+      Tushar: "CASE REF #004-T: Criminal breach of squad trust. Accused of backing out of 6 confirmed trips within 2 hours of departure time.",
+      Faiz: "CASE REF #819-F: Unauthorized cellular exploitation. Documented theft of 140+ GB mobile data via hotspot without fiscal contribution.",
+      Farhan: "CASE REF #511-R: Unlicensed motivational lecturing. Accused of administering philosophical advice while carrying personal attendance deficit."
+    };
+
+    function issueSubpoena() {
+      const target = document.getElementById("subpoena-target").value;
+      const out = document.getElementById("subpoena-output");
+      out.style.display = "block";
+      out.innerHTML = `<strong>COURT OF ROOT ADMIN NADIM</strong><br>DOCKET: 2026-FZ-CRIMINAL<br><br>${subpoenas[target]}<br><br><em>PENALTY: Loss of remaining aura points and forced canteen funding.</em>`;
+    }
+
     function triggerSpy() {
       const out = document.getElementById("spy-output");
       out.style.display = "block";
       out.innerHTML = `> [WARN] Local root handshake verified.<br>> Screen: ${window.innerWidth}x${window.innerHeight}<br>> Background microphone loop: SYNCHRONIZED.<br>> Status: Nadim is watching this session live.`;
     }
 
-    // Downfall Forecaster
     const downfalls = {
       Mahesh: { trigger: "Fights over splitting ₹35 cutting chai bill", expiry: "August 14, 2027", last: "Left group after being roasted on birthday" },
       Maaz: { trigger: "Caught lying about 'arriving in 5 mins' for the 1000th time", expiry: "November 3, 2026", last: "Muted group forever due to unpaid debts" },
@@ -540,7 +625,6 @@
       document.getElementById("mort-last").innerText = downfalls[t].last;
     }
 
-    // Scanner
     function startScanner() {
       const name = document.getElementById("scanner-name").value;
       const terminal = document.getElementById("scan-terminal");
@@ -562,7 +646,6 @@
       });
     }
 
-    // Roast Logic
     let currentRoastLevel = "mild";
     function setRoastLevel(btn, level) {
       document.querySelectorAll(".seg-btn").forEach(b => b.classList.remove("active"));
@@ -614,7 +697,6 @@
       }
     }
 
-    // Arcade Reaction
     let reactTimeout = null;
     let startTime = 0;
     let arcadeState = "idle";
@@ -658,7 +740,6 @@
       }
     }
 
-    // Future Predictor
     const futures = {
       Mahesh: { career: "Certified Tapri Manager", wealth: "₹24.50 + 1 Vada Pav", romance: "Friendzoned internationally" },
       Maaz: { career: "Full-time Excuse Maker", wealth: "Unlimited Udhaari", romance: "Single by popular demand" },
@@ -677,7 +758,6 @@
       document.getElementById("future-marriage").innerText = futures[name].romance;
     }
 
-    // Vault
     const vaultData = {
       tushar_mahesh: "📁 INCIDENT REPORT: Tushar aur Mahesh ne last time plan banake aakhri minute pe cancel kiya tha. Total damage: Pure group ka mood kharab.",
       maaz_crimes: "📁 FINANCIAL AUDIT: Maaz owes everyone collectively ₹240 for cutting chai. Claims he will 'GPay tomorrow' since 2024.",
@@ -688,7 +768,6 @@
       document.getElementById("vault-output").innerText = vaultData[key];
     }
 
-    // Quiz
     const quizQuestions = [
       { q: "Nadim group me late kab aata hai?", options: ["Always on time (King)", "Jab sab ghar nikalne wale ho", "Sirf free food ke waqt"], correct: 0 },
       { q: "Group me sabse zyada udhaari kiski pending hai?", options: ["Maaz ki", "Mahesh ki", "Nadim ki (0 Udhaari)"], correct: 0 },
@@ -728,7 +807,6 @@
     }
     renderQuiz();
 
-    // Nuclear Protocol
     let meltdownTimer = null;
     function triggerMeltdown() {
       document.body.classList.add("meltdown-active");
