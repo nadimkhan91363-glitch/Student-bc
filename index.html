@@ -9,6 +9,26 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <style>
+    /* Dynamic Theme Variables */
+    body[data-theme="clean-dark"] {
+      --bg-primary: #090D16;
+      --bg-surface: #111827;
+      --bg-elevated: #1F2937;
+      --text-main: #F9FAFB;
+      --text-muted: #9CA3AF;
+      --border-subtle: #374151;
+      --accent: #3B82F6;
+    }
+    body[data-theme="cyber-matrix"] {
+      --bg-primary: #050505;
+      --bg-surface: #0D1117;
+      --bg-elevated: #161B22;
+      --text-main: #00FF66;
+      --text-muted: #008F11;
+      --border-subtle: #003B00;
+      --accent: #00FF66;
+    }
+
     .input-field, .dropdown-select {
       width: 100%;
       padding: 12px 14px;
@@ -143,7 +163,7 @@
     }
     .leader-list li:first-child {
       color: var(--accent);
-      background: #EFF6FF;
+      background: rgba(37, 99, 235, 0.1);
       border-radius: var(--radius-sm);
     }
     .danger-pill-btn {
@@ -157,6 +177,35 @@
       cursor: pointer;
       width: 100%;
       letter-spacing: 0.05em;
+    }
+
+    /* Quiz Specific Styles */
+    .quiz-question-box {
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .quiz-opt-btn {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      text-align: left;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .quiz-opt-btn:hover {
+      border-color: var(--accent);
     }
 
     /* Screen Meltdown FX */
@@ -173,7 +222,6 @@
       background: #7F1D1D !important;
       color: #FFF !important;
     }
-
     .nuclear-modal {
       position: fixed;
       inset: 0;
@@ -225,13 +273,18 @@
     </div>
   </div>
 
-  <!-- Top Navbar -->
+  <!-- Top Navbar with Theme Switcher -->
   <header class="navbar">
     <div class="brand">
       <span class="brand-pill">FZ-OS</span>
       <span class="brand-title">THE FRIENDZONE</span>
     </div>
-    <div class="nav-controls">
+    <div class="nav-controls" style="display: flex; align-items: center; gap: 10px;">
+      <select id="theme-switcher" class="dropdown-select" style="margin-bottom: 0; padding: 6px 10px; font-size: 0.78rem; width: auto;">
+        <option value="clean-light">Silicon Valley</option>
+        <option value="clean-dark">Midnight Slate</option>
+        <option value="cyber-matrix">Cyber Matrix</option>
+      </select>
       <span class="status-indicator"><span class="dot"></span> Online</span>
     </div>
   </header>
@@ -326,9 +379,22 @@
         </div>
       </section>
 
-      <!-- Module 05: Secret Classified Files -->
+      <!-- Module 05: How Well Do You Know Nadim? (Affinity Quiz) -->
       <section class="card">
         <span class="module-number">MODULE 05</span>
+        <h3>Loyalty & Affinity Quiz</h3>
+        <p class="card-desc">Test: Kitna jante ho Nadim ko?</p>
+        
+        <div id="quiz-wrapper">
+          <div id="quiz-question" class="quiz-question-box">Question will load here...</div>
+          <div id="quiz-options" class="quiz-options"></div>
+          <div id="quiz-feedback" class="output-box" style="display: none;"></div>
+        </div>
+      </section>
+
+      <!-- Module 06: Secret Classified Files -->
+      <section class="card">
+        <span class="module-number">MODULE 06</span>
         <h3>Classified Folders</h3>
         <p class="card-desc">Encrypted evidence files.</p>
         
@@ -340,9 +406,9 @@
         <div id="vault-output" class="output-box" style="margin-top: 10px;">Click any folder to decrypt.</div>
       </section>
 
-      <!-- Module 06: Leaderboard -->
+      <!-- Module 07: Leaderboard -->
       <section class="card">
-        <span class="module-number">MODULE 06</span>
+        <span class="module-number">MODULE 07</span>
         <h3>Aura Leaderboard</h3>
         <p class="card-desc">Live status verified by system.</p>
         
@@ -356,7 +422,7 @@
         </ul>
       </section>
 
-      <!-- Module 07: Mystery Button -->
+      <!-- Module 08: Mystery Button -->
       <section class="card" style="grid-column: 1 / -1;">
         <span class="module-number">HAZARD</span>
         <h3>Nuclear Protocol</h3>
@@ -367,7 +433,7 @@
     </div>
   </main>
 
-  <!-- Meltdown Modal (Hidden by Default) -->
+  <!-- Meltdown Modal -->
   <div id="nuclear-modal" class="nuclear-modal hidden">
     <div class="nuclear-content">
       <h2>💀 PROTOCOL BREACH DETECTED!</h2>
@@ -390,7 +456,7 @@
   <!-- Script Logic -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // Audio Synth FX (No external audio files needed)
+      // Audio Synth FX
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       function playTone(freq, type, duration) {
         try {
@@ -398,7 +464,7 @@
           const gain = audioCtx.createGain();
           osc.type = type;
           osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-          gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+          gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
           gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
           osc.connect(gain);
           gain.connect(audioCtx.destination);
@@ -406,6 +472,13 @@
           osc.stop(audioCtx.currentTime + duration);
         } catch(e) {}
       }
+
+      // Theme Switcher Logic
+      const themeSwitcher = document.getElementById("theme-switcher");
+      themeSwitcher.addEventListener("change", (e) => {
+        document.body.setAttribute("data-theme", e.target.value);
+        playTone(550, 'sine', 0.1);
+      });
 
       // Gate Logic
       const loaderBar = document.getElementById("loader-bar");
@@ -486,156 +559,4 @@
 
       // Voice Roast Reader
       document.getElementById("speak-roast-btn").addEventListener("click", () => {
-        const text = document.getElementById("roast-output").innerText;
-        if (!text || text.includes("Waiting")) return;
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.rate = 0.9;
-        window.speechSynthesis.speak(utterance);
-      });
-
-      // Biometric Scanner
-      document.getElementById("start-scan-btn").addEventListener("click", () => {
-        playTone(800, 'sine', 0.15);
-        const name = document.getElementById("scanner-name").value;
-        const terminal = document.getElementById("scan-terminal");
-        const log = document.getElementById("scan-log");
-        terminal.classList.remove("hidden");
-        log.innerHTML = `> Connecting neural sensors to ${name}...`;
-
-        const logs = [
-          `Target confirmed: ${name}`,
-          "Scanning intelligence... [ERROR: FILE NOT FOUND]",
-          "Measuring bakchodi capacity... [OVERFLOW: 999%]",
-          `System Note: ${name} is strictly advised to touch grass.`
-        ];
-
-        logs.forEach((txt, idx) => {
-          setTimeout(() => {
-            playTone(450 + (idx * 100), 'sine', 0.1);
-            log.innerHTML += `<br>> ${txt}`;
-          }, (idx + 1) * 450);
-        });
-      });
-
-      // Arcade Reaction
-      const reactZone = document.getElementById("reaction-box");
-      const reactBtn = document.getElementById("start-reaction-btn");
-      const reactScore = document.getElementById("reaction-score");
-      let reactTimeout = null;
-      let startTime = 0;
-      let state = "idle";
-
-      reactBtn.addEventListener("click", () => {
-        clearTimeout(reactTimeout);
-        state = "waiting";
-        reactZone.style.background = "#FEF3C7";
-        reactZone.style.color = "#92400E";
-        reactZone.innerText = "Wait for GREEN...";
-        reactScore.innerText = "-- ms";
-
-        const delay = Math.random() * 2200 + 1200;
-        reactTimeout = setTimeout(() => {
-          state = "ready";
-          reactZone.style.background = "#D1FAE5";
-          reactZone.style.color = "#065F46";
-          reactZone.innerText = "CLICK NOW!";
-          startTime = Date.now();
-          playTone(880, 'sine', 0.15);
-        }, delay);
-      });
-
-      reactZone.addEventListener("click", () => {
-        if (state === "waiting") {
-          clearTimeout(reactTimeout);
-          state = "idle";
-          playTone(150, 'sawtooth', 0.3);
-          reactZone.style.background = "#FEE2E2";
-          reactZone.style.color = "#991B1B";
-          reactZone.innerText = "Too early! Jaldbazi mat kar.";
-        } else if (state === "ready") {
-          const diff = Date.now() - startTime;
-          state = "idle";
-          playTone(600, 'sine', 0.2);
-          reactZone.style.background = "var(--bg-elevated)";
-          reactZone.style.color = "var(--text-main)";
-          reactZone.innerText = `Finished: ${diff} ms`;
-          reactScore.innerText = `${diff} ms`;
-        }
-      });
-
-      // Future Predictor
-      const futures = {
-        Mahesh: { career: "Certified Tapri Manager", wealth: "₹24.50 + 1 Vada Pav", romance: "Friendzoned internationally" },
-        Maaz: { career: "Full-time Excuse Maker", wealth: "Unlimited Udhaari", romance: "Single by popular demand" },
-        Tushar: { career: "Professional WhatsApp Status Watcher", wealth: "3 Expired Coupons", romance: "System Error 💀" },
-        Faiz: { career: "Free Hotspot Hunter", wealth: "₹18 & High Hopes", romance: "Pending Verification..." },
-        Farhan: { career: "Gossip Architect & Advisor", wealth: "₹2 Bank Balance", romance: "Married to Netflix" }
-      };
-
-      document.getElementById("predict-btn").addEventListener("click", () => {
-        playTone(520, 'triangle', 0.2);
-        const name = document.getElementById("future-name").value;
-        const box = document.getElementById("future-output");
-        box.style.display = "flex";
-        
-        document.getElementById("future-target").innerText = name;
-        document.getElementById("future-career").innerText = futures[name].career;
-        document.getElementById("future-wealth").innerText = futures[name].wealth;
-        document.getElementById("future-marriage").innerText = futures[name].romance;
-      });
-
-      // Classified Folders
-      const vaultData = {
-        tushar_mahesh: "📁 INCIDENT REPORT: Tushar aur Mahesh ne last time plan banake aakhri minute pe cancel kiya tha. Total damage: Pure group ka mood kharab.",
-        maaz_crimes: "📁 FINANCIAL AUDIT: Maaz owes everyone collectively ₹240 for cutting chai. Claims he will 'GPay tomorrow' since 2024.",
-        faiz_farhan: "📁 LOG ENTRY: Faiz aur Farhan jab bhi bolte hain 'Bhai 2 minute me pahuch raha hu', actually wo log so ke bhi nahi uthe hote."
-      };
-
-      document.querySelectorAll(".folder-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          playTone(700, 'sine', 0.1);
-          const key = btn.dataset.folder;
-          document.getElementById("vault-output").innerText = vaultData[key];
-        });
-      });
-
-      // Wild Nuclear Meltdown Protocol
-      const mysteryBtn = document.getElementById("mystery-btn");
-      const nuclearModal = document.getElementById("nuclear-modal");
-      const nuclearBar = document.getElementById("nuclear-bar");
-      const cancelBtn = document.getElementById("cancel-nuclear-btn");
-
-      mysteryBtn.addEventListener("click", () => {
-        // Meltdown FX
-        document.body.classList.add("meltdown-active");
-        nuclearModal.classList.remove("hidden");
-
-        // Alarm siren
-        let count = 0;
-        const siren = setInterval(() => {
-          playTone(count % 2 === 0 ? 800 : 400, 'sawtooth', 0.2);
-          count++;
-          if (count > 10) clearInterval(siren);
-        }, 200);
-
-        let p = 0;
-        const pInterval = setInterval(() => {
-          p += 10;
-          nuclearBar.style.width = `${p}%`;
-          if (p >= 100) {
-            clearInterval(pInterval);
-            document.getElementById("nuclear-status").innerText = "💥 100% UPLOAD COMPLETE! Ab sab doston ke ghar pe police aur rishtedaar dono aa rahe hain.";
-          }
-        }, 300);
-      });
-
-      cancelBtn.addEventListener("click", () => {
-        document.body.classList.remove("meltdown-active");
-        nuclearModal.classList.add("hidden");
-        nuclearBar.style.width = "0%";
-        alert("Transaction pending! Nadim ko Google Pay kar dena varna kal wapas leak hoga 😂");
-      });
-    });
-  </script>
-</body>
-</html>
+        const text = document.getElementById("roast-output").inner
