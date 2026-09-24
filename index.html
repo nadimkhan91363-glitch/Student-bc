@@ -3,160 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>THE FRIENDZONE — VIP Baddie Vault</title>
+  <title>FZ-OS // ARCHIVE 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <style>
     :root {
-      --genz-pink: #EC4899;
-      --genz-purple: #8B5CF6;
-      --genz-neon: #06B6D4;
-    }
-    body[data-theme="clean-dark"] {
-      --bg-primary: #090D16;
-      --bg-surface: #111827;
-      --bg-elevated: #1F2937;
-      --text-main: #F9FAFB;
-      --text-muted: #9CA3AF;
-      --border-subtle: #374151;
-      --accent: #EC4899;
+      --bg: #090A0F;
+      --surface: #12131C;
+      --elevated: #1A1C28;
+      --border: #282A3A;
+      --text-main: #F3F4F6;
+      --text-dim: #9CA3AF;
+      --pink-neon: #FF2E93;
+      --cyan-neon: #00F0FF;
     }
 
-    /* Honeytrap VIP Card */
-    .vip-bait-card {
-      background: linear-gradient(135deg, rgba(236, 72, 153, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
-      border: 2px solid var(--genz-pink);
-      border-radius: 16px;
-      padding: 22px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(236, 72, 153, 0.2);
-    }
-    .vip-badge {
-      display: inline-block;
-      padding: 4px 10px;
-      background: #EC4899;
-      color: #FFF;
-      font-size: 0.72rem;
-      font-weight: 800;
-      border-radius: 6px;
-      letter-spacing: 0.05em;
-    }
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 14px;
-      margin-top: 14px;
-    }
-    .video-card {
-      background: #181920;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
-      overflow: hidden;
-      cursor: pointer;
-      position: relative;
-      transition: transform 0.2s, border-color 0.2s;
-    }
-    .video-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--genz-pink);
-    }
-    .video-thumb {
-      height: 180px;
-      background-size: cover;
-      background-position: center;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .play-circle {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: rgba(0, 0, 0, 0.7);
-      border: 2px solid #FFF;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      color: #FFF;
-      box-shadow: 0 0 15px rgba(236, 72, 153, 0.6);
-    }
-    .video-info {
-      padding: 12px;
-    }
-    .video-info h4 {
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', sans-serif;
       margin: 0;
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: #F8FAFC;
-    }
-    .video-info p {
-      margin: 4px 0 0 0;
-      font-size: 0.75rem;
-      color: #94A3B8;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Modal Bully Popup */
-    .bully-modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.95);
-      z-index: 99999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .bully-box {
-      background: #111827;
-      border: 2px solid #EC4899;
-      border-radius: 20px;
-      padding: 26px;
-      max-width: 440px;
-      width: 100%;
-      text-align: center;
-      box-shadow: 0 0 50px rgba(236, 72, 153, 0.4);
-      position: relative;
-    }
-    .bully-avatar {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      margin: 0 auto 14px auto;
-      border: 3px solid #EC4899;
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.2rem;
-      background-color: #1F2937;
-    }
-    .bully-headline {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: #FFF;
-      margin-bottom: 8px;
-    }
-    .bully-text {
-      font-size: 0.88rem;
-      color: #CBD5E1;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    /* Floating Real-time Push Notification Banner */
+    /* Top Gen-Z Push Alerts */
     .push-notif-container {
       position: fixed;
       top: 14px;
       left: 50%;
       transform: translateX(-50%);
       width: 90%;
-      max-width: 420px;
+      max-width: 400px;
       z-index: 10000;
       pointer-events: none;
       display: flex;
@@ -164,18 +44,17 @@
       gap: 10px;
     }
     .system-push {
-      background: rgba(24, 24, 27, 0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 14px;
+      background: rgba(18, 19, 28, 0.94);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
       padding: 12px 16px;
-      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
       display: flex;
       align-items: center;
       gap: 12px;
-      color: #FFF;
-      animation: slideInDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: slideInDown 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       pointer-events: auto;
     }
     @keyframes slideInDown {
@@ -183,447 +62,541 @@
       100% { transform: translateY(0); opacity: 1; }
     }
     .push-app-icon {
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       border-radius: 10px;
-      background: #EC4899;
+      background: var(--pink-neon);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       flex-shrink: 0;
     }
-    .push-details {
-      flex: 1;
-    }
     .push-title {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 700;
-      color: #94A3B8;
+      color: var(--text-dim);
       display: flex;
       justify-content: space-between;
     }
     .push-body {
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       font-weight: 600;
-      color: #F8FAFC;
+      color: #FFF;
       margin-top: 2px;
-      line-height: 1.3;
     }
 
-    .ping-widget {
+    /* Minimalist Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(9, 10, 15, 0.8);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .brand-pill {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 800;
+      background: var(--pink-neon);
+      color: #000;
+      padding: 3px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+    }
+    .brand-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 0.95rem;
+      letter-spacing: -0.02em;
+      margin-left: 8px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Hero */
+    .hero-card {
+      padding: 24px 0 10px 0;
+    }
+    .hero-card h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: -0.03em;
+      margin: 0 0 6px 0;
+    }
+    .hero-card p {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+    .meta-tag {
+      display: inline-block;
+      font-family: monospace;
+      font-size: 0.72rem;
+      color: var(--cyan-neon);
+      margin-top: 8px;
+    }
+
+    /* Honeytrap Aesthetic Reel Vault */
+    .vault-section {
+      background: linear-gradient(180deg, rgba(255, 46, 147, 0.05) 0%, rgba(18, 19, 28, 0) 100%);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      margin: 20px 0 30px 0;
+    }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .section-head span {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--pink-neon);
+    }
+    .section-head small {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .reel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+    }
+    .reel-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reel-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--pink-neon);
+    }
+    .reel-thumb {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 0.72rem;
-      font-family: monospace;
-      padding: 4px 10px;
-      background: rgba(236, 72, 153, 0.1);
-      border: 1px solid rgba(236, 72, 153, 0.3);
-      color: #EC4899;
+      justify-content: center;
+    }
+    .play-pill {
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 6px 14px;
       border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #FFF;
     }
-    .pulse-dot {
-      width: 6px;
-      height: 6px;
-      background: #EC4899;
-      border-radius: 50%;
-      box-shadow: 0 0 8px #EC4899;
-      animation: pulseAnim 1.5s infinite;
+    .reel-meta {
+      padding: 14px;
     }
-    @keyframes pulseAnim {
-      0% { transform: scale(0.95); opacity: 0.8; }
-      50% { transform: scale(1.4); opacity: 1; }
-      100% { transform: scale(0.95); opacity: 0.8; }
+    .reel-meta h4 {
+      margin: 0;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #FFF;
+    }
+    .reel-meta p {
+      margin: 4px 0 0 0;
+      font-size: 0.75rem;
+      color: var(--text-dim);
     }
 
-    .input-field, .dropdown-select {
+    /* Intercept Modal */
+    .intercept-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.96);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .intercept-box {
+      background: var(--surface);
+      border: 1px solid var(--pink-neon);
+      border-radius: 20px;
+      padding: 24px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 0 60px rgba(255, 46, 147, 0.25);
+    }
+    .stat-line {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.82rem;
+    }
+    .stat-line:last-child {
+      border-bottom: none;
+    }
+    .stat-line span { color: var(--text-dim); }
+    .stat-line strong { color: var(--cyan-neon); font-family: monospace; }
+
+    /* Standard Cards Grid */
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .module-tag {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: var(--cyan-neon);
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+    .card h3 {
+      margin: 0 0 6px 0;
+      font-size: 1.15rem;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .card-desc {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin: 0 0 14px 0;
+    }
+
+    .dropdown-select {
       width: 100%;
       padding: 12px 14px;
-      border: 1px solid var(--border-subtle);
-      background: var(--bg-elevated);
-      color: var(--text-main);
-      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--elevated);
+      color: #FFF;
+      border-radius: 10px;
       font-family: inherit;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       outline: none;
       margin-bottom: 12px;
       box-sizing: border-box;
     }
     .action-btn {
       background: var(--text-main);
-      color: var(--bg-surface);
+      color: var(--bg);
       border: none;
       padding: 12px 16px;
-      border-radius: var(--radius-sm);
-      font-weight: 600;
-      font-size: 0.9rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.88rem;
       cursor: pointer;
       width: 100%;
-      transition: opacity 0.2s, transform 0.1s;
+      transition: all 0.15s ease;
     }
     .action-btn:active {
-      transform: scale(0.98);
-    }
-    .segmented-control {
-      display: flex;
-      background: var(--bg-elevated);
-      padding: 4px;
-      border-radius: var(--radius-sm);
-      margin-bottom: 12px;
-      gap: 4px;
-    }
-    .seg-btn {
-      flex: 1;
-      border: none;
-      background: transparent;
-      color: var(--text-muted);
-      padding: 8px 4px;
-      border-radius: var(--radius-sm);
-      font-size: 0.78rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    .seg-btn.active {
-      background: var(--bg-surface);
-      color: var(--text-main);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      transform: scale(0.97);
     }
     .output-box {
       margin-top: 14px;
-      background: var(--bg-elevated);
+      background: var(--elevated);
       padding: 14px;
-      border-radius: var(--radius-sm);
-      font-size: 0.88rem;
-      border-left: 3px solid var(--accent);
+      border-radius: 10px;
+      font-size: 0.85rem;
       line-height: 1.6;
+      border-left: 3px solid var(--pink-neon);
     }
-    .reaction-zone {
-      background: var(--bg-elevated);
-      height: 105px;
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 0.95rem;
-      cursor: pointer;
-      user-select: none;
-      margin-bottom: 12px;
-      transition: background 0.15s ease;
-      border: 1px dashed var(--border-subtle);
-    }
-    .arcade-actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-    }
-    .score-display {
-      font-weight: 800;
-      font-size: 1.05rem;
-      color: var(--accent);
-    }
-    .vault-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .folder-btn {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-main);
-      padding: 10px 14px;
-      border-radius: var(--radius-sm);
-      text-align: left;
-      font-weight: 600;
-      font-size: 0.88rem;
-      cursor: pointer;
-    }
-    .leader-list {
-      list-style: none;
-      margin-top: 8px;
-    }
-    .leader-list li {
-      display: flex;
-      justify-content: space-between;
-      padding: 8px 10px;
-      border-bottom: 1px solid var(--border-subtle);
-      font-size: 0.88rem;
-      font-weight: 600;
-    }
-    .leader-list li:first-child {
-      color: var(--accent);
-      background: rgba(236, 72, 153, 0.1);
-      border-radius: var(--radius-sm);
-    }
-    .danger-pill-btn {
-      background: #FEE2E2;
-      color: #B91C1C;
-      border: 1px solid #FECACA;
-      padding: 14px 18px;
-      border-radius: 999px;
-      font-weight: 800;
-      font-size: 0.95rem;
-      cursor: pointer;
-      width: 100%;
-      letter-spacing: 0.05em;
-    }
-    .soundboard-grid {
+
+    /* Soundboard */
+    .sound-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
-      margin-top: 10px;
     }
     .sound-btn {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-main);
-      padding: 12px 10px;
+      background: var(--elevated);
+      border: 1px solid var(--border);
+      color: #FFF;
+      padding: 10px;
       border-radius: 8px;
+      font-size: 0.8rem;
       font-weight: 700;
-      font-size: 0.85rem;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      transition: all 0.15s ease;
     }
     .sound-btn:active {
-      transform: scale(0.95);
-      border-color: var(--accent);
+      border-color: var(--pink-neon);
+      transform: scale(0.96);
     }
-    .timestamp-badge {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      font-family: monospace;
-      margin-top: 6px;
-      display: block;
+
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      border-top: 1px solid var(--border);
+      margin-top: 50px;
+      color: var(--text-dim);
+      font-size: 0.8rem;
     }
+    .footer span { color: #FFF; font-weight: 700; }
   </style>
 </head>
-<body data-theme="clean-dark">
+<body>
 
-  <!-- Dynamic Simulated Push Alert Container -->
+  <!-- Dynamic System Alerts -->
   <div id="push-container" class="push-notif-container"></div>
 
-  <!-- Honeytrap Bully Modal -->
-  <div id="bully-modal" class="bully-modal" style="display: none;">
-    <div class="bully-box">
-      <div id="bully-avatar" class="bully-avatar">🚨</div>
-      <div id="bully-title" class="bully-headline">THARAK DETECTED 404!</div>
-      <p id="bully-desc" class="bully-text">Scanning subject... G@ndu spotted. You really thought pyari ladkiyan tumhe dekh ke reels banayengi?</p>
+  <!-- The Intercept Modal -->
+  <div id="intercept-modal" class="intercept-modal" style="display: none;">
+    <div class="intercept-box">
+      <div style="font-size: 2.2rem; margin-bottom: 8px;">💀</div>
+      <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; margin: 0 0 6px 0; color: #FFF;">SIMP PROTOCOL INTERCEPTED</h3>
+      <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 16px;">Biometric telemetry flagged unprovoked thumbnail thirst.</p>
       
-      <div id="rickroll-frame" style="display: none; margin-bottom: 16px; border-radius: 12px; overflow: hidden;">
-        <video id="troll-video" width="100%" height="240" controls autoplay loop playsinline>
-          <!-- Funny subverted rickroll / meme clip -->
+      <div style="background: var(--elevated); padding: 12px; border-radius: 12px; margin-bottom: 16px;">
+        <div class="stat-line"><span>Target Status:</span> <strong>COOKED</strong></div>
+        <div class="stat-line"><span>Delusion Index:</span> <strong>99.8% (STAGE 4)</strong></div>
+        <div class="stat-line"><span>Rizz Metric:</span> <strong>-10,000 AURA</strong></div>
+        <div class="stat-line"><span>Real Life Outlook:</span> <strong>LEFT ON DELIVERED</strong></div>
+      </div>
+
+      <div id="troll-video-container" style="display: none; margin-bottom: 14px; border-radius: 10px; overflow: hidden;">
+        <video id="troll-video" width="100%" height="220" autoplay loop muted playsinline style="background: #000;">
           <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
         </video>
       </div>
 
-      <button id="bully-btn" class="action-btn" style="background: #EC4899; color: #FFF;" onclick="proceedToBullyVideo()">Aukaat Confirm Karo & Dekho 😂</button>
-      <button class="action-btn" style="background: transparent; color: #94A3B8; margin-top: 8px;" onclick="closeBullyModal()">Nahi bhai, sharam aa rahi hai (Close)</button>
+      <button id="bypass-btn" class="action-btn" style="background: var(--pink-neon); color: #FFF;" onclick="playSubvertedVideo()">Confirm Delusion & Play Reel</button>
+      <button class="action-btn" style="background: transparent; color: var(--text-dim); margin-top: 8px;" onclick="closeIntercept()">Accept Reality (Close)</button>
     </div>
   </div>
 
-  <!-- Instant Safe Gate -->
-  <div id="gate-overlay" class="gate-overlay" onclick="closeGate()">
-    <div class="gate-card" onclick="event.stopPropagation()">
-      <div class="badge" style="background: #FDF2F8; color: #DB2777;">GEN-Z HANDSHAKE</div>
-      <h1>WELCOME, HUMAN.</h1>
-      <p class="gate-subtitle">Your squad credentials and tharak quotient are being verified...</p>
-      
-      <div class="loader-track">
-        <div id="loader-bar" class="loader-bar" style="width: 100%; background: #EC4899;"></div>
-      </div>
-      <p id="loader-text" class="status-text" style="color: #EC4899; font-weight: 700;">Simp Credentials Verified ✓</p>
-      
-      <button id="enter-btn" class="primary-btn" onclick="closeGate()" style="margin-top: 18px; display: block; background: #EC4899;">Access Secret Vault →</button>
-    </div>
-  </div>
-
-  <!-- Top Navbar -->
+  <!-- Navbar -->
   <header class="navbar">
-    <div class="brand">
-      <span class="brand-pill" style="background: #EC4899;">FZ-PRO</span>
-      <span class="brand-title">THE FRIENDZONE</span>
+    <div style="display: flex; align-items: center;">
+      <span class="brand-pill">FZ-OS</span>
+      <span class="brand-title">SURVEILLANCE NODE</span>
     </div>
-    <div class="nav-controls" style="display: flex; align-items: center; gap: 10px;">
-      <div class="ping-widget">
-        <div class="pulse-dot"></div>
-        <span id="live-ping">24 ms</span> (Bandra Node)
-      </div>
-      <select id="theme-switcher" class="dropdown-select" style="margin-bottom: 0; padding: 6px 10px; font-size: 0.78rem; width: auto;" onchange="changeTheme(this.value)">
-        <option value="clean-dark">Midnight Velvet</option>
-        <option value="cyber-matrix">Cyber Matrix</option>
-      </select>
+    <div style="font-family: monospace; font-size: 0.75rem; color: var(--cyan-neon);">
+      [LATENCY: 21ms // MUMBAI]
     </div>
   </header>
 
-  <!-- Main Container -->
   <main class="container">
     <section class="hero-card">
-      <div class="hero-content">
-        <h2>Friendship Evaluation Terminal</h2>
-        <p>Active squad surveillance: Mahesh, Maaz, Tushar, Faiz, Farhan.</p>
-        <span id="live-system-time" class="timestamp-badge">SESSION VERIFIED: BANDRA CLOUD // ACTIVE</span>
-      </div>
+      <h2>Squad Evaluation Terminal</h2>
+      <p>Target subjects: Mahesh, Maaz, Tushar, Faiz, Farhan.</p>
+      <span class="meta-tag">SYSTEM INTEGRITY: 100% // ZERO MERCY ENGAGED</span>
     </section>
 
-    <!-- MODULE 00: THE HONEYTRAP / PYARI LADKIYAN VAULT -->
-    <section class="vip-bait-card" style="margin-bottom: 24px;">
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <span class="vip-badge">HOT REELS ARCHIVE 🍓</span>
-        <span style="font-size: 0.75rem; color: #F472B6; font-weight: 700;">CONFIDENTIAL CONTENT</span>
+    <!-- HONEYTRAP VAULT SECTION -->
+    <section class="vault-section">
+      <div class="section-head">
+        <span>VIP AESTHETIC ARCHIVE</span>
+        <small>FEED CURATION // LEVEL 05</small>
       </div>
-      <h3 style="font-size: 1.3rem; margin: 10px 0 4px 0; color: #FFF;">✨ Aesthetic Vault: Top 0.1% Feeds</h3>
-      <p style="font-size: 0.85rem; color: #E2E8F0; margin: 0 0 16px 0;">Warning: Only for boys with ₹50,000+ monthly allowance or clean skin.</p>
 
-      <div class="video-grid">
-        <div class="video-card" onclick="openHoneytrap('Bandra Cafe Aesthetic Girl', 'Maaz')">
-          <div class="video-thumb" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80');">
-            <div class="play-circle">▶</div>
+      <div class="reel-grid">
+        <div class="reel-card" onclick="triggerIntercept('Bandra Matchalatte Girlie', 'Maaz')">
+          <div class="reel-thumb" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80');">
+            <div class="play-pill">▶ 1.4M VIEWS</div>
           </div>
-          <div class="video-info">
+          <div class="reel-meta">
             <h4>Bandra Matchalatte Girlie</h4>
-            <p>1.2M Views • "Looking for rich boy in Mumbai"</p>
+            <p>"If he doesn't drive an Audi, he's basically an NPC"</p>
           </div>
         </div>
 
-        <div class="video-card" onclick="openHoneytrap('K-Pop Obsessed Girl', 'Mahesh')">
-          <div class="video-thumb" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80');">
-            <div class="play-circle">▶</div>
+        <div class="reel-card" onclick="triggerIntercept('K-Pop Obsessed Girlie', 'Mahesh')">
+          <div class="reel-thumb" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80');">
+            <div class="play-pill">▶ 890K VIEWS</div>
           </div>
-          <div class="video-info">
-            <h4>Korean Dance Trend / Cute Reel</h4>
-            <p>840K Views • "Single and ready to mingle"</p>
+          <div class="reel-meta">
+            <h4>Seongsu-dong Outfit Check</h4>
+            <p>"Waiting for an aesthetic boy who listens to Frank Ocean"</p>
           </div>
         </div>
 
-        <div class="video-card" onclick="openHoneytrap('Russian Model Edit', 'Tushar')">
-          <div class="video-thumb" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80');">
-            <div class="play-circle">▶</div>
+        <div class="reel-card" onclick="triggerIntercept('European Summer Vlog', 'Tushar')">
+          <div class="reel-thumb" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80');">
+            <div class="play-pill">▶ 3.1M VIEWS</div>
           </div>
-          <div class="video-info">
-            <h4>Russian Aesthetic Vlog 4K</h4>
-            <p>3.4M Views • "Why Indian boys are so cute?"</p>
+          <div class="reel-meta">
+            <h4>Amalfi Coast Golden Hour</h4>
+            <p>"POV: You didn't cancel plans and actually touched grass"</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Standard Modules Grid -->
+    <!-- DIAGNOSTIC MODULES -->
     <div class="modules-grid">
 
-      <!-- Soundboard of Shame -->
+      <!-- GenZ Aura Audit -->
       <section class="card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <span class="module-number">AUDIO SANCTUARY</span>
-          <span class="dank-badge" style="background: #312E81; color: #C7D2FE;">FX SYNTH 🔊</span>
-        </div>
-        <h3>Soundboard of Shame</h3>
-        <p class="card-desc">Fire live acoustic punishment directly into group calls.</p>
+        <span class="module-tag">METRIC 01</span>
+        <h3>Aura Deficit Breakdown</h3>
+        <p class="card-desc">Calculated based on screen-time, missed calls, and reply latency.</p>
         
-        <div class="soundboard-grid">
-          <button class="sound-btn" onclick="playMemeSound('bruh')">🗿 Bruh Tone</button>
-          <button class="sound-btn" onclick="playMemeSound('damage')">💔 Damage</button>
-          <button class="sound-btn" onclick="playMemeSound('siren')">🚨 Police Raid</button>
-          <button class="sound-btn" onclick="playMemeSound('crickets')">🦗 Awkward Cricket</button>
-          <button class="sound-btn" onclick="playMemeSound('flatline')">💀 Flatline</button>
-          <button class="sound-btn" onclick="playMemeSound('fart')">🎺 Reverb Brass</button>
-        </div>
+        <select id="aura-name" class="dropdown-select">
+          <option value="Maaz">Maaz</option>
+          <option value="Mahesh">Mahesh</option>
+          <option value="Tushar">Tushar</option>
+          <option value="Faiz">Faiz</option>
+          <option value="Farhan">Farhan</option>
+        </select>
+        <button class="action-btn" onclick="calcAura()">Query Net Worth & Aura</button>
+        <div id="aura-output" class="output-box" style="display: none;"></div>
       </section>
 
-      <!-- Roast Engine -->
+      <!-- GenZ Excuse Decrypter -->
       <section class="card">
-        <span class="module-number">MODULE 02</span>
-        <h3>Roast Engine v3.4</h3>
-        <p class="card-desc">Specially calibrated for the group.</p>
-        
-        <select id="roast-name" class="dropdown-select">
-          <option value="Mahesh">Mahesh</option>
+        <span class="module-tag">METRIC 02</span>
+        <h3>Vocal Frequency Lie Detector</h3>
+        <p class="card-desc">Acoustic forensic deconstruction of typical squad excuses.</p>
+
+        <select id="lie-name" class="dropdown-select">
           <option value="Maaz">Maaz</option>
+          <option value="Mahesh">Mahesh</option>
           <option value="Tushar">Tushar</option>
           <option value="Faiz">Faiz</option>
           <option value="Farhan">Farhan</option>
         </select>
 
-        <div class="segmented-control">
-          <button class="seg-btn active" onclick="setRoastLevel(this, 'mild')">Mild</button>
-          <button class="seg-btn" onclick="setRoastLevel(this, 'dangerous')">Dangerous</button>
-          <button class="seg-btn" onclick="setRoastLevel(this, 'nuclear')">Nuclear ☢️</button>
-        </div>
-        <button class="action-btn" onclick="triggerRoast()">Generate Critique</button>
-        <div id="roast-output" class="output-box">Waiting for subject...</div>
-        <button class="action-btn" style="margin-top: 8px; background: var(--bg-elevated); color: var(--text-main); border: 1px solid var(--border-subtle);" onclick="speakRoast()">🔊 Speak Roast Out Loud</button>
+        <select id="lie-excuse" class="dropdown-select">
+          <option value="1">"Bro was literally sleeping my phone was on DND"</option>
+          <option value="2">"Bro leaving in 2 minutes bike keys nahi mil rahi thi"</option>
+          <option value="3">"GPay UPI server down chal raha hai swear to god"</option>
+        </select>
+
+        <button class="action-btn" onclick="runDecrypt()">Deconstruct Audio Pulse</button>
+        <div id="lie-output" class="output-box" style="display: none;"></div>
       </section>
 
-      <!-- Arcade Reaction -->
+      <!-- Soundboard of Shame -->
       <section class="card">
-        <span class="module-number">MODULE 03</span>
-        <h3>Bakchodi Arcade</h3>
-        <p class="card-desc">Click the pad as soon as it turns GREEN.</p>
+        <span class="module-tag">METRIC 03</span>
+        <h3>Acoustic Punishment Hub</h3>
+        <p class="card-desc">Direct WebAudio triggers for squad humiliation.</p>
         
-        <div id="reaction-box" class="reaction-zone" onclick="clickReactionZone()">Click "Start Test" Below</div>
-        <div class="arcade-actions">
-          <button id="start-reaction-btn" class="action-btn" style="flex: 1;" onclick="startArcade()">Start Test</button>
-          <span id="reaction-score" class="score-display">-- ms</span>
+        <div class="sound-grid">
+          <button class="sound-btn" onclick="playSound('bruh')">🗿 Bruh (Sub Bass)</button>
+          <button class="sound-btn" onclick="playSound('damage')">💔 Emotional Hit</button>
+          <button class="sound-btn" onclick="playSound('siren')">🚨 NPC Alert</button>
+          <button class="sound-btn" onclick="playSound('crickets')">🦗 Zero Rizz Silence</button>
         </div>
       </section>
 
-      <!-- Aura Leaderboard -->
+      <!-- Moral Liquidation Notice -->
       <section class="card">
-        <span class="module-number">MODULE 04</span>
-        <h3>Aura Leaderboard</h3>
-        <p class="card-desc">Live status verified by system.</p>
-        
-        <ul class="leader-list">
-          <li><span>👑 Nadim (Admin)</span> <span>+999,999 Aura</span></li>
-          <li><span>Mahesh</span> <span>-420 Aura</span></li>
-          <li><span>Maaz</span> <span>-69 Aura</span></li>
-          <li><span>Tushar</span> <span>0 Aura</span></li>
-          <li><span>Faiz</span> <span>-150 Aura</span></li>
-          <li><span>Farhan</span> <span>-850 Aura</span></li>
-        </ul>
-      </section>
+        <span class="module-tag">METRIC 04</span>
+        <h3>Fiscal Chai Docket</h3>
+        <p class="card-desc">Formal recovery proceedings for chronic cutting chai debt.</p>
 
-      <!-- Hazard Button -->
-      <section class="card" style="grid-column: 1 / -1;">
-        <span class="module-number">HAZARD</span>
-        <h3>Nuclear Protocol</h3>
-        <p class="card-desc">Strictly prohibited from user interaction.</p>
-        <button class="danger-pill-btn" onclick="triggerMeltdown()">⚠️ DO NOT PRESS UNDER ANY CIRCUMSTANCE</button>
+        <select id="debt-name" class="dropdown-select">
+          <option value="Maaz">Maaz (Prime Offender)</option>
+          <option value="Mahesh">Mahesh (Phantom Card Error)</option>
+          <option value="Tushar">Tushar (Bathroom Evader)</option>
+          <option value="Faiz">Faiz (Bandwidth Parasite)</option>
+          <option value="Farhan">Farhan (Unlicensed Consultant)</option>
+        </select>
+
+        <button class="action-btn" onclick="calcDebt()">Generate Audit Slip</button>
+        <div id="debt-output" class="output-box" style="display: none; font-family: monospace;"></div>
       </section>
 
     </div>
   </main>
 
   <footer class="footer">
-    <div class="footer-inner">
-      <p class="curated">ENGINEERED WITH RIGOR & ZERO MERCY</p>
-      <p class="credits">Designed & built by <span>Nadimmmm</span></p>
-    </div>
+    <p>FZ-OS // DESIGNED WITH RIGOR BY <span>NADIMMMM</span></p>
+    <p style="margin-top: 4px; font-size: 0.72rem; color: #4B5563;">ALL DIAGNOSES ARE LEGALLY BINDING AND ALGORITHMICALLY PERMANENT.</p>
   </footer>
 
   <script>
-    function triggerHaptic(pattern = [50]) {
-      if ('vibrate' in navigator) navigator.vibrate(pattern);
+    // Audio Synthesizer
+    let audioCtx = null;
+    function getCtx() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      return audioCtx;
     }
 
-    function showSystemPush(app, icon, title, msg) {
+    function playSound(type) {
+      const ctx = getCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      if (type === 'bruh') {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(130, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(65, ctx.currentTime + 0.35);
+        gain.gain.setValueAtTime(0.3, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.35);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.35);
+      } else if (type === 'damage') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(440, ctx.currentTime);
+        osc.frequency.setValueAtTime(280, ctx.currentTime + 0.1);
+        gain.gain.setValueAtTime(0.3, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.3);
+      } else if (type === 'siren') {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(500, ctx.currentTime);
+        osc.frequency.linearRampToValueAtTime(850, ctx.currentTime + 0.2);
+        gain.gain.setValueAtTime(0.2, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.4);
+      } else if (type === 'crickets') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(4500, ctx.currentTime);
+        gain.gain.setValueAtTime(0.04, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.25);
+      }
+    }
+
+    function showPush(app, icon, title, msg) {
       const container = document.getElementById("push-container");
       const push = document.createElement("div");
       push.className = "system-push";
       push.innerHTML = `
         <div class="push-app-icon">${icon}</div>
-        <div class="push-details">
-          <div class="push-title"><span>${app.toUpperCase()}</span> <span>now</span></div>
+        <div style="flex:1;">
+          <div class="push-title"><span>${app}</span> <span>now</span></div>
           <div class="push-body">${title}: ${msg}</div>
         </div>
       `;
       container.appendChild(push);
-      triggerHaptic([40, 60, 40]);
 
       setTimeout(() => {
         push.style.opacity = '0';
@@ -633,228 +606,72 @@
       }, 4500);
     }
 
-    function closeGate() {
-      triggerHaptic(50);
-      const gate = document.getElementById("gate-overlay");
-      if (gate) {
-        gate.style.opacity = "0";
-        setTimeout(() => gate.style.display = "none", 300);
-      }
-      setTimeout(() => {
-        showSystemPush("VIP Vault", "🔞", "Security Alert", "High Tharak detected in your browser history.");
-      }, 1500);
+    // Honeytrap Intercept Engine
+    function triggerIntercept(reelTitle, defaultTarget) {
+      playSound('siren');
+      document.getElementById("intercept-modal").style.display = "flex";
+      document.getElementById("troll-video-container").style.display = "none";
+      document.getElementById("bypass-btn").style.display = "block";
+      showPush("Instagram", "🔞", "Activity Alert", "Simp behavior detected on feed.");
     }
 
-    // HONEYTRAP BULLY ENGINE
-    const bullyQuotes = [
-      "Bhai ka bank balance ₹12 hai aur sapne Sydney Sweeney ke dekh raha hai 💀",
-      "Kitna tharki hai bey! Thumbnail dekhte hi bina 1 second soche click kar diya?",
-      "Ladki door se dekh ke rasta badal leti hai, aur yaha 4K video dekhne aaya hai.",
-      "Muh dho ke aa pehle, screen pe tel lag gaya tere chehre ka.",
-      "Nadim ne ye trap tere jaise desperate doston ko pakadne ke liye hi lagaya tha 😂"
-    ];
-
-    function openHoneytrap(title, defaultTarget) {
-      triggerHaptic([100, 50, 100]);
-      playMemeSound('siren');
-      const modal = document.getElementById("bully-modal");
-      const desc = document.getElementById("bully-desc");
-      const randomQuote = bullyQuotes[Math.floor(Math.random() * bullyQuotes.length)];
-      
-      desc.innerHTML = `<strong>TARGET CAUGHT: ${defaultTarget}</strong><br><br>${randomQuote}`;
-      modal.style.display = "flex";
-      document.getElementById("rickroll-frame").style.display = "none";
-      document.getElementById("bully-btn").style.display = "block";
+    function playSubvertedVideo() {
+      playSound('damage');
+      document.getElementById("troll-video-container").style.display = "block";
+      document.getElementById("bypass-btn").style.display = "none";
     }
 
-    function proceedToBullyVideo() {
-      triggerHaptic([80, 80]);
-      playMemeSound('fart');
-      document.getElementById("bully-title").innerText = "AUKAAT CHECK PASSED! 🤡";
-      document.getElementById("bully-desc").innerHTML = "Le dekh le pyari ladki! 100% real footage extracted from your camera right now:";
-      document.getElementById("rickroll-frame").style.display = "block";
-      document.getElementById("bully-btn").style.display = "none";
+    function closeIntercept() {
+      document.getElementById("intercept-modal").style.display = "none";
     }
 
-    function closeBullyModal() {
-      document.getElementById("bully-modal").style.display = "none";
-    }
-
-    // Audio Engine
-    let audioCtx = null;
-    function getAudioContext() {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-      return audioCtx;
-    }
-
-    function playMemeSound(type) {
-      triggerHaptic([30]);
-      const ctx = getAudioContext();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-
-      if (type === 'bruh') {
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(140, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(70, ctx.currentTime + 0.4);
-        gain.gain.setValueAtTime(0.3, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.4);
-      } else if (type === 'damage') {
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(450, ctx.currentTime);
-        osc.frequency.setValueAtTime(300, ctx.currentTime + 0.1);
-        gain.gain.setValueAtTime(0.3, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.3);
-      } else if (type === 'siren') {
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(600, ctx.currentTime);
-        osc.frequency.linearRampToValueAtTime(900, ctx.currentTime + 0.2);
-        osc.frequency.linearRampToValueAtTime(600, ctx.currentTime + 0.4);
-        gain.gain.setValueAtTime(0.2, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.5);
-      } else if (type === 'crickets') {
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(4000, ctx.currentTime);
-        gain.gain.setValueAtTime(0.05, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.3);
-      } else if (type === 'flatline') {
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(880, ctx.currentTime);
-        gain.gain.setValueAtTime(0.2, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.8);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.8);
-      } else if (type === 'fart') {
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(90, ctx.currentTime);
-        osc.frequency.linearRampToValueAtTime(50, ctx.currentTime + 0.3);
-        gain.gain.setValueAtTime(0.35, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.35);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.35);
-      }
-    }
-
-    // Roast Logic
-    let currentRoastLevel = "mild";
-    function setRoastLevel(btn, level) {
-      triggerHaptic(20);
-      document.querySelectorAll(".seg-btn").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      currentRoastLevel = level;
-    }
-
-    const personalRoasts = {
-      Mahesh: {
-        mild: "walks into a room and background noise automatically drops.",
-        dangerous: "plans to study for 8 hours, ends up watching reels about JCB excavation.",
-        nuclear: "bhai ka confidence Ambani jaisa hai, lekin bank account me ₹11.20 bache hain."
-      },
-      Maaz: {
-        mild: "replies to important group texts after 3 full business days.",
-        dangerous: "bhai humesha bolta hai '5 minute me aya' aur 2 ghante baad nikalta hai.",
-        nuclear: "is living proof that you can waste 1.5GB daily data with zero productive output."
-      },
-      Tushar: {
-        mild: "looks like someone who pays full price for free trial apps.",
-        dangerous: "phone ki battery 3% pe chalti hai, aur dimaag 1% pe.",
-        nuclear: "agla plan banayega to guarantee cancel karega, ye universal truth hai."
-      },
-      Faiz: {
-        mild: "humesha hotspot maangne ke liye sabse aage rehta hai.",
-        dangerous: "bolta hai 'aaj treat meri taraf se', bill aane pe bathroom chala jata hai.",
-        nuclear: "their future is blurrier than a 144p video clip from 2005."
-      },
-      Farhan: {
-        mild: "has the physical stamina of an uncharged torch.",
-        dangerous: "advice sabko deta hai jaise IAS officer ho, khud attendance ke liye rota hai.",
-        nuclear: "bhai ka aura itna negative hai ki room ka temperature gir jaata hai."
-      }
+    // Aura Breakdowns
+    const auraProfiles = {
+      Maaz: "<strong>STATUS: IRREDEEMABLY COOKED (-95,000 Aura)</strong><br>Takes 72 business hours to respond to simple texts, yet seen active on Instagram 4 minutes ago liking reels.",
+      Mahesh: "<strong>STATUS: NPC VIBRATION (-42,000 Aura)</strong><br>Aura decimated after watching 6 consecutive hours of JCB excavation compilations while wearing same college tee.",
+      Tushar: "<strong>STATUS: PERPETUAL DELUSION (-68,000 Aura)</strong><br>Cancels confirmed plans with unverified claims of sudden fever, spotted at local tea stall 40 mins later.",
+      Faiz: "<strong>STATUS: PARASITIC CLIENT (-12,000 Aura)</strong><br>Automatically connects to mobile hotspots without handshake protocol. Consumes 40GB data with zero fiscal return.",
+      Farhan: "<strong>STATUS: UNLICENSED PHILOSOPHER (-85,000 Aura)</strong><br>Delivers 45-minute motivational lectures on hustle culture while holding 4 active college backlogs."
     };
 
-    function triggerRoast() {
-      triggerHaptic(50);
-      const name = document.getElementById("roast-name").value;
-      const roast = personalRoasts[name][currentRoastLevel];
-      document.getElementById("roast-output").innerText = `${name} ${roast}`;
-      playMemeSound('damage');
+    function calcAura() {
+      const name = document.getElementById("aura-name").value;
+      const out = document.getElementById("aura-output");
+      out.style.display = "block";
+      out.innerHTML = auraProfiles[name];
+      playSound('bruh');
     }
 
-    function speakRoast() {
-      triggerHaptic(30);
-      const text = document.getElementById("roast-output").innerText;
-      if (!text || text.includes("Waiting")) return;
-      if ('speechSynthesis' in window) {
-        const u = new SpeechSynthesisUtterance(text);
-        u.rate = 0.9;
-        window.speechSynthesis.speak(u);
-      }
+    // Excuse Decrypter
+    const excuseProfiles = {
+      1: "<strong>TRUTH DECRYPTED:</strong> Subject was wide awake, saw the notification drop, stared at it deadpan, and kept scrolling TikTok.",
+      2: "<strong>TRUTH DECRYPTED:</strong> Subject is currently horizontal in bed, wrapped in a blanket, wearing no socks. Latency: +140 mins.",
+      3: "<strong>TRUTH DECRYPTED:</strong> UPI server is completely functional. Subject's bank balance has reached terminal zero."
+    };
+
+    function runDecrypt() {
+      const excuse = document.getElementById("lie-excuse").value;
+      const out = document.getElementById("lie-output");
+      out.style.display = "block";
+      out.innerHTML = excuseProfiles[excuse];
+      playSound('damage');
     }
 
-    // Arcade
-    let reactTimeout = null;
-    let startTime = 0;
-    let arcadeState = "idle";
+    // Debt Slip
+    const debtProfiles = {
+      Maaz: `DEBT AUDIT: MAAZ<br>------------------------<br>[x] 24x Cutting Chai : ₹288<br>[x] Moral Tardiness Tax: ₹500<br>TOTAL OUTSTANDING: ₹788<br>STATUS: PENDING RECOVERY`,
+      Mahesh: `DEBT AUDIT: MAHESH<br>------------------------<br>[x] Tapri Samosa Nibbling: ₹60<br>[x] JCB Screen-time Tax: ₹200<br>TOTAL OUTSTANDING: ₹260<br>STATUS: UNPAID`,
+      Tushar: `DEBT AUDIT: TUSHAR<br>------------------------<br>[x] Sudden Dropout Penalty: ₹450<br>[x] Shared Auto Subsidy: ₹80<br>TOTAL OUTSTANDING: ₹530<br>STATUS: COOKED`,
+      Faiz: `DEBT AUDIT: FAIZ<br>------------------------<br>[x] 62GB Mobile Hotspot: ₹620<br>[x] Free Biscuit Extraction: ₹40<br>TOTAL OUTSTANDING: ₹660<br>STATUS: PARASITIC`,
+      Farhan: `DEBT AUDIT: FARHAN<br>------------------------<br>[x] Unsolicited Gyaan Fee: ₹800<br>[x] Actual Chai Drunk: ₹24<br>TOTAL PENALTY: ₹824<br>STATUS: NON-RECOVERABLE`
+    };
 
-    function startArcade() {
-      triggerHaptic(40);
-      const zone = document.getElementById("reaction-box");
-      const score = document.getElementById("reaction-score");
-      clearTimeout(reactTimeout);
-      arcadeState = "waiting";
-      zone.style.background = "#FEF3C7";
-      zone.style.color = "#92400E";
-      zone.innerText = "Wait for GREEN...";
-      score.innerText = "-- ms";
-
-      const delay = Math.random() * 2000 + 1200;
-      reactTimeout = setTimeout(() => {
-        arcadeState = "ready";
-        zone.style.background = "#D1FAE5";
-        zone.style.color = "#065F46";
-        zone.innerText = "CLICK NOW!";
-        startTime = Date.now();
-        triggerHaptic(100);
-      }, delay);
-    }
-
-    function clickReactionZone() {
-      const zone = document.getElementById("reaction-box");
-      const score = document.getElementById("reaction-score");
-      if (arcadeState === "waiting") {
-        clearTimeout(reactTimeout);
-        arcadeState = "idle";
-        zone.style.background = "#FEE2E2";
-        zone.style.color = "#991B1B";
-        zone.innerText = "Too early! Jaldbazi mat kar.";
-        triggerHaptic([80, 50, 80]);
-        playMemeSound('bruh');
-      } else if (arcadeState === "ready") {
-        const diff = Date.now() - startTime;
-        arcadeState = "idle";
-        zone.style.background = "var(--bg-elevated)";
-        zone.style.color = "var(--text-main)";
-        zone.innerText = `Finished: ${diff} ms`;
-        score.innerText = `${diff} ms`;
-        triggerHaptic(60);
-        playMemeSound('siren');
-      }
-    }
-
-    function triggerMeltdown() {
-      triggerHaptic([200, 100, 200, 100, 300]);
-      alert("💥 100% UPLOAD COMPLETE! Ab sab doston ke ghar pe police aur rishtedaar dono aa rahe hain.");
+    function calcDebt() {
+      const name = document.getElementById("debt-name").value;
+      const out = document.getElementById("debt-output");
+      out.style.display = "block";
+      out.innerHTML = debtProfiles[name];
+      playSound('crickets');
     }
   </script>
 </body>
