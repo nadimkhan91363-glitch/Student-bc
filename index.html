@@ -3,12 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>THE FRIENDZONE — Secret OS Portal</title>
+  <title>THE FRIENDZONE — VIP Baddie Vault</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <style>
+    :root {
+      --genz-pink: #EC4899;
+      --genz-purple: #8B5CF6;
+      --genz-neon: #06B6D4;
+    }
     body[data-theme="clean-dark"] {
       --bg-primary: #090D16;
       --bg-surface: #111827;
@@ -16,16 +21,132 @@
       --text-main: #F9FAFB;
       --text-muted: #9CA3AF;
       --border-subtle: #374151;
-      --accent: #3B82F6;
+      --accent: #EC4899;
     }
-    body[data-theme="cyber-matrix"] {
-      --bg-primary: #050505;
-      --bg-surface: #0D1117;
-      --bg-elevated: #161B22;
-      --text-main: #00FF66;
-      --text-muted: #008F11;
-      --border-subtle: #003B00;
-      --accent: #00FF66;
+
+    /* Honeytrap VIP Card */
+    .vip-bait-card {
+      background: linear-gradient(135deg, rgba(236, 72, 153, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
+      border: 2px solid var(--genz-pink);
+      border-radius: 16px;
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(236, 72, 153, 0.2);
+    }
+    .vip-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      background: #EC4899;
+      color: #FFF;
+      font-size: 0.72rem;
+      font-weight: 800;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+    }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .video-card {
+      background: #181920;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .video-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--genz-pink);
+    }
+    .video-thumb {
+      height: 180px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .play-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.7);
+      border: 2px solid #FFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #FFF;
+      box-shadow: 0 0 15px rgba(236, 72, 153, 0.6);
+    }
+    .video-info {
+      padding: 12px;
+    }
+    .video-info h4 {
+      margin: 0;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #F8FAFC;
+    }
+    .video-info p {
+      margin: 4px 0 0 0;
+      font-size: 0.75rem;
+      color: #94A3B8;
+    }
+
+    /* Modal Bully Popup */
+    .bully-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .bully-box {
+      background: #111827;
+      border: 2px solid #EC4899;
+      border-radius: 20px;
+      padding: 26px;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 0 50px rgba(236, 72, 153, 0.4);
+      position: relative;
+    }
+    .bully-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      margin: 0 auto 14px auto;
+      border: 3px solid #EC4899;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      background-color: #1F2937;
+    }
+    .bully-headline {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #FFF;
+      margin-bottom: 8px;
+    }
+    .bully-text {
+      font-size: 0.88rem;
+      color: #CBD5E1;
+      line-height: 1.6;
+      margin-bottom: 20px;
     }
 
     /* Floating Real-time Push Notification Banner */
@@ -65,7 +186,7 @@
       width: 38px;
       height: 38px;
       border-radius: 10px;
-      background: #2563EB;
+      background: #EC4899;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -90,7 +211,6 @@
       line-height: 1.3;
     }
 
-    /* Live Telemetry Ping Widget */
     .ping-widget {
       display: flex;
       align-items: center;
@@ -98,17 +218,17 @@
       font-size: 0.72rem;
       font-family: monospace;
       padding: 4px 10px;
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      color: #10B981;
+      background: rgba(236, 72, 153, 0.1);
+      border: 1px solid rgba(236, 72, 153, 0.3);
+      color: #EC4899;
       border-radius: 999px;
     }
     .pulse-dot {
       width: 6px;
       height: 6px;
-      background: #10B981;
+      background: #EC4899;
       border-radius: 50%;
-      box-shadow: 0 0 8px #10B981;
+      box-shadow: 0 0 8px #EC4899;
       animation: pulseAnim 1.5s infinite;
     }
     @keyframes pulseAnim {
@@ -178,18 +298,6 @@
       border-left: 3px solid var(--accent);
       line-height: 1.6;
     }
-    .terminal-box {
-      background: #090D16;
-      color: #10B981;
-      padding: 14px;
-      border-radius: var(--radius-sm);
-      font-family: monospace;
-      font-size: 0.8rem;
-      margin-top: 12px;
-      min-height: 80px;
-      text-align: left;
-      line-height: 1.6;
-    }
     .reaction-zone {
       background: var(--bg-elevated);
       height: 105px;
@@ -246,7 +354,7 @@
     }
     .leader-list li:first-child {
       color: var(--accent);
-      background: rgba(37, 99, 235, 0.1);
+      background: rgba(236, 72, 153, 0.1);
       border-radius: var(--radius-sm);
     }
     .danger-pill-btn {
@@ -261,91 +369,6 @@
       width: 100%;
       letter-spacing: 0.05em;
     }
-
-    @keyframes screenShake {
-      0% { transform: translate(1px, 1px) rotate(0deg); }
-      20% { transform: translate(-3px, 0px) rotate(1deg); }
-      40% { transform: translate(3px, -1px) rotate(-1deg); }
-      60% { transform: translate(-3px, 1px) rotate(0deg); }
-      80% { transform: translate(2px, 1px) rotate(1deg); }
-      100% { transform: translate(1px, -2px) rotate(0deg); }
-    }
-    .meltdown-active {
-      animation: screenShake 0.1s infinite !important;
-      background: #7F1D1D !important;
-      color: #FFF !important;
-    }
-    .nuclear-modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.95);
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .nuclear-content {
-      background: #18181B;
-      color: #EF4444;
-      border: 2px solid #EF4444;
-      border-radius: var(--radius-lg);
-      padding: 30px;
-      text-align: center;
-      max-width: 400px;
-      box-shadow: 0 0 50px rgba(239, 68, 68, 0.5);
-    }
-    .dank-badge {
-      display: inline-block;
-      padding: 3px 8px;
-      font-size: 0.72rem;
-      font-weight: 800;
-      border-radius: 4px;
-      background: #450A0A;
-      color: #F87171;
-    }
-
-    .wrapped-card {
-      background: linear-gradient(135deg, #18181B 0%, #09090B 100%);
-      border: 2px solid #27272A;
-      border-radius: 16px;
-      padding: 20px;
-      color: #FFF;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-      position: relative;
-      overflow: hidden;
-      margin-top: 14px;
-    }
-    .wrapped-title {
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      color: #A1A1AA;
-      font-weight: 800;
-    }
-    .wrapped-user {
-      font-size: 1.4rem;
-      font-weight: 800;
-      margin: 4px 0 16px 0;
-      color: #38BDF8;
-    }
-    .wrapped-stat-box {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 8px;
-      padding: 10px 12px;
-      margin-bottom: 8px;
-    }
-    .wrapped-stat-label {
-      font-size: 0.7rem;
-      color: #94A3B8;
-      text-transform: uppercase;
-    }
-    .wrapped-stat-val {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #F8FAFC;
-    }
-
     .soundboard-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -371,102 +394,6 @@
       transform: scale(0.95);
       border-color: var(--accent);
     }
-
-    .receipt-paper {
-      background: #FFFDF0;
-      color: #1C1917;
-      font-family: monospace;
-      padding: 18px;
-      border-radius: 6px;
-      margin-top: 14px;
-      border: 1px dashed #D6D3D1;
-      font-size: 0.8rem;
-      line-height: 1.5;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
-
-    .radar-box {
-      width: 100%;
-      height: 120px;
-      background: #000;
-      border-radius: 8px;
-      border: 1px solid #10B981;
-      position: relative;
-      margin: 10px 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    .radar-sweep {
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      background: #10B981;
-      box-shadow: 0 0 10px #10B981;
-      animation: sweepAnim 1.8s linear infinite;
-    }
-    @keyframes sweepAnim {
-      0% { top: 0%; opacity: 0.2; }
-      50% { opacity: 1; }
-      100% { top: 100%; opacity: 0.2; }
-    }
-    .radar-text {
-      color: #10B981;
-      font-family: monospace;
-      font-size: 0.85rem;
-      z-index: 2;
-    }
-
-    .fir-slip {
-      background: #F8FAFC;
-      color: #0F172A;
-      font-family: monospace;
-      border: 2px solid #DC2626;
-      border-radius: 8px;
-      padding: 16px;
-      margin-top: 14px;
-      font-size: 0.8rem;
-      line-height: 1.6;
-    }
-
-    .bhikhari-card {
-      background: #FFFFFF;
-      color: #0F172A;
-      border-radius: 12px;
-      padding: 18px;
-      text-align: center;
-      margin-top: 14px;
-      border: 2px solid #0284C7;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    }
-    .fake-qr {
-      width: 140px;
-      height: 140px;
-      margin: 10px auto;
-      border: 4px solid #000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 0.75rem;
-      color: #EF4444;
-      background-color: #FFF;
-      background-image: repeating-linear-gradient(45deg, #000 0, #000 10px, #FFF 0, #FFF 20px);
-    }
-
-    .rx-paper {
-      background: #F0FDF4;
-      color: #14532D;
-      border: 2px dashed #16A34A;
-      border-radius: 10px;
-      padding: 18px;
-      margin-top: 14px;
-      font-family: monospace;
-      font-size: 0.82rem;
-      line-height: 1.6;
-    }
-
     .timestamp-badge {
       font-size: 0.72rem;
       color: var(--text-muted);
@@ -476,41 +403,59 @@
     }
   </style>
 </head>
-<body data-theme="clean-light">
+<body data-theme="clean-dark">
 
   <!-- Dynamic Simulated Push Alert Container -->
   <div id="push-container" class="push-notif-container"></div>
 
-  <!-- Instant Gate -->
-  <div id="gate-overlay" class="gate-overlay" onclick="closeGate()">
-    <div class="gate-card" onclick="event.stopPropagation()">
-      <div class="badge">SECURE HANDSHAKE</div>
-      <h1>WELCOME, HUMAN.</h1>
-      <p class="gate-subtitle">Your friendship credentials are being verified with quantum precision...</p>
+  <!-- Honeytrap Bully Modal -->
+  <div id="bully-modal" class="bully-modal" style="display: none;">
+    <div class="bully-box">
+      <div id="bully-avatar" class="bully-avatar">🚨</div>
+      <div id="bully-title" class="bully-headline">THARAK DETECTED 404!</div>
+      <p id="bully-desc" class="bully-text">Scanning subject... G@ndu spotted. You really thought pyari ladkiyan tumhe dekh ke reels banayengi?</p>
       
-      <div class="loader-track">
-        <div id="loader-bar" class="loader-bar" style="width: 100%;"></div>
+      <div id="rickroll-frame" style="display: none; margin-bottom: 16px; border-radius: 12px; overflow: hidden;">
+        <video id="troll-video" width="100%" height="240" controls autoplay loop playsinline>
+          <!-- Funny subverted rickroll / meme clip -->
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        </video>
       </div>
-      <p id="loader-text" class="status-text" style="color: #10B981; font-weight: 700;">Credentials Verified ✓</p>
-      
-      <button id="enter-btn" class="primary-btn" onclick="closeGate()" style="margin-top: 18px; display: block;">Access Portal →</button>
+
+      <button id="bully-btn" class="action-btn" style="background: #EC4899; color: #FFF;" onclick="proceedToBullyVideo()">Aukaat Confirm Karo & Dekho 😂</button>
+      <button class="action-btn" style="background: transparent; color: #94A3B8; margin-top: 8px;" onclick="closeBullyModal()">Nahi bhai, sharam aa rahi hai (Close)</button>
     </div>
   </div>
 
-  <!-- Top Navbar with Live Telemetry Ping -->
+  <!-- Instant Safe Gate -->
+  <div id="gate-overlay" class="gate-overlay" onclick="closeGate()">
+    <div class="gate-card" onclick="event.stopPropagation()">
+      <div class="badge" style="background: #FDF2F8; color: #DB2777;">GEN-Z HANDSHAKE</div>
+      <h1>WELCOME, HUMAN.</h1>
+      <p class="gate-subtitle">Your squad credentials and tharak quotient are being verified...</p>
+      
+      <div class="loader-track">
+        <div id="loader-bar" class="loader-bar" style="width: 100%; background: #EC4899;"></div>
+      </div>
+      <p id="loader-text" class="status-text" style="color: #EC4899; font-weight: 700;">Simp Credentials Verified ✓</p>
+      
+      <button id="enter-btn" class="primary-btn" onclick="closeGate()" style="margin-top: 18px; display: block; background: #EC4899;">Access Secret Vault →</button>
+    </div>
+  </div>
+
+  <!-- Top Navbar -->
   <header class="navbar">
     <div class="brand">
-      <span class="brand-pill">FZ-OS</span>
+      <span class="brand-pill" style="background: #EC4899;">FZ-PRO</span>
       <span class="brand-title">THE FRIENDZONE</span>
     </div>
     <div class="nav-controls" style="display: flex; align-items: center; gap: 10px;">
       <div class="ping-widget">
         <div class="pulse-dot"></div>
-        <span id="live-ping">28 ms</span> (Mumbai Node)
+        <span id="live-ping">24 ms</span> (Bandra Node)
       </div>
       <select id="theme-switcher" class="dropdown-select" style="margin-bottom: 0; padding: 6px 10px; font-size: 0.78rem; width: auto;" onchange="changeTheme(this.value)">
-        <option value="clean-light">Silicon Valley</option>
-        <option value="clean-dark">Midnight Slate</option>
+        <option value="clean-dark">Midnight Velvet</option>
         <option value="cyber-matrix">Cyber Matrix</option>
       </select>
     </div>
@@ -521,151 +466,55 @@
     <section class="hero-card">
       <div class="hero-content">
         <h2>Friendship Evaluation Terminal</h2>
-        <p>Active squad surveillance & clinical diagnostics: Mahesh, Maaz, Tushar, Faiz, Farhan.</p>
-        <span id="live-system-time" class="timestamp-badge">SESSION INITIALIZED: INITIALIZING...</span>
+        <p>Active squad surveillance: Mahesh, Maaz, Tushar, Faiz, Farhan.</p>
+        <span id="live-system-time" class="timestamp-badge">SESSION VERIFIED: BANDRA CLOUD // ACTIVE</span>
       </div>
     </section>
 
+    <!-- MODULE 00: THE HONEYTRAP / PYARI LADKIYAN VAULT -->
+    <section class="vip-bait-card" style="margin-bottom: 24px;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span class="vip-badge">HOT REELS ARCHIVE 🍓</span>
+        <span style="font-size: 0.75rem; color: #F472B6; font-weight: 700;">CONFIDENTIAL CONTENT</span>
+      </div>
+      <h3 style="font-size: 1.3rem; margin: 10px 0 4px 0; color: #FFF;">✨ Aesthetic Vault: Top 0.1% Feeds</h3>
+      <p style="font-size: 0.85rem; color: #E2E8F0; margin: 0 0 16px 0;">Warning: Only for boys with ₹50,000+ monthly allowance or clean skin.</p>
+
+      <div class="video-grid">
+        <div class="video-card" onclick="openHoneytrap('Bandra Cafe Aesthetic Girl', 'Maaz')">
+          <div class="video-thumb" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80');">
+            <div class="play-circle">▶</div>
+          </div>
+          <div class="video-info">
+            <h4>Bandra Matchalatte Girlie</h4>
+            <p>1.2M Views • "Looking for rich boy in Mumbai"</p>
+          </div>
+        </div>
+
+        <div class="video-card" onclick="openHoneytrap('K-Pop Obsessed Girl', 'Mahesh')">
+          <div class="video-thumb" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80');">
+            <div class="play-circle">▶</div>
+          </div>
+          <div class="video-info">
+            <h4>Korean Dance Trend / Cute Reel</h4>
+            <p>840K Views • "Single and ready to mingle"</p>
+          </div>
+        </div>
+
+        <div class="video-card" onclick="openHoneytrap('Russian Model Edit', 'Tushar')">
+          <div class="video-thumb" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80');">
+            <div class="play-circle">▶</div>
+          </div>
+          <div class="video-info">
+            <h4>Russian Aesthetic Vlog 4K</h4>
+            <p>3.4M Views • "Why Indian boys are so cute?"</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Standard Modules Grid -->
     <div class="modules-grid">
-
-      <!-- UPI Bhikhari QR Generator -->
-      <section class="card" style="border: 2px solid #0284C7;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <span class="module-number" style="background: #E0F2FE; color: #0284C7;">CROWDFUNDING</span>
-          <span class="dank-badge" style="background: #0284C7; color: #FFF;">UPI BEGGAR 💸</span>
-        </div>
-        <h3>UPI Bhikhari Scanner</h3>
-        <p class="card-desc">Generate official donation QR for squad member's unpaid bills.</p>
-
-        <select id="upi-name" class="dropdown-select">
-          <option value="Maaz">Maaz (Chai Udhaari Fund)</option>
-          <option value="Mahesh">Mahesh (Recharge Expired Relief)</option>
-          <option value="Tushar">Tushar (Petrol Contribution Beggar)</option>
-          <option value="Faiz">Faiz (Hotspot Data Subsidy)</option>
-          <option value="Farhan">Farhan (Life Coach Speaking Fee)</option>
-        </select>
-
-        <button class="action-btn" style="background: #0284C7; color: #FFF;" onclick="generateUPI()">Generate Beggar QR Slip</button>
-        <div id="upi-display" class="bhikhari-card" style="display: none;"></div>
-      </section>
-
-      <!-- Brainrot Detox Prescription -->
-      <section class="card" style="border: 2px solid #16A34A;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <span class="module-number" style="background: #DCFCE7; color: #15803D;">PSYCHIATRY</span>
-          <span class="dank-badge" style="background: #15803D; color: #FFF;">REELS DETOX 💊</span>
-        </div>
-        <h3>Reels Addiction Prescription</h3>
-        <p class="card-desc">Official psychiatric detox slip for chronic Instagram doomscrollers.</p>
-
-        <select id="rx-name" class="dropdown-select">
-          <option value="Mahesh">Mahesh</option>
-          <option value="Maaz">Maaz</option>
-          <option value="Tushar">Tushar</option>
-          <option value="Faiz">Faiz</option>
-          <option value="Farhan">Farhan</option>
-        </select>
-
-        <button class="action-btn" style="background: #16A34A; color: #FFF;" onclick="generatePrescription()">Draft Medical Rx</button>
-        <div id="rx-display" class="rx-paper" style="display: none;"></div>
-      </section>
-
-      <!-- Radar Lie Detector & Excuse Decrypter -->
-      <section class="card" style="border: 2px solid #10B981;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <span class="module-number" style="background: #D1FAE5; color: #047857;">ACOUSTIC RADAR</span>
-          <span class="dank-badge" style="background: #064E3B; color: #6EE7B7;">LIE DETECTOR 🛰️</span>
-        </div>
-        <h3>Excuse Decrypter 3000</h3>
-        <p class="card-desc">Intercept squad member's voice frequency and expose the real truth.</p>
-
-        <select id="lie-name" class="dropdown-select">
-          <option value="Maaz">Maaz</option>
-          <option value="Mahesh">Mahesh</option>
-          <option value="Tushar">Tushar</option>
-          <option value="Faiz">Faiz</option>
-          <option value="Farhan">Farhan</option>
-        </select>
-
-        <select id="lie-excuse" class="dropdown-select">
-          <option value="e1">"Bhai bas 5 minute me nikal raha hu"</option>
-          <option value="e2">"Phone silent pe tha awaz nahi aayi"</option>
-          <option value="e3">"Mummy ne urgent market bhej diya"</option>
-          <option value="e4">"GPay limit exceed ho gayi kal subah pakka"</option>
-        </select>
-
-        <div class="radar-box">
-          <div class="radar-sweep"></div>
-          <div id="radar-status" class="radar-text">READY FOR SIGNAL LOCK</div>
-        </div>
-
-        <button class="action-btn" style="background: #047857; color: #FFF;" onclick="runLieDetector()">Analyze Voice Pulse</button>
-        <div id="lie-output" class="output-box" style="display: none; border-left-color: #10B981;"></div>
-      </section>
-
-      <!-- Official Police FIR Generator -->
-      <section class="card" style="border: 2px solid #EF4444;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <span class="module-number" style="background: #FEE2E2; color: #B91C1C;">CRIMINAL BRANCH</span>
-          <span class="dank-badge">MAHARASHTRA FIR 🚨</span>
-        </div>
-        <h3>Squad Non-Bailable FIR</h3>
-        <p class="card-desc">Draft an official non-bailable cyber notice against squad delinquencies.</p>
-
-        <select id="fir-target" class="dropdown-select">
-          <option value="Mahesh">Mahesh (Severe WhatsApp Status Crime)</option>
-          <option value="Maaz">Maaz (Chronic 5-Minute Deception)</option>
-          <option value="Tushar">Tushar (Pre-Meditated Trip Cancellation)</option>
-          <option value="Faiz">Faiz (Grand Hotspot Data Heist)</option>
-          <option value="Farhan">Farhan (Unregistered Tapri Philosophy)</option>
-        </select>
-
-        <button class="action-btn" style="background: #B91C1C; color: #FFF;" onclick="generateFIR()">Lodge Police Cyber FIR</button>
-        <div id="fir-display" class="fir-slip" style="display: none;"></div>
-      </section>
-
-      <!-- Squad Wrapped 2026 -->
-      <section class="card" style="border: 2px solid #38BDF8;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <span class="module-number" style="background: #E0F2FE; color: #0284C7;">ANNUAL REVIEW</span>
-          <span class="dank-badge" style="background: #0369A1; color: #FFF;">WRAPPED 2026</span>
-        </div>
-        <h3>Squad Wrapped Exporter 🏆</h3>
-        <p class="card-desc">Generate Instagram-story metrics for selected squad member.</p>
-        
-        <select id="wrapped-target" class="dropdown-select">
-          <option value="Mahesh">Mahesh</option>
-          <option value="Maaz">Maaz</option>
-          <option value="Tushar">Tushar</option>
-          <option value="Faiz">Faiz</option>
-          <option value="Farhan">Farhan</option>
-        </select>
-        <button class="action-btn" style="background: #0284C7; color: #FFF;" onclick="generateWrapped()">Compile Wrapped Card</button>
-        
-        <div id="wrapped-display" class="wrapped-card" style="display: none;">
-          <div class="wrapped-title">FRIENDZONE // 2026 ARCHIVE</div>
-          <div class="wrapped-user" id="wrap-name">USER WRAPPED</div>
-          
-          <div class="wrapped-stat-box">
-            <div class="wrapped-stat-label">Top Mental Affliction</div>
-            <div class="wrapped-stat-val" id="wrap-trait">--</div>
-          </div>
-          <div class="wrapped-stat-box">
-            <div class="wrapped-stat-label">Hours Made Squad Wait</div>
-            <div class="wrapped-stat-val" id="wrap-hours">--</div>
-          </div>
-          <div class="wrapped-stat-box">
-            <div class="wrapped-stat-label">Primary Excusal Phrase</div>
-            <div class="wrapped-stat-val" id="wrap-phrase">--</div>
-          </div>
-          <div class="wrapped-stat-box">
-            <div class="wrapped-stat-label">Year-End Net Aura</div>
-            <div class="wrapped-stat-val" id="wrap-aura" style="color: #F87171;">--</div>
-          </div>
-          
-          <button class="action-btn" style="margin-top: 12px; background: #FFF; color: #000;" onclick="downloadWrapped()">📥 Download Story PNG</button>
-        </div>
-      </section>
 
       <!-- Soundboard of Shame -->
       <section class="card">
@@ -683,126 +532,6 @@
           <button class="sound-btn" onclick="playMemeSound('crickets')">🦗 Awkward Cricket</button>
           <button class="sound-btn" onclick="playMemeSound('flatline')">💀 Flatline</button>
           <button class="sound-btn" onclick="playMemeSound('fart')">🎺 Reverb Brass</button>
-        </div>
-      </section>
-
-      <!-- Tapri Udhaari Settle Engine -->
-      <section class="card" style="border: 1px solid #78350F;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <span class="module-number" style="background: #FEF3C7; color: #B45309;">FISCAL DEBT</span>
-          <span class="dank-badge" style="background: #78350F; color: #FDE68A;">TAPRI AUDIT ☕</span>
-        </div>
-        <h3>Tapri Udhaari Receipt Engine</h3>
-        <p class="card-desc">Calculate outstanding cutting chai & bun maska debt.</p>
-        
-        <select id="tapri-target" class="dropdown-select">
-          <option value="Maaz">Maaz (Prime Debtor)</option>
-          <option value="Mahesh">Mahesh (Lost Wallet Syndrome)</option>
-          <option value="Tushar">Tushar (Ate Full Samosa, Left ₹10)</option>
-          <option value="Faiz">Faiz (Hotspot + Free Chai Leech)</option>
-          <option value="Farhan">Farhan (Gave Gyaan in Place of Cash)</option>
-        </select>
-        
-        <button class="action-btn" onclick="generateReceipt()">Print Formal Tax Invoice</button>
-        <div id="receipt-display" class="receipt-paper" style="display: none;"></div>
-      </section>
-
-      <!-- Mansik Santulan Calculator -->
-      <section class="card" style="border: 1px solid #7F1D1D;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <span class="module-number" style="background: #450A0A; color: #F87171;">DIAGNOSIS</span>
-          <span class="dank-badge">BRAINROT 💔</span>
-        </div>
-        <h3>Mansik Santulan Scale</h3>
-        <p class="card-desc">Measures neural stability on the Oggy & Jack scale.</p>
-        
-        <select id="santulan-target" class="dropdown-select">
-          <option value="Mahesh">Mahesh</option>
-          <option value="Maaz">Maaz</option>
-          <option value="Tushar">Tushar</option>
-          <option value="Faiz">Faiz</option>
-          <option value="Farhan">Farhan</option>
-        </select>
-        <button class="action-btn" onclick="calcSantulan()">Run Mental Health Check</button>
-        <div id="santulan-output" class="output-box" style="display: none; border-left-color: #EF4444;"></div>
-      </section>
-
-      <!-- G@nd Jalao Index -->
-      <section class="card" style="border: 1px solid #78350F;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <span class="module-number" style="background: #451A03; color: #FBBF24;">REALITY CHECK</span>
-          <span class="dank-badge" style="background: #451A03; color: #FBBF24;">JALANKARI 🌚</span>
-        </div>
-        <h3>G@nd Jalao Index</h3>
-        <p class="card-desc">Instagram kholte hi screen reality test.</p>
-        
-        <select id="jalan-target" class="dropdown-select">
-          <option value="Mahesh">Mahesh</option>
-          <option value="Maaz">Maaz</option>
-          <option value="Tushar">Tushar</option>
-          <option value="Faiz">Faiz</option>
-          <option value="Farhan">Farhan</option>
-        </select>
-        <button class="action-btn" onclick="calcJalan()">Check Daily Trauma</button>
-        <div id="jalan-output" class="output-box" style="display: none; border-left-color: #F59E0B;"></div>
-      </section>
-
-      <!-- Female Filter Distortion -->
-      <section class="card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <span class="module-number">PARALLEL UNIVERSE</span>
-          <span class="dank-badge" style="background: #3B0764; color: #D8B4FE;">FINEST GIRL 💅</span>
-        </div>
-        <h3>Female Filter Reality</h3>
-        <p class="card-desc">Realized you would've been the finest girl in the squad.</p>
-        
-        <select id="female-target" class="dropdown-select">
-          <option value="Mahesh">Mahesh</option>
-          <option value="Maaz">Maaz</option>
-          <option value="Tushar">Tushar</option>
-          <option value="Faiz">Faiz</option>
-          <option value="Farhan">Farhan</option>
-        </select>
-        <button class="action-btn" onclick="calcFemale()">Simulate Alter Ego</button>
-        <div id="female-output" class="output-box" style="display: none; border-left-color: #A855F7;"></div>
-      </section>
-
-      <!-- Dog Haircut Rehab Index -->
-      <section class="card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <span class="module-number">REHABILITATION</span>
-          <span class="dank-badge" style="background: #064E3B; color: #6EE7B7;">CLEAN SHAVE 👔</span>
-        </div>
-        <h3>Life Rehab Index</h3>
-        <p class="card-desc">Gave up bad habits and got his life together.</p>
-        
-        <select id="rehab-target" class="dropdown-select">
-          <option value="Mahesh">Mahesh</option>
-          <option value="Maaz">Maaz</option>
-          <option value="Tushar">Tushar</option>
-          <option value="Faiz">Faiz</option>
-          <option value="Farhan">Farhan</option>
-        </select>
-        <button class="action-btn" onclick="calcRehab()">Audit Cleanliness</button>
-        <div id="rehab-output" class="output-box" style="display: none; border-left-color: #10B981;"></div>
-      </section>
-
-      <!-- Biometric Scanner -->
-      <section class="card">
-        <span class="module-number">MODULE 01</span>
-        <h3>Biometric & IQ Scanner</h3>
-        <p class="card-desc">Simulated deep sensory verification.</p>
-        
-        <select id="scanner-name" class="dropdown-select">
-          <option value="Mahesh">Mahesh</option>
-          <option value="Maaz">Maaz</option>
-          <option value="Tushar">Tushar</option>
-          <option value="Faiz">Faiz</option>
-          <option value="Farhan">Farhan</option>
-        </select>
-        <button class="action-btn" onclick="startScanner()">Initialize Deep Scan</button>
-        <div id="scan-terminal" class="terminal-box" style="display: none;">
-          <p id="scan-log">> System ready...</p>
         </div>
       </section>
 
@@ -830,7 +559,7 @@
         <button class="action-btn" style="margin-top: 8px; background: var(--bg-elevated); color: var(--text-main); border: 1px solid var(--border-subtle);" onclick="speakRoast()">🔊 Speak Roast Out Loud</button>
       </section>
 
-      <!-- Bakchodi Arcade -->
+      <!-- Arcade Reaction -->
       <section class="card">
         <span class="module-number">MODULE 03</span>
         <h3>Bakchodi Arcade</h3>
@@ -843,23 +572,9 @@
         </div>
       </section>
 
-      <!-- Classified Folders -->
-      <section class="card">
-        <span class="module-number">MODULE 04</span>
-        <h3>Classified Folders</h3>
-        <p class="card-desc">Encrypted evidence files.</p>
-        
-        <div class="vault-grid">
-          <button class="folder-btn" onclick="openVault('tushar_mahesh')">📁 Tushar & Mahesh Top Secrets</button>
-          <button class="folder-btn" onclick="openVault('maaz_crimes')">📁 Maaz Pending Udhari</button>
-          <button class="folder-btn" onclick="openVault('faiz_farhan')">📁 Faiz & Farhan Late Arrivals</button>
-        </div>
-        <div id="vault-output" class="output-box" style="margin-top: 10px;">Click any folder to decrypt.</div>
-      </section>
-
       <!-- Aura Leaderboard -->
       <section class="card">
-        <span class="module-number">MODULE 05</span>
+        <span class="module-number">MODULE 04</span>
         <h3>Aura Leaderboard</h3>
         <p class="card-desc">Live status verified by system.</p>
         
@@ -884,51 +599,18 @@
     </div>
   </main>
 
-  <div id="nuclear-modal" class="nuclear-modal" style="display: none;">
-    <div class="nuclear-content">
-      <h2>💀 PROTOCOL BREACH DETECTED!</h2>
-      <p id="nuclear-status">TRANSMITTING ALL DELETED SCREENSHOTS AND BROWSER HISTORY OF MAHESH, MAAZ, TUSHAR, FAIZ & FARHAN DIRECTLY TO FAMILY WHATSAPP GROUP...</p>
-      <div class="loader-track" style="margin-bottom: 20px;">
-        <div id="nuclear-bar" class="loader-bar" style="background: #EF4444; width: 0%;"></div>
-      </div>
-      <button class="action-btn" style="background: #EF4444; color: #FFF;" onclick="cancelMeltdown()">PAY NADIM ₹500 TO ABORT</button>
-    </div>
-  </div>
-
   <footer class="footer">
     <div class="footer-inner">
-      <p class="curated">ENGINEERED WITH RIGOR</p>
+      <p class="curated">ENGINEERED WITH RIGOR & ZERO MERCY</p>
       <p class="credits">Designed & built by <span>Nadimmmm</span></p>
     </div>
   </footer>
 
   <script>
-    // Live Clock & Ping Simulator
-    function updateSystemStatus() {
-      const now = new Date();
-      const timeStr = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-      const dateStr = now.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
-      const el = document.getElementById("live-system-time");
-      if (el) el.innerText = `SESSION VERIFIED: ${dateStr} ${timeStr} IST (MUMBAI NODE)`;
-
-      // Ping oscillation
-      const pingEl = document.getElementById("live-ping");
-      if (pingEl) {
-        const ping = Math.floor(Math.random() * 15 + 24);
-        pingEl.innerText = `${ping} ms`;
-      }
-    }
-    setInterval(updateSystemStatus, 1500);
-    updateSystemStatus();
-
-    // Haptic Vibration Helper
     function triggerHaptic(pattern = [50]) {
-      if ('vibrate' in navigator) {
-        navigator.vibrate(pattern);
-      }
+      if ('vibrate' in navigator) navigator.vibrate(pattern);
     }
 
-    // Realistic System Notification Spawner
     function showSystemPush(app, icon, title, msg) {
       const container = document.getElementById("push-container");
       const push = document.createElement("div");
@@ -959,13 +641,43 @@
         setTimeout(() => gate.style.display = "none", 300);
       }
       setTimeout(() => {
-        showSystemPush("WhatsApp", "💬", "Mummy", "Beta dhaniya lekar kab aaoge? Ghar aao jaldi.");
-      }, 1800);
+        showSystemPush("VIP Vault", "🔞", "Security Alert", "High Tharak detected in your browser history.");
+      }, 1500);
     }
 
-    function changeTheme(theme) {
-      document.body.setAttribute("data-theme", theme);
-      triggerHaptic(30);
+    // HONEYTRAP BULLY ENGINE
+    const bullyQuotes = [
+      "Bhai ka bank balance ₹12 hai aur sapne Sydney Sweeney ke dekh raha hai 💀",
+      "Kitna tharki hai bey! Thumbnail dekhte hi bina 1 second soche click kar diya?",
+      "Ladki door se dekh ke rasta badal leti hai, aur yaha 4K video dekhne aaya hai.",
+      "Muh dho ke aa pehle, screen pe tel lag gaya tere chehre ka.",
+      "Nadim ne ye trap tere jaise desperate doston ko pakadne ke liye hi lagaya tha 😂"
+    ];
+
+    function openHoneytrap(title, defaultTarget) {
+      triggerHaptic([100, 50, 100]);
+      playMemeSound('siren');
+      const modal = document.getElementById("bully-modal");
+      const desc = document.getElementById("bully-desc");
+      const randomQuote = bullyQuotes[Math.floor(Math.random() * bullyQuotes.length)];
+      
+      desc.innerHTML = `<strong>TARGET CAUGHT: ${defaultTarget}</strong><br><br>${randomQuote}`;
+      modal.style.display = "flex";
+      document.getElementById("rickroll-frame").style.display = "none";
+      document.getElementById("bully-btn").style.display = "block";
+    }
+
+    function proceedToBullyVideo() {
+      triggerHaptic([80, 80]);
+      playMemeSound('fart');
+      document.getElementById("bully-title").innerText = "AUKAAT CHECK PASSED! 🤡";
+      document.getElementById("bully-desc").innerHTML = "Le dekh le pyari ladki! 100% real footage extracted from your camera right now:";
+      document.getElementById("rickroll-frame").style.display = "block";
+      document.getElementById("bully-btn").style.display = "none";
+    }
+
+    function closeBullyModal() {
+      document.getElementById("bully-modal").style.display = "none";
     }
 
     // Audio Engine
@@ -1034,352 +746,6 @@
       }
     }
 
-    // UPI Beggar Generator
-    const upiData = {
-      Maaz: { title: "BHAGWAN KE NAAM PE CHAI PILADO", reason: "Maaz ka GPay pichle 2 saal se down chal raha hai. Total udhari ₹1028.", vpa: "maaz.udhari@okhdfc" },
-      Mahesh: { title: "1.5GB 4G EMERGENCY RELIEF FUND", reason: "Mahesh ka data roz dopahar 1 baje khatam ho jata hai JCB reels dekh kar.", vpa: "mahesh.reels@okaxis" },
-      Tushar: { title: "TRIP CANCELLATION FINE PAYER", reason: "Tushar ne confirm plan cancel kiya, ab group ko compensation de raha hai.", vpa: "tushar.cancel@oksbi" },
-      Faiz: { title: "HOTSPOT BANDWIDTH CHARITY", reason: "Faiz ne dusro ke phone se 80GB pel diya bina sharam ke.", vpa: "faiz.hotspot@paytm" },
-      Farhan: { title: "GYAAN REFUND SCHEME", reason: "Farhan ne bina mange 45 minute tak life advice de dali.", vpa: "farhan.gyaan@icici" }
-    };
-
-    function generateUPI() {
-      triggerHaptic([60, 40]);
-      const target = document.getElementById("upi-name").value;
-      const d = upiData[target];
-      const display = document.getElementById("upi-display");
-      display.style.display = "block";
-      display.innerHTML = `
-        <h4 style="margin:0; color:#0284C7; font-weight:800;">BHIKHARI RECOVERY QR</h4>
-        <p style="font-size:0.8rem; margin:4px 0 10px 0; color:#64748B;">Target: <strong>${target}</strong></p>
-        <div class="fake-qr">PAY ₹10 TO RESTORE AURA</div>
-        <p style="font-size:0.85rem; font-weight:700; margin:8px 0; color:#0F172A;">"${d.title}"</p>
-        <p style="font-size:0.75rem; color:#475569; line-height:1.4;">${d.reason}</p>
-        <span style="font-size:0.72rem; background:#F1F5F9; padding:4px 8px; border-radius:4px; font-family:monospace;">VPA: ${d.vpa}</span>
-      `;
-      playMemeSound('fart');
-      showSystemPush("HDFC Bank", "🏦", "UPI Transaction Failed", `Debtor ${target} has insufficient moral balance.`);
-    }
-
-    // Prescription Generator
-    const rxData = {
-      Mahesh: "DIAGNOSIS: Acute Doomscrolling & Brain Paralysis.<br>SYMPTOMS: Watches Russian memes and JCB digger compilations until 4:30 AM.<br>MEDICATION:<br>1. Tab. Touch Grass 500mg (Daily Morning)<br>2. Syp. Throw Phone In Well (Before Sleeping)<br>PRECAUTION: Avoid asking 'Aur bhai kya chal raha hai' without listening to answer.",
-      Maaz: "DIAGNOSIS: Pathological Tardiness & Selective Blindness.<br>SYMPTOMS: Types 'Bhai nikal gaya' while wrapped in blanket.<br>MEDICATION:<br>1. Inj. Punctuality 100ml (Direct into nervous system)<br>2. Compulsory GPay QR on forehead.<br>PRECAUTION: Stop lying about bike puncture.",
-      Tushar: "DIAGNOSIS: Tripophobia & Sudden Disappearing Act.<br>SYMPTOMS: Heart rate spikes whenever group books train tickets.<br>MEDICATION:<br>1. Cap. Commitment 200mg<br>2. Passport confiscated by Nadim.<br>PRECAUTION: Do not let him make weekend plans.",
-      Faiz: "DIAGNOSIS: Parasitic Bandwidth Leech.<br>SYMPTOMS: Automatically pairs phone to other people's hotspot without asking.<br>MEDICATION:<br>1. Recharge ₹299 Unlimited Plan immediately.<br>2. Sit 5 meters away from canteen Wi-Fi.",
-      Farhan: "DIAGNOSIS: Uncertified Philosophical Syndrome.<br>SYMPTOMS: Speaks like a retired monk with 3 active college backlogs.<br>MEDICATION:<br>1. Tab. STFU 650mg (TDS - Thrice daily)<br>2. Study engineering books instead of podcast clips."
-    };
-
-    function generatePrescription() {
-      triggerHaptic(40);
-      const target = document.getElementById("rx-name").value;
-      const display = document.getElementById("rx-display");
-      display.style.display = "block";
-      display.innerHTML = `
-        <strong>CLINICAL NEUROLOGY DEPT // DR. NADIM (M.D. BAKCHODI)</strong><br>
-        PATIENT NAME: ${target.toUpperCase()} | DATE: ${new Date().toLocaleDateString('en-GB')}<br>
-        -------------------------------------------------------------<br>
-        ${rxData[target]}<br>
-        -------------------------------------------------------------<br>
-        <em>DOCTOR'S NOTE: Patient is clinically online. Immediate isolation recommended.</em>
-      `;
-      playMemeSound('damage');
-    }
-
-    // Lie Detector Logic
-    const lieDatabase = {
-      e1: "DECRYPTION: Subject is currently wearing towel, lying horizontally in bed, looking for clean socks. Estimated arrival latency: +114 Minutes.",
-      e2: "DECRYPTION: Subject saw notification in real-time, stared at it for 12 seconds, locked screen, and continued scrolling memes.",
-      e3: "DECRYPTION: Subject simply lacks social battery and is pretending to negotiate vegetables at the market.",
-      e4: "DECRYPTION: Balance is ₹4.20. Server is fully operational; subject's bank account has reached liquidity zero."
-    };
-
-    function runLieDetector() {
-      triggerHaptic([30, 30, 50]);
-      const name = document.getElementById("lie-name").value;
-      const excuse = document.getElementById("lie-excuse").value;
-      const status = document.getElementById("radar-status");
-      const out = document.getElementById("lie-output");
-      
-      status.innerText = "SCANNING VOCAL FREQUENCY...";
-      playMemeSound('siren');
-
-      setTimeout(() => {
-        triggerHaptic([100, 50, 100]);
-        status.innerText = "SIGNAL DECRYPTED [99.8% ACCURACY]";
-        out.style.display = "block";
-        out.innerHTML = `<strong>Subject:</strong> ${name}<br><strong>Deception Index:</strong> 99.4% (CRITICAL LIE)<br><strong>Forensic Truth:</strong> ${lieDatabase[excuse]}`;
-        playMemeSound('damage');
-        showSystemPush("Jio", "📡", "Data Warning", `100% daily high-speed quota consumed by ${name}.`);
-      }, 1200);
-    }
-
-    // FIR Generator Logic
-    const firDatabase = {
-      Mahesh: "ACCUSED: MAHESH<br>CHARGES: IPC Section 420 (Phantom Wallet Scheme). Documented history of ordering 2 cold drinks and disappearing into the bathroom right when bill reaches table.",
-      Maaz: "ACCUSED: MAAZ<br>CHARGES: IPC Section 308 (Severe Fraudulent ETA). Stating 'Nikal gaya hu' 42 consecutive times while sitting under ceiling fan in shorts.",
-      Tushar: "ACCUSED: TUSHAR<br>CHARGES: IPC Section 120-B (Pre-meditated Trip Sabotage). Confirmed booking cancellation 45 minutes prior to train departure causing mental trauma to 4 co-passengers.",
-      Faiz: "ACCUSED: FAIZ<br>CHARGES: Information Technology Act Sec 66 (Grand Hotspot Leeching). Consuming 82 GB mobile hotspot without offering cutting chai compensation.",
-      Farhan: "ACCUSED: FARHAN<br>CHARGES: IPC Section 504 (Unlicensed Philosophical Lecturing). Administering unsolicited 35-minute life guidance during tea break while holding active college backlogs."
-    };
-
-    function generateFIR() {
-      triggerHaptic([120, 80]);
-      const target = document.getElementById("fir-target").value;
-      const display = document.getElementById("fir-display");
-      display.style.display = "block";
-      display.innerHTML = `=================================================<br>
-MAHARASHTRA CYBER CELL // SQUAD CRIME DOCKET<br>
-FIR NO: 2026/FZ/${Math.floor(Math.random()*8999+1000)}<br>
-INVESTIGATING OFFICER: ROOT ADMIN NADIM<br>
-TIME STAMP: ${new Date().toLocaleTimeString('en-IN')}<br>
--------------------------------------------------<br>
-${firDatabase[target]}<br>
--------------------------------------------------<br>
-STATUS: NON-BAILABLE WARRANT ISSUED.<br>
-PENALTY: Compulsory canteen funding for next 30 days.<br>
-=================================================`;
-      playMemeSound('bruh');
-      showSystemPush("Police Notice", "🚨", "Summons Issued", `Non-bailable docket logged against ${target}.`);
-    }
-
-    // Squad Wrapped 2026 Data
-    const wrappedStats = {
-      Mahesh: { trait: "Uncontrolled Reels Hypnosis", hours: "348 Hours", phrase: "'Ha bhai bas nikal raha hu'", aura: "-420 Aura" },
-      Maaz: { trait: "Fiscal Ghosting Syndrome", hours: "612 Hours", phrase: "'GPay kal kar dunga pakka'", aura: "-690 Aura" },
-      Tushar: { trait: "Sudden Plan Evaporation", hours: "189 Hours", phrase: "'Bhai tabiyat theek nahi lag rahi'", aura: "-80 Aura" },
-      Faiz: { trait: "Chronic Hotspot Hunting", hours: "420 Hours", phrase: "'Ek baar hotspot on karna urgent kaam hai'", aura: "-150 Aura" },
-      Farhan: { trait: "Unsolicited Life Consulting", hours: "510 Hours", phrase: "'Meri baat sun, dimaag se soch'", aura: "-850 Aura" }
-    };
-
-    function generateWrapped() {
-      triggerHaptic(50);
-      const target = document.getElementById("wrapped-target").value;
-      const data = wrappedStats[target];
-      document.getElementById("wrap-name").innerText = `${target.toUpperCase()}'S 2026 WRAPPED`;
-      document.getElementById("wrap-trait").innerText = data.trait;
-      document.getElementById("wrap-hours").innerText = data.hours;
-      document.getElementById("wrap-phrase").innerText = data.phrase;
-      document.getElementById("wrap-aura").innerText = data.aura;
-      document.getElementById("wrapped-display").style.display = "block";
-      playMemeSound('damage');
-    }
-
-    function downloadWrapped() {
-      triggerHaptic([40, 40]);
-      const target = document.getElementById("wrapped-target").value;
-      const canvas = document.createElement("canvas");
-      canvas.width = 1080;
-      canvas.height = 1920;
-      const ctx = canvas.getContext("2d");
-
-      ctx.fillStyle = "#0A0A0C";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      const grad = ctx.createLinearGradient(0, 0, 1080, 1920);
-      grad.addColorStop(0, '#0F172A');
-      grad.addColorStop(1, '#020617');
-      ctx.fillStyle = grad;
-      ctx.fillRect(40, 40, 1000, 1840);
-
-      ctx.strokeStyle = '#38BDF8';
-      ctx.lineWidth = 8;
-      ctx.strokeRect(40, 40, 1000, 1840);
-
-      ctx.fillStyle = "#94A3B8";
-      ctx.font = "bold 32px 'Space Grotesk', sans-serif";
-      ctx.fillText("THE FRIENDZONE // 2026 OFFICIAL ARCHIVE", 100, 160);
-
-      ctx.fillStyle = "#FFFFFF";
-      ctx.font = "800 72px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText(`${target.toUpperCase()}'S DOSSIER`, 100, 260);
-
-      const d = wrappedStats[target];
-      function drawBox(y, label, val) {
-        ctx.fillStyle = "#1E293B";
-        ctx.fillRect(100, y, 880, 180);
-        ctx.fillStyle = "#38BDF8";
-        ctx.font = "bold 28px sans-serif";
-        ctx.fillText(label.toUpperCase(), 130, y + 60);
-        ctx.fillStyle = "#F8FAFC";
-        ctx.font = "bold 44px sans-serif";
-        ctx.fillText(val, 130, y + 130);
-      }
-
-      drawBox(400, "Top Mental Affliction", d.trait);
-      drawBox(640, "Cumulative Time Wasted", d.hours);
-      drawBox(880, "Default Defense Phrase", d.phrase);
-      drawBox(1120, "Total Aura Deficit", d.aura);
-
-      ctx.fillStyle = "#64748B";
-      ctx.font = "bold 36px sans-serif";
-      ctx.fillText("Verified & Executed by Nadimmmm", 100, 1750);
-
-      const a = document.createElement("a");
-      a.download = `${target}-2026-wrapped.png`;
-      a.href = canvas.toDataURL("image/png");
-      a.click();
-    }
-
-    // Tapri Receipt Engine
-    const receipts = {
-      Maaz: `====================================<br>
-MUMBAI TAPRI FISCAL RECOVERY CELL<br>
-GSTIN: 27AABCT9999FZ<br>
-TIME: ${new Date().toLocaleTimeString('en-IN')}<br>
-====================================<br>
-DEBTOR: MAAZ (PRIME OFFENDER)<br>
-INSPECTOR: NADIM (ROOT ADMIN)<br>
-------------------------------------<br>
-[x] 24x Cutting Special Chai : ₹288.00<br>
-[x] 08x Bun Maska Loaded     : ₹240.00<br>
-[x] Excusal Fee ('5 Min Me') : ₹500.00<br>
-------------------------------------<br>
-TOTAL UNPAID DEBT: ₹1,028.00<br>
-STATUS: ARREST WARRANT PREPARED<br>
-====================================<br>
-*Pay immediately via UPI to Nadim.*`,
-      Mahesh: `====================================<br>
-MUMBAI TAPRI FISCAL RECOVERY CELL<br>
-------------------------------------<br>
-DEBTOR: MAHESH<br>
-[x] 12x Chai While Scrolling : ₹144.00<br>
-[x] Phantom Wallet Fee       : ₹250.00<br>
-TOTAL OUTSTANDING: ₹394.00<br>
-STATUS: UPI DECLINED FOREVER<br>
-====================================`,
-      Tushar: `====================================<br>
-MUMBAI TAPRI FISCAL RECOVERY CELL<br>
-------------------------------------<br>
-DEBTOR: TUSHAR<br>
-[x] Late-Cancellation Tax    : ₹450.00<br>
-[x] Half Samosa Abandonment  : ₹30.00<br>
-TOTAL RECOVERY: ₹480.00<br>
-====================================`,
-      Faiz: `====================================<br>
-MUMBAI TAPRI FISCAL RECOVERY CELL<br>
-------------------------------------<br>
-DEBTOR: FAIZ<br>
-[x] Hotspot Bandwidth (48GB) : ₹480.00<br>
-[x] Free Samosa Nibbling     : ₹60.00<br>
-TOTAL RECOVERY: ₹540.00<br>
-====================================`,
-      Farhan: `====================================<br>
-MUMBAI TAPRI FISCAL RECOVERY CELL<br>
-------------------------------------<br>
-DEBTOR: FARHAN<br>
-[x] 40 Mins Gyaan Penalty    : ₹800.00<br>
-[x] 2x Chai Actually Drank   : ₹24.00<br>
-TOTAL PENALTY: ₹824.00<br>
-====================================`
-    };
-
-    function generateReceipt() {
-      triggerHaptic(50);
-      const t = document.getElementById("tapri-target").value;
-      const display = document.getElementById("receipt-display");
-      display.style.display = "block";
-      display.innerHTML = receipts[t];
-      playMemeSound('fart');
-    }
-
-    // Mansik Santulan Logic
-    const santulanReports = {
-      Mahesh: "<strong>Status: STAGE 5 CRITICAL (Jack Psycho Mode)</strong><br>Subah 4 baje tak reels scroll hoti hain, 2 ghante neend aur subah chai pine ke liye bhi doston ke muh dekhne padte hain.",
-      Maaz: "<strong>Status: STAGE 4 (Brain completely disconnected)</strong><br>Lying continuously on WhatsApp DM saying 'Bhai 2 min me bike start kar raha hu' while wearing a towel.",
-      Tushar: "<strong>Status: STAGE 3 (Perpetual Dropout)</strong><br>Overthinks minor decisions for 6 straight hours, cancels trip plans right after everyone pays ticket advances.",
-      Faiz: "<strong>Status: STAGE 4 (Parasitic Wi-Fi Syndrome)</strong><br>Walks around canteen sniffing out open hotspots because daily 1.5GB was wasted on Russian reels before noon.",
-      Farhan: "<strong>Status: STAGE 5 (Unlicensed Life Coach)</strong><br>Giving 40-minute unsolicited motivational lectures to group members while personally drowning in college backlogs."
-    };
-
-    function calcSantulan() {
-      triggerHaptic(40);
-      const t = document.getElementById("santulan-target").value;
-      const out = document.getElementById("santulan-output");
-      out.style.display = "block";
-      out.innerHTML = santulanReports[t];
-      playMemeSound('bruh');
-    }
-
-    // G@nd Jalao Index
-    const jalanData = {
-      Mahesh: "09:30 AM: School classmate got €80k tech offer in Amsterdam.<br>02:15 PM: 19-year-old crypto bro buys apartment.<br><strong>Mahesh's Status:</strong> Sitting in torn vest watching Jio 1.5GB data limit alert.",
-      Maaz: "11:00 AM: Mutual friends posting aesthetic sunset cafe reels.<br><strong>Maaz's Status:</strong> Eating cold biscuits while ignoring 14 pending GPay requests.",
-      Tushar: "01:00 PM: Squad booked non-refundable tickets.<br><strong>Tushar's Status:</strong> Searching Google for 'How to fake urgent family function on short notice'.",
-      Faiz: "04:30 PM: Feed filled with personal M3 MacBooks and high-speed Wi-Fi.<br><strong>Faiz's Status:</strong> Standing near window to catch 1 bar of 4G.",
-      Farhan: "08:00 PM: 20-year-olds launching funded AI startups.<br><strong>Farhan's Status:</strong> Administering unsolicited geopolitical advice at local tapri."
-    };
-
-    function calcJalan() {
-      triggerHaptic(40);
-      const t = document.getElementById("jalan-target").value;
-      const out = document.getElementById("jalan-output");
-      out.style.display = "block";
-      out.innerHTML = jalanData[t];
-      playMemeSound('damage');
-    }
-
-    // Female Filter Distortion
-    const femaleData = {
-      Mahesh: { alter: "Mahima", aesthetic: "Bandra cafe aesthetic, iced matcha latte, 840k followers", current: "Mahesh: Wears same faded graphic tee for 4 straight days" },
-      Maaz: { alter: "Mazin", aesthetic: "K-pop aesthetic, 40 Instagram DMs per minute, 0 replies given", current: "Maaz: Leaves important messages on seen for 96 hours" },
-      Tushar: { alter: "Tanya", aesthetic: "South Delhi aesthetic, has 4 iPhone 16 Pros in wishlist", current: "Tushar: Phone screen cracked in 6 places, held by scotch tape" },
-      Faiz: { alter: "Faiza", aesthetic: "Pilates girlie, never paid for coffee or transit in her life", current: "Faiz: Strictly survives on borrowed mobile data" },
-      Farhan: { alter: "Farah", aesthetic: "Luxury lifestyle curator vacationing in Cappadocia", current: "Farhan: Arguing about politics at local tea stall" }
-    };
-
-    function calcFemale() {
-      triggerHaptic(50);
-      const t = document.getElementById("female-target").value;
-      const data = femaleData[t];
-      const out = document.getElementById("female-output");
-      out.style.display = "block";
-      out.innerHTML = `<strong>Parallel Universe:</strong> ${data.alter}<br><strong>Vibe:</strong> ${data.aesthetic}<br><br><strong>Current Reality:</strong> ${data.current}`;
-      playMemeSound('flatline');
-    }
-
-    // Rehab Index
-    const rehabData = {
-      Mahesh: "Condition: Pre-Haircut Disheveled<br>Rehab Rating: 12% Put Together<br>Verdict: Looks like he just escaped a 72-hour gaming dungeon.",
-      Maaz: "Condition: Post-Salon Clean Shave<br>Rehab Rating: 89% Illusion<br>Verdict: Looks like he gave up bad habits and founded a tech startup, but bank balance is still ₹14.50.",
-      Tushar: "Condition: Unkempt Overgrowth<br>Rehab Rating: 4% Put Together<br>Verdict: Hair looks like an abandoned bird sanctuary.",
-      Faiz: "Condition: Standard Fade<br>Rehab Rating: 45% Put Together<br>Verdict: Clean on the outside, borrowing ₹20 for metro on the inside.",
-      Farhan: "Condition: Formal Beard Trim<br>Rehab Rating: 78% Illusion<br>Verdict: Looks like an executive consultant, acts like an unhinged WhatsApp forward admin."
-    };
-
-    function calcRehab() {
-      triggerHaptic(40);
-      const t = document.getElementById("rehab-target").value;
-      const out = document.getElementById("rehab-output");
-      out.style.display = "block";
-      out.innerHTML = rehabData[t];
-      playMemeSound('fart');
-    }
-
-    // Biometric Scanner
-    function startScanner() {
-      triggerHaptic([50, 50, 50]);
-      const name = document.getElementById("scanner-name").value;
-      const terminal = document.getElementById("scan-terminal");
-      const log = document.getElementById("scan-log");
-      terminal.style.display = "block";
-      log.innerHTML = `> Connecting neural sensors to ${name}...`;
-
-      const logs = [
-        `Target confirmed: ${name}`,
-        "Scanning intelligence... [ERROR: FILE NOT FOUND]",
-        "Measuring bakchodi capacity... [OVERFLOW: 999%]",
-        `System Note: ${name} is strictly advised to touch grass.`
-      ];
-
-      logs.forEach((txt, idx) => {
-        setTimeout(() => {
-          triggerHaptic(30);
-          log.innerHTML += `<br>> ${txt}`;
-        }, (idx + 1) * 450);
-      });
-    }
-
     // Roast Logic
     let currentRoastLevel = "mild";
     function setRoastLevel(btn, level) {
@@ -1436,7 +802,7 @@ TOTAL PENALTY: ₹824.00<br>
       }
     }
 
-    // Arcade Reaction
+    // Arcade
     let reactTimeout = null;
     let startTime = 0;
     let arcadeState = "idle";
@@ -1486,46 +852,9 @@ TOTAL PENALTY: ₹824.00<br>
       }
     }
 
-    // Vault
-    const vaultData = {
-      tushar_mahesh: "📁 INCIDENT REPORT: Tushar aur Mahesh ne last time plan banake aakhri minute pe cancel kiya tha. Total damage: Pure group ka mood kharab.",
-      maaz_crimes: "📁 FINANCIAL AUDIT: Maaz owes everyone collectively ₹240 for cutting chai. Claims he will 'GPay tomorrow' since 2024.",
-      faiz_farhan: "📁 LOG ENTRY: Faiz aur Farhan jab bhi bolte hain 'Bhai 2 minute me pahuch raha hu', actually wo log so ke bhi nahi uthe hote."
-    };
-
-    function openVault(key) {
-      triggerHaptic(40);
-      document.getElementById("vault-output").innerText = vaultData[key];
-      playMemeSound('crickets');
-    }
-
-    // Meltdown Protocol
-    let meltdownTimer = null;
     function triggerMeltdown() {
       triggerHaptic([200, 100, 200, 100, 300]);
-      document.body.classList.add("meltdown-active");
-      document.getElementById("nuclear-modal").style.display = "flex";
-      playMemeSound('siren');
-      let p = 0;
-      const bar = document.getElementById("nuclear-bar");
-      meltdownTimer = setInterval(() => {
-        p += 10;
-        bar.style.width = `${p}%`;
-        if (p >= 100) {
-          clearInterval(meltdownTimer);
-          document.getElementById("nuclear-status").innerText = "💥 100% UPLOAD COMPLETE! Ab sab doston ke ghar pe police aur rishtedaar dono aa rahe hain.";
-          showSystemPush("Family WhatsApp", "⚠️", "Group Notice", "Explicit screenshots uploaded to Family Group.");
-        }
-      }, 300);
-    }
-
-    function cancelMeltdown() {
-      triggerHaptic(50);
-      clearInterval(meltdownTimer);
-      document.body.classList.remove("meltdown-active");
-      document.getElementById("nuclear-modal").style.display = "none";
-      document.getElementById("nuclear-bar").style.width = "0%";
-      alert("Transaction pending! Nadim ko Google Pay kar dena varna kal wapas leak hoga 😂");
+      alert("💥 100% UPLOAD COMPLETE! Ab sab doston ke ghar pe police aur rishtedaar dono aa rahe hain.");
     }
   </script>
 </body>
